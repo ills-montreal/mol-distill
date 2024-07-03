@@ -1,7 +1,6 @@
 import time
 import torch
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 
 
 class TrainerGM:
@@ -16,6 +15,7 @@ class TrainerGM:
         scheduler=None,
         wandb=False,
         embedder_name_list=None,
+        out_dir=None,
     ):
         self.model = model
         self.knifes = knifes
@@ -27,6 +27,7 @@ class TrainerGM:
         self.embedder_name_list = embedder_name_list
         self.batch_size = batch_size
         self.knife_optimizer = torch.optim.AdamW(knifes.parameters(), lr=1e-3)
+        self.out_dir = out_dir
 
     def get_loss(
         self,
@@ -132,10 +133,14 @@ class TrainerGM:
 
                 if eval_loss < min_eval_loss:
                     min_eval_loss = eval_loss
-                    torch.save(self.model.state_dict(), "best_model.pth")
+                    torch.save(
+                        self.model.state_dict(),
+                        os.path.join(self.out_dir, "best_model.pth"),
+                    )
 
             if self.wandb:
                 import wandb
+
                 for name, loss in train_loss_per_embedder.items():
                     dict_to_log[f"train_loss_{name}"] = loss
                 wandb.log(dict_to_log)

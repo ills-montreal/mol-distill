@@ -69,6 +69,7 @@ def get_parser():
     parser.add_argument("--save-name", type=str, default="tmp")
 
     parser.add_argument("--wandb", action="store_true")
+    parser.add_argument("--out-dir", type=str, default="results")
 
     return parser
 
@@ -102,6 +103,7 @@ def main(args):
     model = Model_GM(
         gnn,
     )
+    model = torch.compile(model, fullgraph=True, dynamic=True)
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
             knifes_config = yaml.safe_load(f)
@@ -144,6 +146,7 @@ def main(args):
         batch_size=args.batch_size,
         wandb=args.wandb,
         embedder_name_list=args.embedders_to_simulate,
+        out_dir=args.out_dir,
     )
 
     trainer.train(
@@ -160,8 +163,11 @@ if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
 
+    args.out_dir = os.path.join(args.out_dir, args.dataset)
+
     if args.wandb:
         wandb.init(project="mol-distill", config=args)
+        args.out_dir = os.path.join(args.out_dir, wandb.run.name)
         wandb.config.update(args)
 
         wandb.define_metric("train_loss", step_metric="epoch")
@@ -169,5 +175,9 @@ if __name__ == "__main__":
         wandb.define_metric("lr", step_metric="epoch")
         for embedder in args.embedders_to_simulate:
             wandb.define_metric(f"train_loss_{embedder}", step_metric="epoch")
+    os.makedirs(args.out_dir, exist_ok=True)
+    # save args
+    with open(os.path.join(args.out_dir, "args.yaml"), "w") as f:
+        yaml.dump(args.__dict__, f)
 
     main(args)
