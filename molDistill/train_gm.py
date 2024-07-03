@@ -20,6 +20,8 @@ import logging
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
 
+from torch.profiler import profile, ProfilerActivity
+
 torch._logging.set_logs(dynamo=50)
 
 
@@ -56,6 +58,7 @@ def get_parser():
         choices=["gin", "gine", "gcn", "gat", "graphsage", "tag", "arma", "gatv2"],
     )
     parser.add_argument("--n-layer", type=int, default=2)
+    parser.add_argument("--n-MLP-layer", type=int, default=2)
     parser.add_argument("--dim", type=int, default=512)
     parser.add_argument("--drop-ratio", type=float, default=0.0)
     parser.add_argument("--batch-norm-type", type=str, default="batch")
@@ -110,6 +113,7 @@ def main(args):
         model,
         fullgraph=True,
         dynamic=True,
+        disable=True,
     )
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
@@ -154,15 +158,18 @@ def main(args):
         embedder_name_list=args.embedders_to_simulate,
         out_dir=args.out_dir,
     )
-
-    trainer.train(
-        graph_loader,
-        emb_loader,
-        graph_loader_valid,
-        emb_loader_valid,
-        args.num_epochs,
-        args.log_interval,
-    )
+    with profile(
+        activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True
+    ) as prof:
+        trainer.train(
+            graph_loader,
+            emb_loader,
+            graph_loader_valid,
+            emb_loader_valid,
+            args.num_epochs,
+            args.log_interval,
+        )
+    prof.export_chrome_trace("results/trace.json")
 
 
 if __name__ == "__main__":

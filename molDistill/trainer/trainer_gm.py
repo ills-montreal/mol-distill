@@ -3,6 +3,7 @@ import os
 import time
 import torch
 from tqdm import tqdm
+from torch.profiler import record_function
 
 
 class TrainerGM:
@@ -110,11 +111,13 @@ class TrainerGM:
     ):
         mean_time = 0
         min_eval_loss = float("inf")
+
         for epoch in range(num_epochs):
             t0 = time.time()
-            train_loss, train_loss_per_embedder = self.train_epoch(
-                input_loader, embedding_loader, epoch
-            )
+            with record_function(f"train-epoch-{epoch}"):
+                train_loss, train_loss_per_embedder = self.train_epoch(
+                    input_loader, embedding_loader, epoch
+                )
             t1 = time.time()
 
             dict_to_log = {
@@ -127,7 +130,8 @@ class TrainerGM:
             mean_time += t1 - t0
             if epoch % log_interval == 0:
                 mean_time /= log_interval
-                eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
+                with record_function(f"eval-epoch-{epoch}"):
+                    eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
                 print(f"Epoch {epoch}, Loss: {train_loss} --- {mean_time:.2f} s/epoch")
                 print(f"----\tEval Loss: {eval_loss}")
                 mean_time = 0
@@ -142,7 +146,6 @@ class TrainerGM:
 
             if self.wandb:
                 import wandb
-
                 for name, loss in train_loss_per_embedder.items():
                     dict_to_log[f"train_loss_{name}"] = loss
                 wandb.log(dict_to_log)

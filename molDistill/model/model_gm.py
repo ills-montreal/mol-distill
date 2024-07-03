@@ -2,7 +2,7 @@ from typing import List
 
 import torch.nn as nn
 from torch_geometric.data import InMemoryDataset
-
+from torch.profiler import record_function
 
 class Model_GM(nn.Module):
     def __init__(
@@ -15,5 +15,6 @@ class Model_GM(nn.Module):
 
 
     def forward(self, x, edge_index, edge_attr, batch, size):
-        return self.backbone(x, edge_index, edge_attr, batch, size)
+        with record_function("forward"):
+            return self.backbone(x, edge_index, edge_attr, batch, size)
 

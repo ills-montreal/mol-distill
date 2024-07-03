@@ -29,6 +29,7 @@ from data.data_encoding import (
     node_embedding_order,
     edge_embedding_order,
 )
+from torch.profiler import record_function
 
 
 class GNN(nn.Module):
@@ -77,7 +78,9 @@ class GNN(nn.Module):
                 h_theta = MLP([dim, dim, dim])
                 self.gnns.append(GINEConv(h_theta, edge_dim=dim))
             elif gnn_type == "gcn":
-                self.gnns.append(GCNConv(dim, dim, add_self_loops=False, normalize=False))
+                self.gnns.append(
+                    GCNConv(dim, dim, add_self_loops=False, normalize=False)
+                )
             elif gnn_type == "gat":
                 self.gnns.append(GATConv(dim, dim, edge_dim=dim))
             elif gnn_type == "graphsage":
@@ -161,6 +164,28 @@ class GNN_graphpred(nn.Module):
         else:
             raise ValueError("Invalid graph pooling type.")
 
+        if args.batch_norm_type == "batch":
+            self.batch_norm = nn.BatchNorm1d(self.emb_dim)
+        elif args.batch_norm_type == "layer":
+            self.batch_norm = nn.LayerNorm(self.emb_dim)
+        else:
+            self.batch_norm = nn.Identity()
+
+        sequential_args = []
+        for i in range(args.n_MLP_layer):
+            if i == 0:
+                sequential_args.append(
+                    (f"fc-{i}", nn.Linear(self.emb_dim, self.emb_dim))
+                )
+            else:
+                sequential_args.append((f"relu-{i}", nn.ReLU()))
+                sequential_args.append(
+                    (f"fc{i}", nn.Linear(self.emb_dim, self.emb_dim))
+                )
+                sequential_args.append((f"bn-{i}", self.batch_norm))
+
+        self.fully_connected = nn.Sequential(OrderedDict(sequential_args))
+
     def from_pretrained(self, model_file):
         if model_file == "":
             return
@@ -168,7 +193,10 @@ class GNN_graphpred(nn.Module):
         return
 
     def forward(self, x, edge_index, edge_attr, batch, size=None):
-        node_representation = self.molecule_model(x, edge_index, edge_attr)
-        graph_representation = self.pool(node_representation, batch, size=size)
+        with record_function("graph_forward"):
+            node_representation = self.molecule_model(x, edge_index, edge_attr)
+        with record_function("mol_forward"):
+            graph_representation = self.pool(node_representation, batch, size=size)
+            graph_representation = self.fully_connected(graph_representation)
 
         return graph_representation
