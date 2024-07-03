@@ -127,7 +127,7 @@ class TrainerGM:
             mean_time += t1 - t0
             if epoch % log_interval == 0:
                 mean_time /= log_interval
-                eval_loss = self.eval(input_loader_valid, embedding_loader_valid)
+                eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
                 print(f"Epoch {epoch}, Loss: {train_loss} --- {mean_time:.2f} s/epoch")
                 print(f"----\tEval Loss: {eval_loss}")
                 mean_time = 0
@@ -151,11 +151,20 @@ class TrainerGM:
         return
 
     @torch.no_grad()
-    def eval(self, input_loader, embedding_loader):
+    def eval(self, input_loader, embedding_loader, epoch):
         self.model.eval()
         eval_loss = 0
         embeddings = []
-        for batch_idx, (graph, embs) in enumerate(zip(input_loader, embedding_loader)):
+        for batch_idx, (graph, embs) in enumerate(
+            zip(
+                input_loader,
+                tqdm(
+                    embedding_loader,
+                    desc=f"Eval || epoch {epoch} ||  ",
+                    total=len(input_loader),
+                ),
+            )
+        ):
             embs, smiles = embs
             graph = graph.to(self.device)
             l, embs = self.get_loss(graph, embs, backward=False, return_embs=True)

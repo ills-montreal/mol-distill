@@ -20,6 +20,8 @@ import logging
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
 
+torch._logging.set_logs(dynamo=50)
+
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -99,11 +101,16 @@ def main(args):
     )
 
     # get model
-    gnn = GNN_graphpred(args, GNN(**args.__dict__))
+    gnn = GNN(**args.__dict__)
+    mol_model = GNN_graphpred(args, gnn)
     model = Model_GM(
-        gnn,
+        mol_model,
     )
-    model = torch.compile(model, fullgraph=True, dynamic=True)
+    model = torch.compile(
+        model,
+        fullgraph=True,
+        dynamic=True,
+    )
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
             knifes_config = yaml.safe_load(f)
