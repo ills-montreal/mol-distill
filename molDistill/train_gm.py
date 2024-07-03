@@ -166,15 +166,19 @@ if __name__ == "__main__":
     args.out_dir = os.path.join(args.out_dir, args.dataset)
 
     if args.wandb:
-        wandb.init(project="mol-distill", config=args)
+        wandb.init(
+            project="mol-distill",
+            allow_val_change=True,
+        )
         args.out_dir = os.path.join(args.out_dir, wandb.run.name)
-        wandb.config.update(args)
 
         wandb.define_metric("train_loss", step_metric="epoch")
         wandb.define_metric("eval_loss", step_metric="epoch")
         wandb.define_metric("lr", step_metric="epoch")
         for embedder in args.embedders_to_simulate:
             wandb.define_metric(f"train_loss_{embedder}", step_metric="epoch")
+        wandb.config.update(args)
+
     os.makedirs(args.out_dir, exist_ok=True)
     # save args
     with open(os.path.join(args.out_dir, "args.yaml"), "w") as f:
