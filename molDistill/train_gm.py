@@ -125,7 +125,6 @@ def main(args):
     )
 
     model = model.to(args.device)
-    model = torch.compile(model, fullgraph=True, disable=True)
     print(model)
     # get optimizer
     optimizer = torch.optim.Adam(
