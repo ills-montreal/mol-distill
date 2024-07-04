@@ -47,21 +47,24 @@ class TrainerGM:
             graph.batch,
             size=len(graph.smiles),
         )
+        for i in range(len(embs)):
+            embs[i] = embs[i].to(self.device, non_blocking=True)
         loss = 0
         for i, emb in enumerate(embs):
-            emb = emb.to(self.device)
             knife = self.knifes[i]
-            emb_loss = knife.kernel_cond(embeddings, emb)
+            with record_function(f"knife-{i}"):
+                emb_loss = knife(embeddings, emb)
             if train_loss_per_embedder is not None:
                 train_loss_per_embedder[self.embedder_name_list[i]] += emb_loss
 
             loss += emb_loss
         if backward:
-            loss.backward()
-            self.optimizer.step()
-            self.knife_optimizer.step()
-            self.optimizer.zero_grad()
-            self.knife_optimizer.zero_grad()
+            with record_function("backward"):
+                loss.backward()
+                self.optimizer.step()
+                self.knife_optimizer.step()
+                self.optimizer.zero_grad()
+                self.knife_optimizer.zero_grad()
         if return_embs:
             return loss, embeddings
         return loss
@@ -81,9 +84,10 @@ class TrainerGM:
             )
         ):
             embs, smiles = embs
-            assert graph.smiles == smiles
+
             self.optimizer.zero_grad()
             self.knife_optimizer.zero_grad()
+
             graph = graph.to(self.device)
             assert graph.smiles == smiles
 

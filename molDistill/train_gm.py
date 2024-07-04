@@ -58,7 +58,7 @@ def get_parser():
         choices=["gin", "gine", "gcn", "gat", "graphsage", "tag", "arma", "gatv2"],
     )
     parser.add_argument("--n-layer", type=int, default=2)
-    parser.add_argument("--n-MLP-layer", type=int, default=2)
+    parser.add_argument("--n-MLP-layer", type=int, default=1)
     parser.add_argument("--dim", type=int, default=512)
     parser.add_argument("--drop-ratio", type=float, default=0.0)
     parser.add_argument("--batch-norm-type", type=str, default="batch")
@@ -91,7 +91,8 @@ def main(args):
     graph_loader = DataLoader(
         graph_input[idx_train],
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=1,
+        pin_memory=True,
         drop_last=True,
         shuffle=False,
     )
@@ -99,8 +100,9 @@ def main(args):
     graph_loader_valid = DataLoader(
         graph_input[idx_valid],
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=1,
         shuffle=False,
+        pin_memory=True,
     )
 
     # get model
@@ -113,7 +115,7 @@ def main(args):
         model,
         fullgraph=True,
         dynamic=True,
-        disable=True,
+        disable=False,
     )
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
@@ -124,16 +126,24 @@ def main(args):
         with open(args.knifes_config, "w") as f:
             yaml.dump(knifes_config.__dict__, f)
 
-    knifes = torch.nn.ModuleList(
-        [
-            KNIFE(
-                args=knifes_config,
-                zc_dim=args.dim,
-                zd_dim=emb_dim,
+    knifes = []
+    for emb_dm in embs_dim:
+        knife = KNIFE(
+            args=knifes_config,
+            zc_dim=args.dim,
+            zd_dim=emb_dm,
+        ).kernel_cond
+
+        knifes.append(
+            torch.compile(
+                knife,
+                fullgraph=True,
+                dynamic=True,
+                disable=True,
             )
-            for emb_dim in embs_dim
-        ]
-    )
+        )
+
+    knifes = torch.nn.ModuleList(knifes)
 
     model = model.to(args.device)
     print(model)
@@ -158,9 +168,7 @@ def main(args):
         embedder_name_list=args.embedders_to_simulate,
         out_dir=args.out_dir,
     )
-    with profile(
-        activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True
-    ) as prof:
+    with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
         trainer.train(
             graph_loader,
             emb_loader,

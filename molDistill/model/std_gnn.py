@@ -165,11 +165,11 @@ class GNN_graphpred(nn.Module):
             raise ValueError("Invalid graph pooling type.")
 
         if args.batch_norm_type == "batch":
-            self.batch_norm = nn.BatchNorm1d(self.emb_dim)
+            self.batch_norm = nn.BatchNorm1d
         elif args.batch_norm_type == "layer":
-            self.batch_norm = nn.LayerNorm(self.emb_dim)
+            self.batch_norm = nn.LayerNorm
         else:
-            self.batch_norm = nn.Identity()
+            self.batch_norm = lambda x: nn.Identity
 
         sequential_args = []
         for i in range(args.n_MLP_layer):
@@ -180,9 +180,9 @@ class GNN_graphpred(nn.Module):
             else:
                 sequential_args.append((f"relu-{i}", nn.ReLU()))
                 sequential_args.append(
-                    (f"fc{i}", nn.Linear(self.emb_dim, self.emb_dim))
+                    (f"fc-{i}", nn.Linear(self.emb_dim, self.emb_dim))
                 )
-                sequential_args.append((f"bn-{i}", self.batch_norm))
+                sequential_args.append((f"bn-{i}", self.batch_norm(self.emb_dim)))
 
         self.fully_connected = nn.Sequential(OrderedDict(sequential_args))
 
