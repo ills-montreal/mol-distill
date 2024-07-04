@@ -60,7 +60,9 @@ class TrainerGM:
         )
         for i in range(len(embs)):
             embs[i] = embs[i].to(self.device, non_blocking=True)
-        loss =self.get_knife_loss(embeddings, embs, loss_per_embedder=loss_per_embedder)
+        loss = self.get_knife_loss(
+            embeddings, embs, loss_per_embedder=loss_per_embedder
+        )
         if backward:
             loss.backward()
             self.optimizer.step()
@@ -188,6 +190,11 @@ class TrainerGM:
                 loss_per_embedder=test_loss_per_embedder,
             )
             eval_loss += l
+
+        for name in self.embedder_name_list:
+            test_loss_per_embedder[name] = test_loss_per_embedder[name].item() / len(
+                input_loader
+            )
         return eval_loss.item() / len(input_loader), test_loss_per_embedder
 
     @torch.no_grad()

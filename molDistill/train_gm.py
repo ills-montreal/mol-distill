@@ -53,7 +53,7 @@ def get_parser():
         default="gine",
         choices=["gin", "gine", "gcn", "gat", "graphsage", "tag", "arma", "gatv2"],
     )
-    parser.add_argument("--n-layer", type=int, default=2)
+    parser.add_argument("--n-layer", type=int, default=10)
     parser.add_argument("--n-MLP-layer", type=int, default=1)
     parser.add_argument("--dim", type=int, default=512)
     parser.add_argument("--drop-ratio", type=float, default=0.0)
