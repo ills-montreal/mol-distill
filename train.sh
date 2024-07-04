@@ -9,7 +9,7 @@
 #SBATCH --nodes=1
 #SBATCH --output=logs/%x-%j.out
 
-export DATASET=hERG
+export DATASET=ZINC
 
 echo "Starting job on dataset $DATASET  and model $MODELS"
 
