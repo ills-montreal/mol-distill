@@ -20,6 +20,7 @@ import logging
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
 
+
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
@@ -101,21 +102,10 @@ def main(args):
     # get model
     gnn = GNN(**args.__dict__)
     mol_model = GNN_graphpred(args, gnn)
-    mol_model = torch.compile(
-        mol_model,
-        fullgraph=True,
-        dynamic=True,
-        disable=True,
-    )
     model = Model_GM(
         mol_model,
     )
-    model = torch.compile(
-        model,
-        fullgraph=True,
-        dynamic=True,
-        disable=True,
-    )
+    model = torch.compile(model, dynamic=True, fullgraph=True)
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
             knifes_config = yaml.safe_load(f)
@@ -133,19 +123,11 @@ def main(args):
             zd_dim=emb_dm,
         ).kernel_cond
 
-        knifes.append(
-            torch.compile(
-                knife,
-                fullgraph=True,
-                dynamic=True,
-                disable=True,
-            )
-        )
+        knifes.append(knife)
 
     knifes = torch.nn.ModuleList(knifes)
 
     model = model.to(args.device)
-    print(model)
     # get optimizer
     optimizer = torch.optim.Adam(
         model.parameters(), lr=args.lr, weight_decay=args.weight_decay

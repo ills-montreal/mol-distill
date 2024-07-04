@@ -202,7 +202,6 @@ class DistillGraphDataset(InMemoryDataset):
                 data = data
             else:
                 data = data_cls.from_dict(data)
-            print("debug")
             for idx in range(len(data.smiles)):
                 graph = separate(
                     cls=data.__class__,

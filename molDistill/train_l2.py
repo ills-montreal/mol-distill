@@ -121,7 +121,6 @@ def main(args):
     )
     model = model.to(args.device)
     model = model
-    print(model)
     # get optimizer
     optimizer = torch.optim.Adam(
         model.parameters(), lr=args.lr, weight_decay=args.weight_decay
