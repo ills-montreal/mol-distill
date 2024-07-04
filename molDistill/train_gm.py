@@ -22,9 +22,6 @@ from emir.estimators.knife_estimator import KNIFEArgs
 
 from torch.profiler import profile, ProfilerActivity
 
-torch._logging.set_logs(dynamo=50)
-
-
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
@@ -91,8 +88,7 @@ def main(args):
     graph_loader = DataLoader(
         graph_input[idx_train],
         batch_size=args.batch_size,
-        num_workers=1,
-        pin_memory=True,
+        pin_memory=False,
         drop_last=True,
         shuffle=False,
     )
@@ -100,14 +96,19 @@ def main(args):
     graph_loader_valid = DataLoader(
         graph_input[idx_valid],
         batch_size=args.batch_size,
-        num_workers=1,
         shuffle=False,
-        pin_memory=True,
+        pin_memory=False,
     )
 
     # get model
     gnn = GNN(**args.__dict__)
     mol_model = GNN_graphpred(args, gnn)
+    mol_model = torch.compile(
+        mol_model,
+        fullgraph=True,
+        dynamic=True,
+        disable=True,
+    )
     model = Model_GM(
         mol_model,
     )
@@ -115,7 +116,7 @@ def main(args):
         model,
         fullgraph=True,
         dynamic=True,
-        disable=False,
+        disable=True,
     )
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:

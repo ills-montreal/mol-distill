@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Type
+from typing import Optional, Type, Sequence
 import json
 
 import numpy as np
@@ -8,9 +8,14 @@ from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors
 from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect
 from torch.utils import data
+from torch import Tensor
+
+
 from torch_geometric.data import Data, InMemoryDataset
 from torch_geometric.data.data import BaseData
 from torch_geometric.io import fs
+from torch_geometric.data.separate import separate
+import copy
 
 import argparse
 from tqdm import tqdm
@@ -139,6 +144,7 @@ class DistillGraphDataset(InMemoryDataset):
     def __init__(self, root, transform=None, pre_transform=None, max_len=50000):
         self.root = root
         self.max_len = max_len
+        self.data = []
         os.makedirs(os.path.join(self.root, "raw"), exist_ok=True)
         if not os.path.exists(self.raw_paths[0]):
             with open(self.raw_paths[0], "w") as f:
@@ -179,46 +185,42 @@ class DistillGraphDataset(InMemoryDataset):
             self.num_files += 1
 
     def load_processed(self, data_cls: Type[BaseData] = Data) -> None:
-        all_data = None
-        all_slices = None
-
+        self.data = []
         for p in self.processed_paths:
             if not os.path.exists(p):
                 break
             out = fs.torch_load(p)
             assert isinstance(out, tuple)
             assert len(out) == 2 or len(out) == 3
+
             if len(out) == 2:  # Backward compatibility.
                 data, slice = out
             else:
                 data, slice, data_cls = out
+
             if not isinstance(data, dict):  # Backward compatibility.
                 data = data
             else:
                 data = data_cls.from_dict(data)
             print("debug")
-            if all_data is None:
-                all_data = data
-            else:
-                all_data = all_data.concat(data)
+            for idx in range(len(data.smiles)):
+                graph = separate(
+                    cls=data.__class__,
+                    batch=data,
+                    idx=idx,
+                    slice_dict=slice,
+                    decrement=False,
+                )
+                self.data.append(graph)
 
-            if all_slices is None:
-                all_slices = slice
-            else:
-                all_slices = expand_slices(all_slices, slice)
+    def get(self, idx):
+        return self.data[idx]
 
-        self.data, self.slices = all_data, all_slices
+    def len(self) -> int:
+        return len(self.data)
 
     def __repr__(self):
         return "{}()".format(self.__class__.__name__)
-
-
-def expand_slices(s0, s1):
-    new_s = {}
-    for k in s0.keys():
-        s1_k_up = (s1[k] + s0[k][-1])[1:]
-        new_s[k] = torch.cat([s0[k], s1_k_up])
-    return new_s
 
 
 if __name__ == "__main__":

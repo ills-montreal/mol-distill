@@ -120,7 +120,7 @@ def main(args):
         embs_dim,
     )
     model = model.to(args.device)
-    model = torch.compile(model, fullgraph=True, disable=True)
+    model = model
     print(model)
     # get optimizer
     optimizer = torch.optim.Adam(

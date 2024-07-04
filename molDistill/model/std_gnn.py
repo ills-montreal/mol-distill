@@ -119,7 +119,6 @@ class GNN(nn.Module):
                 h = F.dropout(F.relu(h), self.drop_ratio, training=self.training)
         return h
 
-    # def forward(self, x, edge_index, edge_attr):
     def forward(self, x, edge_index, edge_attr):
         x = sum(
             [
