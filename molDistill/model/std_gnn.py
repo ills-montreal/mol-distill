@@ -29,7 +29,6 @@ from data.data_encoding import (
     node_embedding_order,
     edge_embedding_order,
 )
-from torch.profiler import record_function
 
 
 class GNN(nn.Module):
@@ -192,10 +191,8 @@ class GNN_graphpred(nn.Module):
         return
 
     def forward(self, x, edge_index, edge_attr, batch, size=None):
-        with record_function("graph_forward"):
-            node_representation = self.molecule_model(x, edge_index, edge_attr)
-        with record_function("mol_forward"):
-            graph_representation = self.pool(node_representation, batch, size=size)
-            graph_representation = self.fully_connected(graph_representation)
+        node_representation = self.molecule_model(x, edge_index, edge_attr)
+        graph_representation = self.pool(node_representation, batch, size=size)
+        graph_representation = self.fully_connected(graph_representation)
 
         return graph_representation

@@ -3,7 +3,6 @@ import os
 import time
 import torch
 from tqdm import tqdm
-from torch.profiler import record_function
 
 
 class TrainerGM:
@@ -52,19 +51,17 @@ class TrainerGM:
         loss = 0
         for i, emb in enumerate(embs):
             knife = self.knifes[i]
-            with record_function(f"knife-{i}"):
-                emb_loss = knife(embeddings, emb)
+            emb_loss = knife(embeddings, emb)
             if train_loss_per_embedder is not None:
                 train_loss_per_embedder[self.embedder_name_list[i]] += emb_loss
 
             loss += emb_loss
         if backward:
-            with record_function("backward"):
-                loss.backward()
-                self.optimizer.step()
-                self.knife_optimizer.step()
-                self.optimizer.zero_grad()
-                self.knife_optimizer.zero_grad()
+            loss.backward()
+            self.optimizer.step()
+            self.knife_optimizer.step()
+            self.optimizer.zero_grad()
+            self.knife_optimizer.zero_grad()
         if return_embs:
             return loss, embeddings
         return loss
@@ -118,10 +115,9 @@ class TrainerGM:
 
         for epoch in range(num_epochs):
             t0 = time.time()
-            with record_function(f"train-epoch-{epoch}"):
-                train_loss, train_loss_per_embedder = self.train_epoch(
-                    input_loader, embedding_loader, epoch
-                )
+            train_loss, train_loss_per_embedder = self.train_epoch(
+                input_loader, embedding_loader, epoch
+            )
             t1 = time.time()
 
             dict_to_log = {
@@ -134,8 +130,7 @@ class TrainerGM:
             mean_time += t1 - t0
             if epoch % log_interval == 0:
                 mean_time /= log_interval
-                with record_function(f"eval-epoch-{epoch}"):
-                    eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
+                eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
                 print(f"Epoch {epoch}, Loss: {train_loss} --- {mean_time:.2f} s/epoch")
                 print(f"----\tEval Loss: {eval_loss}")
                 mean_time = 0

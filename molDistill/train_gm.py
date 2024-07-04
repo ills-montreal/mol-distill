@@ -20,8 +20,6 @@ import logging
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
 
-from torch.profiler import profile, ProfilerActivity
-
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
@@ -169,16 +167,14 @@ def main(args):
         embedder_name_list=args.embedders_to_simulate,
         out_dir=args.out_dir,
     )
-    with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
-        trainer.train(
-            graph_loader,
-            emb_loader,
-            graph_loader_valid,
-            emb_loader_valid,
-            args.num_epochs,
-            args.log_interval,
-        )
-    prof.export_chrome_trace("results/trace.json")
+    trainer.train(
+        graph_loader,
+        emb_loader,
+        graph_loader_valid,
+        emb_loader_valid,
+        args.num_epochs,
+        args.log_interval,
+    )
 
 
 if __name__ == "__main__":
