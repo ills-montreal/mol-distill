@@ -3,6 +3,7 @@ import os
 import time
 import torch
 from tqdm import tqdm
+from tracing_decorator import tracing_decorator
 
 
 class TrainerGM:
@@ -31,12 +32,23 @@ class TrainerGM:
         self.knife_optimizer = torch.optim.AdamW(knifes.parameters(), lr=1e-3)
         self.out_dir = out_dir
 
+    @tracing_decorator("knife")
+    def get_knife_loss(self, embeddings, embs, loss_per_embedder=None):
+        loss = 0
+        for i, emb in enumerate(embs):
+            knife = self.knifes[i]
+            emb_loss = knife(embeddings, emb)
+            loss += emb_loss
+            if loss_per_embedder is not None:
+                loss_per_embedder[self.embedder_name_list[i]] += emb_loss
+        return loss
+
     def get_loss(
         self,
         graph,
         embs,
         backward=True,
-        train_loss_per_embedder=None,
+        loss_per_embedder=None,
         return_embs=False,
     ):
         embeddings = self.model(
@@ -48,14 +60,7 @@ class TrainerGM:
         )
         for i in range(len(embs)):
             embs[i] = embs[i].to(self.device, non_blocking=True)
-        loss = 0
-        for i, emb in enumerate(embs):
-            knife = self.knifes[i]
-            emb_loss = knife(embeddings, emb)
-            if train_loss_per_embedder is not None:
-                train_loss_per_embedder[self.embedder_name_list[i]] += emb_loss
-
-            loss += emb_loss
+        loss =self.get_knife_loss(embeddings, embs, loss_per_embedder=loss_per_embedder)
         if backward:
             loss.backward()
             self.optimizer.step()
@@ -92,7 +97,7 @@ class TrainerGM:
                 graph,
                 embs,
                 backward=True,
-                train_loss_per_embedder=train_loss_per_embedder,
+                loss_per_embedder=train_loss_per_embedder,
             )
             train_loss += loss
         for name in self.embedder_name_list:
@@ -130,7 +135,9 @@ class TrainerGM:
             mean_time += t1 - t0
             if epoch % log_interval == 0:
                 mean_time /= log_interval
-                eval_loss = self.eval(input_loader_valid, embedding_loader_valid, epoch)
+                eval_loss, test_loss_per_embedder = self.eval(
+                    input_loader_valid, embedding_loader_valid, epoch
+                )
                 print(f"Epoch {epoch}, Loss: {train_loss} --- {mean_time:.2f} s/epoch")
                 print(f"----\tEval Loss: {eval_loss}")
                 mean_time = 0
@@ -145,8 +152,11 @@ class TrainerGM:
 
             if self.wandb:
                 import wandb
+
                 for name, loss in train_loss_per_embedder.items():
                     dict_to_log[f"train_loss_{name}"] = loss
+                for name, loss in test_loss_per_embedder.items():
+                    dict_to_log[f"eval_loss_{name}"] = loss
                 wandb.log(dict_to_log)
             if self.scheduler is not None:
                 self.scheduler.step()
@@ -157,6 +167,7 @@ class TrainerGM:
         self.model.eval()
         eval_loss = 0
         embeddings = []
+        test_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
         for batch_idx, (graph, embs) in enumerate(
             zip(
                 input_loader,
@@ -169,9 +180,15 @@ class TrainerGM:
         ):
             embs, smiles = embs
             graph = graph.to(self.device)
-            l, embs = self.get_loss(graph, embs, backward=False, return_embs=True)
+            l, embs = self.get_loss(
+                graph,
+                embs,
+                backward=False,
+                return_embs=True,
+                loss_per_embedder=test_loss_per_embedder,
+            )
             eval_loss += l
-        return eval_loss.item() / len(input_loader)
+        return eval_loss.item() / len(input_loader), test_loss_per_embedder
 
     @torch.no_grad()
     def encode_loader(self, input_loader):

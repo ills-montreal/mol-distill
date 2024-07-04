@@ -177,6 +177,7 @@ if __name__ == "__main__":
         wandb.define_metric("lr", step_metric="epoch")
         for embedder in args.embedders_to_simulate:
             wandb.define_metric(f"train_loss_{embedder}", step_metric="epoch")
+            wandb.define_metric(f"test_loss_{embedder}", step_metric="epoch")
         wandb.config.update(args)
 
     os.makedirs(args.out_dir, exist_ok=True)
