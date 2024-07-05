@@ -92,6 +92,7 @@ GROUPED_MODELS = {
     ],
 }
 
+
 def update_grouped_models(embedders):
     new_embedders = []
     for embedder in embedders:
@@ -112,12 +113,7 @@ def get_parser():
         "--embedders-to-simulate",
         nargs="+",
         type=str,
-        default=[
-            "Denoising",
-            "BERT",
-            "ThreeD",
-            "GraphCL",
-        ],
+        default=["GNN", "BERT", "GPT", "Denoising", "ThreeD", "MolR", "MoleOOD"],
     )
 
     # training parameters
