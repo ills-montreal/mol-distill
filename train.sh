@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-03:00:00
+#SBATCH --time=0-24:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=40G
 #SBATCH --cpus-per-task=4
@@ -28,8 +28,8 @@ source /home/fransou/DISTILL/bin/activate
 cd distill/mol-distill
 
 
-echo "Running script on dataset $DATASET"
+echo "Running script on dataset $DATASET with dim $1, gnn-type $2 and n-layer $3"
 wandb offline
-python molDistill/train_gm.py --dataset $DATASET --data-dir $SLURM_TMPDIR/tmp_dir/distill/data --wandb
+python molDistill/train_gm.py --dataset $DATASET --data-dir $SLURM_TMPDIR/tmp_dir/distill/data --wandb --dim $1 --gnn-type $2 --n-layer $3
 
 cp -r wandb/* /home/fransou/distill/wandb
