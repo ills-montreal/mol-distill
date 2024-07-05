@@ -20,6 +20,88 @@ import logging
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
 
+GROUPED_MODELS = {
+    "GNN": [
+        "ContextPred",
+        "GPT-GNN",
+        "GraphMVP",
+        "GROVER",
+        # "EdgePred", # This model is especially bad and makes visualization hard
+        "AttributeMask",
+        "GraphLog",
+        "GraphCL",
+        "InfoGraph",
+        "Not-trained",
+    ],
+    "BERT": [
+        "MolBert",
+        "ChemBertMLM-5M",
+        "ChemBertMLM-10M",
+        "ChemBertMLM-77M",
+        "ChemBertMTR-5M",
+        "ChemBertMTR-10M",
+        "ChemBertMTR-77M",
+    ],
+    "GPT": [
+        "ChemGPT-1.2B",
+        "ChemGPT-19M",
+        "ChemGPT-4.7M",
+    ],
+    "Denoising": [
+        "DenoisingPretrainingPQCMv4",
+        "FRAD_QM9",
+    ],
+    "MolR": [
+        "MolR_gat",
+        "MolR_gcn",
+        "MolR_tag",
+    ],
+    "MoleOOD": [
+        "MoleOOD_OGB_GIN",
+        "MoleOOD_OGB_GCN",
+        "MoleOOD_OGB_SAGE",
+    ],
+    "ThreeD": [
+        "ThreeDInfomax",
+    ],
+    "Descriptors": [
+        "usrcat",
+        "electroshape",
+        "usr",
+        "ecfp",
+        "estate",
+        "erg",
+        "rdkit",
+        "topological",
+        "avalon",
+        "maccs",
+        "atompair-count",
+        "topological-count",
+        "fcfp-count",
+        "secfp",
+        "pattern",
+        "fcfp",
+        "scaffoldkeys",
+        "cats",
+        "default",
+        "gobbi",
+        "pmapper",
+        "cats/3D",
+        "gobbi/3D",
+        "pmapper/3D",
+    ],
+}
+
+def update_grouped_models(embedders):
+    new_embedders = []
+    for embedder in embedders:
+        if embedder in GROUPED_MODELS:
+            new_embedders += GROUPED_MODELS[embedder]
+        else:
+            new_embedders.append(embedder)
+    new_embedders = list(set(new_embedders))
+    return new_embedders
+
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -31,11 +113,10 @@ def get_parser():
         nargs="+",
         type=str,
         default=[
-            "FRAD_QM9",
-            "ChemBertMTR-10M",
-            "ChemBertMLM-10M",
+            "Denoising",
+            "BERT",
+            "ThreeD",
             "GraphCL",
-            "GraphMVP",
         ],
     )
 
@@ -162,6 +243,7 @@ def main(args):
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
+    args.embedders_to_simulate = update_grouped_models(args.embedders_to_simulate)
 
     args.out_dir = os.path.join(args.out_dir, args.dataset)
 
