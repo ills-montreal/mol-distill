@@ -26,12 +26,10 @@ GROUPED_MODELS = {
         "GPT-GNN",
         "GraphMVP",
         "GROVER",
-        # "EdgePred", # This model is especially bad and makes visualization hard
         "AttributeMask",
         "GraphLog",
         "GraphCL",
         "InfoGraph",
-        "Not-trained",
     ],
     "BERT": [
         "MolBert",
