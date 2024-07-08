@@ -33,3 +33,4 @@ wandb offline
 python molDistill/train_gm.py --dataset $DATASET --data-dir $SLURM_TMPDIR/tmp_dir/distill/data --wandb --dim $1 --gnn-type $2 --n-layer $3
 
 cp -r wandb/* /home/fransou/distill/wandb
+cp -r results/* /home/fransou/distill/results/*

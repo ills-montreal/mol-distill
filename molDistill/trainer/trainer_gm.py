@@ -1,9 +1,9 @@
 import os
-
 import time
+
 import torch
 from tqdm import tqdm
-from tracing_decorator import tracing_decorator
+from molDistill.tracing_decorator import tracing_decorator
 
 
 class TrainerGM:

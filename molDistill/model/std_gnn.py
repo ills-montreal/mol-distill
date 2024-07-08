@@ -4,7 +4,12 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from data.data_encoding import (
+    allowable_features,
+    allowable_features_edge,
+    node_embedding_order,
+    edge_embedding_order,
+)
 from torch_geometric.nn import (
     MessagePassing,
     global_add_pool,
@@ -22,13 +27,6 @@ from torch_geometric.nn.conv import (
     GATv2Conv,
 )
 from torch_geometric.nn.models import MLP
-
-from data.data_encoding import (
-    allowable_features,
-    allowable_features_edge,
-    node_embedding_order,
-    edge_embedding_order,
-)
 
 
 class GNN(nn.Module):
