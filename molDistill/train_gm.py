@@ -1,24 +1,23 @@
 import argparse
 import json
-import yaml
+import logging
 import os
-import numpy as np
 
+import numpy as np
 import torch
 import torch.utils.data as tdata
-from torch_geometric.loader import DataLoader
-from torch_geometric.data import InMemoryDataset
-
-from model.model_gm import Model_GM
-from model.std_gnn import GNN_graphpred, GNN
-from trainer.trainer_gm import TrainerGM
-from data.embedding_dataloader import EmbeddingDataset, get_embedding_loader
-from data.data_encoding import DistillGraphDataset
-
 import wandb
-import logging
+import yaml
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
+from torch_geometric.data import InMemoryDataset
+from torch_geometric.loader import DataLoader
+
+from molDistill.data.data_encoding import DistillGraphDataset
+from molDistill.data.embedding_dataloader import EmbeddingDataset, get_embedding_loader
+from molDistill.model.model_gm import Model_GM
+from molDistill.model.std_gnn import GNN_graphpred, GNN
+from molDistill.trainer.trainer_gm import TrainerGM
 
 GROUPED_MODELS = {
     "GNN": [

@@ -1,19 +1,18 @@
 import argparse
 import json
+import logging
 import os
-import numpy as np
 
+import numpy as np
 import torch
 import torch.utils.data as tdata
-from torch_geometric.loader import DataLoader
-from torch_geometric.data import InMemoryDataset
-
-from model.model import Model
-from model.std_gnn import GNN_graphpred, GNN
-from trainer.trainer import Trainer
-
 import wandb
-import logging
+from torch_geometric.data import InMemoryDataset
+from torch_geometric.loader import DataLoader
+
+from molDistill.model.model import Model
+from molDistill.model.std_gnn import GNN_graphpred, GNN
+from molDistill.trainer.trainer import Trainer
 
 
 def get_parser():
@@ -40,16 +39,7 @@ def get_parser():
         "--gnn-type",
         type=str,
         default="gine",
-        choices=[
-            "gin",
-            "gine",
-            "gcn",
-            "gat",
-            "graphsage",
-            "tag",
-            "arma",
-            "gatv2"
-        ],
+        choices=["gin", "gine", "gcn", "gat", "graphsage", "tag", "arma", "gatv2"],
     )
     parser.add_argument("--n-layer", type=int, default=3)
     parser.add_argument("--dim", type=int, default=1024)

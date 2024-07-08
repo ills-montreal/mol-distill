@@ -1,3 +1,10 @@
 wandb
+backbone_pretrained_models
 best_model.pth
-**__pycache__
+results/**
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+**.pyc

@@ -1,14 +1,15 @@
 import math
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch_geometric.nn import GraphConv, GATConv, SAGEConv, TAGConv
 from torch_geometric.nn import (
     MessagePassing,
     global_add_pool,
     global_max_pool,
     global_mean_pool,
 )
-from torch_geometric.nn import GraphConv, GATConv, SAGEConv, TAGConv
 
 num_atom_type = 120  # including the extra mask tokens
 num_chirality_tag = 3

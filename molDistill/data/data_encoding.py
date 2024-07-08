@@ -1,25 +1,21 @@
+import argparse
+import copy
+import json
 import os
 from typing import Optional, Type, Sequence
-import json
 
 import numpy as np
 import torch
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors
 from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect
-from torch.utils import data
 from torch import Tensor
-
-
+from torch.utils import data
 from torch_geometric.data import Data, InMemoryDataset
 from torch_geometric.data.data import BaseData
-from torch_geometric.io import fs
 from torch_geometric.data.separate import separate
-import copy
-
-import argparse
+from torch_geometric.io import fs
 from tqdm import tqdm
-
 
 allowable_features = {
     "possible_atomic_num_list": list(range(1, 119)),
