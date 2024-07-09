@@ -28,7 +28,7 @@ if __name__ == "__main__":
                 # Launch the downstream eval script
                 if args.sbatch:
                     os.system(
-                        f"sbatch molDistill/eval.sh custom:{os.path.join(MODEL_PATH, model)} 5"
+                        f"sbatch eval.sh custom:{os.path.join(MODEL_PATH, model)} 5"
                     )
                 else:
                     os.system(
