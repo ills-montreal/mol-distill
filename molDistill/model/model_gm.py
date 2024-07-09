@@ -1,7 +1,4 @@
-from typing import List
-
 import torch.nn as nn
-from torch_geometric.data import InMemoryDataset
 
 
 class Model_GM(nn.Module):

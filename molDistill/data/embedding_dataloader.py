@@ -1,12 +1,10 @@
 import json
 import os
 from dataclasses import dataclass, field
-from typing import List
 
 import numpy as np
 import torch
 import torch.utils.data as tdata
-from torch_geometric.loader import DataLoader
 
 
 @dataclass(frozen=True)

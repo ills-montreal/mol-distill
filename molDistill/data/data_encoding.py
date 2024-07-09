@@ -1,16 +1,9 @@
-import argparse
-import copy
-import json
 import os
-from typing import Optional, Type, Sequence
+from typing import Optional, Type
 
 import numpy as np
 import torch
 from rdkit import Chem
-from rdkit.Chem import AllChem, Descriptors
-from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect
-from torch import Tensor
-from torch.utils import data
 from torch_geometric.data import Data, InMemoryDataset
 from torch_geometric.data.data import BaseData
 from torch_geometric.data.separate import separate

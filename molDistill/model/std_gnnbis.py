@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn import GraphConv, GATConv, SAGEConv, TAGConv
 from torch_geometric.nn import (
-    MessagePassing,
     global_add_pool,
     global_max_pool,
     global_mean_pool,
@@ -90,11 +89,6 @@ class GNN(torch.nn.Module):
         h *= self.factor
         graph_embedding = self.pooling_layer(graph, h)
         return graph_embedding
-
-
-from torch_geometric.nn.inits import glorot, zeros
-from torch_geometric.utils import add_self_loops, softmax
-from torch_scatter import scatter_add
 
 
 class GNN(nn.Module):

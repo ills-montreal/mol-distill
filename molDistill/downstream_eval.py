@@ -1,27 +1,23 @@
-import os
-import json
-from typing import Dict, List, Callable, Optional, Tuple
-import pandas as pd
-import datamol as dm
-import torch
 import argparse
+import json
+import logging
+import os
+from typing import Dict, List, Callable, Optional, Tuple
 
-from molecule.utils.evaluation import (
+import datamol as dm
+import pandas as pd
+import torch
+import wandb
+from molDistill.baselines.utils import MolecularFeatureExtractor
+from molDistill.baselines.utils.evaluation import (
     get_dataloaders,
     Feed_forward,
     FFConfig,
     FF_trainer,
+    get_embedders,
 )
-from molecule.utils.tdc_dataset import get_dataset_split
-
-from molecule.utils import MolecularFeatureExtractor
-from molecule.utils.knife_utils import get_embedders
+from molDistill.baselines.utils.tdc_dataset import get_dataset_split
 from tqdm import tqdm
-
-import wandb
-
-import logging
-
 
 DATASETS_GROUP = {
     "TOX": [
@@ -68,31 +64,11 @@ DATASETS_GROUP = {
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-DESCRIPTORS = [
-    "ecfp",
-    "estate",
-    "fcfp",
-    "erg",
-    "rdkit",
-    "topological",
-    "avalon",
-    "maccs",
-    "secfp",
-    "scaffoldkeys",
-    "cats",
-    "gobbi",
-    "pmapper",
-    "cats/3D",
-    "gobbi/3D",
-    "pmapper/3D",
-    # "ScatteringWavelet",
-]
 MODELS = [
     "ContextPred",
     "GPT-GNN",
     "GraphMVP",
     "GROVER",
-    # "EdgePred", # This model is especially bad and makes visualization hard
     "AttributeMask",
     "GraphLog",
     "GraphCL",
@@ -115,7 +91,6 @@ MODELS = [
     "MolR_tag",
     "MoleOOD_OGB_GIN",
     "MoleOOD_OGB_GCN",
-    "MoleOOD_OGB_SAGE",
     "ThreeDInfomax",
 ]
 
@@ -174,7 +149,6 @@ def get_split_emb(
 
 def launch_evaluation(
     dataset: str,
-    length: int,
     embedder_name: str,
     device: str,
     split_idx: Dict[str, List[int]],
@@ -236,9 +210,8 @@ def launch_evaluation(
         {
             "embedder": [embedder_name],
             "dataset": [dataset],
-            "length": [length],
             "metric_test": test_metric,
-            "metric": trainer.best_metric
+            "metric": trainer.best_metric,
         }
     )
     return df_results
@@ -274,16 +247,14 @@ def main(args):
                     # Get all enmbedders
                     feature_extractor = MolecularFeatureExtractor(
                         dataset=dataset,
-                        length=args.length,
                         device=args.device,
                         data_dir=args.data_path,
                     )
-                    embedders = get_embedders(MODELS + DESCRIPTORS, feature_extractor)
+                    embedders = get_embedders(MODELS, feature_extractor)
 
                     final_res.append(
                         launch_evaluation(
                             dataset=dataset,
-                            length=args.length,
                             embedder_name=embedder_name,
                             split_idx=split_idx,
                             device=args.device,
@@ -298,37 +269,59 @@ def main(args):
 
     df = pd.concat(final_res).reset_index(drop=True)
     wandb.log({"results_df": wandb.Table(dataframe=df)})
-    df = df.groupby(["embedder", "dataset", "length"]).mean().reset_index()
+    df = df.groupby(["embedder", "dataset"]).mean().reset_index()
 
     wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
 
 
-if __name__ == "__main__":
-    from molecule.utils.parser_mol import add_downstream_args, add_FF_downstream_args
+def add_downstream_args(parser: argparse.ArgumentParser):
+    parser.add_argument("--hidden-dim", type=int, default=128)
+    parser.add_argument("--n-layers", type=int, default=1)
+    parser.add_argument("--d-rate", type=float, default=0.0)
+    parser.add_argument("--norm", type=str, default="layer")
+    parser.add_argument("--lr", type=float, default=0.001)
+    parser.add_argument("--batch-size", type=int, default=128)
+    parser.add_argument("--n-epochs", type=int, default=100)
+    parser.add_argument("--test-batch-size", type=int, default=256)
 
+    parser.add_argument(
+        "--data-path",
+        type=str,
+        default="../data",
+    )
+    parser.add_argument("--datasets", type=str, nargs="+", default=["hERG"])
+    parser.add_argument(
+        "--embedders",
+        type=str,
+        nargs="+",
+        default=None,
+        required=False,
+        help="Embedders to use",
+    )
+    parser.add_argument("--n-runs", type=int, default=5)
+    parser.add_argument("--device", type=str, default="cuda")
+    parser.add_argument("--plot-loss", action="store_true")
+    parser.add_argument("--split-method", type=str, default="scaffold")
+    return parser
+
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Launch the evaluation of a downstream model",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
     parser = add_downstream_args(parser)
-    parser = add_FF_downstream_args(parser)
 
     args = parser.parse_args()
 
     if args.split_method == "scaffold":
-        wandb.init(project="Emir-downstream", tags=["scaffold"])
+        wandb.init(project="distill-downstream", tags=["scaffold"])
     else:
-        wandb.init(project="Emir-downstream")
-
-    if args.hpo_whole_config is not None:
-        config = args.hpo_whole_config.split("_")
-        args.n_layers = int(config[0])
-        args.hidden_dim = int(config[1])
-        args.d_rate = float(config[2])
+        wandb.init(project="distill-downstream")
 
     if args.embedders is None:
-        args.embedders = MODELS  # + DESCRIPTORS
+        args.embedders = MODELS
 
     for group in DATASETS_GROUP.keys():
         if group in args.datasets:

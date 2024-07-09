@@ -1,4 +1,3 @@
-import math
 from collections import OrderedDict
 
 import torch
@@ -11,7 +10,6 @@ from data.data_encoding import (
     edge_embedding_order,
 )
 from torch_geometric.nn import (
-    MessagePassing,
     global_add_pool,
     global_max_pool,
     global_mean_pool,

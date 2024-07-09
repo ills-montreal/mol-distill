@@ -1,20 +1,15 @@
 import argparse
-import json
-import logging
 import os
 
-import numpy as np
 import torch
-import torch.utils.data as tdata
 import wandb
 import yaml
 from emir.estimators.knife import KNIFE
 from emir.estimators.knife_estimator import KNIFEArgs
-from torch_geometric.data import InMemoryDataset
 from torch_geometric.loader import DataLoader
 
 from molDistill.data.data_encoding import DistillGraphDataset
-from molDistill.data.embedding_dataloader import EmbeddingDataset, get_embedding_loader
+from molDistill.data.embedding_dataloader import get_embedding_loader
 from molDistill.model.model_gm import Model_GM
 from molDistill.model.std_gnn import GNN_graphpred, GNN
 from molDistill.trainer.trainer_gm import TrainerGM
