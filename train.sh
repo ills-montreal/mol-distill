@@ -9,7 +9,7 @@
 #SBATCH --nodes=1
 #SBATCH --output=logs/%x-%j.out
 
-export DATASET=hERG
+export DATASET=ZINC
 export DISTILL_DIR=/home/fransou/distill
 export SLURM_DIR=$SLURM_TMPDIR/tmp_dir/distill
 
