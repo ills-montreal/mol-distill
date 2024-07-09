@@ -18,7 +18,8 @@ if __name__ == "__main__":
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
     analyze = True
-    while True:
+    continue_training = True
+    while continue_training:
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
         # For every model
@@ -41,7 +42,7 @@ if __name__ == "__main__":
             # if stop.txt is in the directory, stop the script
             if model == "stop.txt":
                 if not analyze:
-                    break
+                    continue_training = False
                 analyze = False
 
         logger.info("Sleeping for 60 seconds")
