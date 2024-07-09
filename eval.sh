@@ -31,3 +31,5 @@ python molDistill/downstream_eval.py \
   --embedders $1 \
   --data-path $SLURM_DIR/data \
   --n-runs $2
+
+cp -r wandb/* $DISTILL_DIR/wandb
