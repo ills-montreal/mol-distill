@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+import time
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
@@ -246,7 +247,7 @@ if __name__ == "__main__":
         if not wandb.run.name is None:
             args.out_dir = os.path.join(args.out_dir, wandb.run.name)
         else:
-            args.out_dir = os.path.join(args.out_dir, wandb.run.id)
+            args.out_dir = os.path.join(args.out_dir, time.strftime("%Y%m%d_%H%M%S"))
         print(args.out_dir)
         wandb.define_metric("train_loss", step_metric="epoch")
         wandb.define_metric("eval_loss", step_metric="epoch")

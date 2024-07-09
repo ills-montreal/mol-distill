@@ -24,9 +24,9 @@ module load python/3.11 scipy-stack rdkit
 source /home/fransou/DISTILL/bin/activate
 
 echo "Running script on dataset $DATASET with dim $1, gnn-type $2 and n-layer $3"
-wandb offline
 cd $SLURM_DIR/mol-distill
 
+wandb offline
 python molDistill/train_gm.py \
   --dataset $DATASET \
   --data-dir $SLURM_DIR/data \
