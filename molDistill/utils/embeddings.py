@@ -1,13 +1,15 @@
-import torch
 import os
+from argparse import Namespace
+
+import torch
 import yaml
 from torch_geometric.loader import DataLoader
+from tqdm import tqdm
+
+from molDistill.data.data_encoding import DistillGraphDataset
 from molDistill.model.model_gm import Model_GM
 from molDistill.model.std_gnn import GNN_graphpred, GNN
-from molDistill.data.data_encoding import DistillGraphDataset
 
-from argparse import Namespace
-from tqdm import tqdm
 
 @torch.no_grad()
 def get_embeddings_from_distill_model(
