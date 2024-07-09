@@ -1,66 +1,23 @@
 import argparse
-import concurrent.futures
-import copy
 # turn on for debugging C code like Segmentation Faults
 import faulthandler
 import os
-import re
 
 import seaborn
 import yaml
 from icecream import install
-from ogb.lsc import DglPCQM4MDataset, PCQM4MEvaluator
-from ogb.utils import smiles2graph
-from torch.nn import *  # do not remove
-from torch.optim import *  # do not remove
-from torch.optim.lr_scheduler import *  # do not remove
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader
 
-from commons.losses import *  # do not remove
-from commons.utils import seed_all, get_random_indices, TENSORBOARD_FUNCTIONS, move_to_device
-from datasets.ZINC_dataset import ZINCDataset
-from datasets.bace_geomol_feat import BACEGeomol
-from datasets.bace_geomol_featurization_of_qm9 import BACEGeomolQM9Featurization
-from datasets.bace_geomol_random_split import BACEGeomolRandom
-from datasets.bbbp_geomol_feat import BBBPGeomol
-from datasets.bbbp_geomol_featurization_of_qm9 import BBBPGeomolQM9Featurization
-from datasets.bbbp_geomol_random_split import BBBPGeomolRandom
+from commons.utils import seed_all
 from datasets.custom_collate import *  # do not remove
-from datasets.esol_geomol_feat import ESOLGeomol
-from datasets.esol_geomol_featurization_of_qm9 import ESOLGeomolQM9Featurization
-from datasets.file_loader_drugs import FileLoaderDrugs
-from datasets.file_loader_qm9 import FileLoaderQM9
-from datasets.geom_drugs_dataset import GEOMDrugs
-from datasets.geom_qm9_dataset import GEOMqm9
-from datasets.geomol_geom_qm9_dataset import QM9GeomolFeatDataset
 from datasets.inference_dataset import InferenceDataset
-from datasets.lipo_geomol_feat import LIPOGeomol
-from datasets.lipo_geomol_featurization_of_qm9 import LIPOGeomolQM9Featurization
-from datasets.ogbg_dataset_extension import OGBGDatasetExtension
-from datasets.qm9_dataset import QM9Dataset
-from datasets.qm9_dataset_geomol_conformers import QM9DatasetGeomolConformers
-from datasets.qm9_dataset_rdkit_conformers import QM9DatasetRDKITConformers
-from datasets.qm9_geomol_featurization import QM9GeomolFeaturization
-from datasets.qmugs_dataset import QMugsDataset
 from datasets.samplers import *  # do not remove
-from models import *  # do not remove
-from models.geomol_mpnn import GeomolGNNWrapper
 from train import load_model
-from trainer.byol_trainer import BYOLTrainer
-from trainer.byol_wrapper import BYOLwrapper
-from trainer.graphcl_trainer import GraphCLTrainer
-from trainer.metrics import QM9DenormalizedL1, QM9DenormalizedL2, \
-    QM9SingleTargetDenormalizedL1, Rsquared, NegativeSimilarity, MeanPredictorLoss, \
+from trainer.metrics import Rsquared, NegativeSimilarity, MeanPredictorLoss, \
     PositiveSimilarity, ContrastiveAccuracy, TrueNegativeRate, TruePositiveRate, Alignment, Uniformity, \
     BatchVariance, DimensionCovariance, MAE, PositiveSimilarityMultiplePositivesSeparate2d, \
     NegativeSimilarityMultiplePositivesSeparate2d, OGBEvaluator, PearsonR, PositiveProb, NegativeProb, \
     Conformer2DVariance, Conformer3DVariance, PCQM4MEvaluatorWrapper
-from trainer.optimal_transport_trainer import OptimalTransportTrainer
-from trainer.philosophy_trainer import PhilosophyTrainer
-from trainer.self_supervised_ae_trainer import SelfSupervisedAETrainer
-from trainer.self_supervised_alternating_trainer import SelfSupervisedAlternatingTrainer
-from trainer.self_supervised_trainer import SelfSupervisedTrainer
-from trainer.trainer import Trainer
 
 faulthandler.enable()
 install()

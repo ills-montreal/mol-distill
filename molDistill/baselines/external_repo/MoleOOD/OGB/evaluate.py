@@ -1,10 +1,6 @@
 import argparse
 import json
-import os
-import time
-from copy import deepcopy
 
-import numpy as np
 import torch
 from ogb.graphproppred import Evaluator
 from torch_geometric.loader import DataLoader
@@ -14,7 +10,7 @@ from .modules.DataLoading import pyg_molsubdataset
 from .modules.GNNs import GNNGraph
 from .modules.SAGE import SAGEMolGraph, VirtSAGEMolGraph
 from .modules.model import Framework
-from .modules.utils import get_device, split_into_groups
+from .modules.utils import get_device
 
 
 def build_backend_from_config(config):

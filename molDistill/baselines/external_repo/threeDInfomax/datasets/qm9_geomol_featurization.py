@@ -7,16 +7,14 @@ import torch
 import torch.nn.functional as F
 import torch_geometric
 from commons.spherical_encoding import dist_emb
-from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector, get_atom_feature_dims, \
+from ogb.utils.features import get_atom_feature_dims, \
     get_bond_feature_dims
 from rdkit import Chem
 from rdkit.Chem.rdchem import BondType as BT
 from rdkit.Chem.rdchem import ChiralType
-from rdkit.Chem.rdchem import HybridizationType
 from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from scipy.constants import physical_constants
 from torch.utils.data import Dataset
-from torch_scatter import scatter
 from tqdm import tqdm
 
 hartree2eV = physical_constants['hartree-electron volt relationship'][0]

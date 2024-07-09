@@ -1,6 +1,3 @@
-import torch
-
-from commons.utils import move_to_device
 from trainer.trainer import Trainer
 
 

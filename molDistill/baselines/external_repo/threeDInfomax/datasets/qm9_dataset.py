@@ -6,9 +6,7 @@ import pandas as pd
 import torch
 import torch.nn.functional as F
 import torch_geometric
-from commons.spherical_encoding import dist_emb
-from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector, get_atom_feature_dims, \
-    get_bond_feature_dims
+from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector
 from rdkit import Chem
 from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from scipy.constants import physical_constants

@@ -4,18 +4,13 @@ import pickle
 import random
 
 import dgl
-import networkx as nx
 import numpy as np
 import torch
-import torch.nn.functional as F
 from commons.geomol_utils import get_dihedral_pairs
 from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector
 from rdkit import Chem
-from rdkit.Chem.rdchem import BondType as BT
 from rdkit.Chem.rdchem import ChiralType
-from rdkit.Chem.rdchem import HybridizationType
-from torch_geometric.data import Dataset, Data, DataLoader
-from torch_scatter import scatter
+from torch_geometric.data import Dataset, Data
 from tqdm import tqdm
 
 dihedral_pattern = Chem.MolFromSmarts('[*]~[*]~[*]~[*]')

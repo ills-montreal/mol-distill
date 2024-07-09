@@ -3,7 +3,6 @@ import os
 import pickle
 import subprocess
 
-from rdkit.Chem import BRICS
 from tqdm import tqdm
 
 from DataLoading import pyg_moldataset

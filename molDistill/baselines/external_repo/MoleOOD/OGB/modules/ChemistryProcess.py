@@ -2,7 +2,6 @@ import os
 from functools import reduce
 
 import numpy as np
-import rdkit
 import torch
 from ogb.utils import smiles2graph
 from rdkit import Chem

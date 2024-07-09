@@ -1,7 +1,6 @@
 import math
 
 import torch
-import torch_geometric
 from torch.distributions.normal import Normal
 
 from .ChemistryProcess import graph_from_substructure

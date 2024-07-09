@@ -1,21 +1,13 @@
 import os
 from argparse import Namespace
 
-import numpy as np
 import seaborn as sn
-import torch
 import yaml
-from icecream import ic
 from matplotlib import pyplot as plt
-from torch.nn import *  # do not remove
-from torch.optim import *  # do not remove
-from torch.optim.lr_scheduler import *  # do not remove
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader
 
 from commons.losses import *  # do not remove
-from datasets.custom_collate import *  # do not remove
 from datasets.samplers import *  # do not remove
-from models import *  # do not remove
 
 sn.set_theme()
 from commons.utils import get_random_indices

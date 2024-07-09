@@ -1,5 +1,3 @@
-import torch
-
 from trainer.self_supervised_trainer import SelfSupervisedTrainer
 
 

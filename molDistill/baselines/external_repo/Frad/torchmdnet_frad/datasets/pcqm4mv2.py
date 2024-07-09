@@ -1,12 +1,11 @@
 import glob
 import os
 from collections.abc import Sequence
-from typing import Any, Callable, List, Optional, Tuple, Union
 from typing import Optional, Callable, List
+from typing import Union
 
 import ase
 import numpy as np
-from molecule.external_repo.Frad.torchmdnet_frad.utils import isRingAromatic, get_geometry_graph_ring
 from rdkit import Chem
 from torch import Tensor
 from tqdm import tqdm

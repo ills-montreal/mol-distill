@@ -20,7 +20,7 @@ from modules.SAGE import SAGEMolGraph, VirtSAGEMolGraph
 from modules.model import Framework, ConditionalGnn, DomainClassifier
 from modules.model import bce_log, KLDist, MeanLoss, DeviationLoss
 from modules.model import discrete_gaussian
-from modules.utils import get_device, split_into_groups
+from modules.utils import get_device
 
 
 def build_backend_from_config(config):

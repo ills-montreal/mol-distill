@@ -1,11 +1,8 @@
 import dgl
 import dgl.function as fn
 import torch
-import torch
-import torch.nn as nn
 import torch.nn as nn
 import torch.nn.functional as F
-from dgl.nn.pytorch import SumPooling
 from dgl.nn.pytorch import SumPooling, AvgPooling, MaxPooling, GlobalAttentionPooling, Set2Set
 from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 

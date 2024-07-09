@@ -1,7 +1,4 @@
 import sys
-import sys
-
-import numpy as np  # sometimes needed to avoid mkl-service error
 
 sys.path.append(sys.path[0]+'/..')
 import os

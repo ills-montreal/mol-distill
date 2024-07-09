@@ -76,7 +76,6 @@ def pyg_molloader(d_name, bs, shuffle=True, datainfo=None):
 
 def pyg_dataset(d_name):
     from ogb.graphproppred import PygGraphPropPredDataset
-    from torch_geometric.loader import DataLoader
 
     work_dir = os.path.abspath(os.path.dirname(__file__))
     # work_dir = os.path.dirname(work_dir)
@@ -88,7 +87,6 @@ def pyg_dataset(d_name):
 
 def pyg_moldataset(d_name):
     from ogb.graphproppred import PygGraphPropPredDataset
-    from torch_geometric.loader import DataLoader
 
     work_dir = os.path.abspath(os.path.dirname(__file__))
     # work_dir = os.path.dirname(work_dir)
@@ -107,7 +105,6 @@ def pyg_moldataset(d_name):
 
 def pyg_molsubdataset(d_name, preprocess_method='brics'):
     from ogb.graphproppred import PygGraphPropPredDataset
-    from torch_geometric.loader import DataLoader
 
     work_dir = os.path.abspath(os.path.dirname(__file__))
     # work_dir = os.path.dirname(work_dir)

@@ -1,12 +1,8 @@
-import os
-
 import dgl
-import numpy as np
 import torch
 import torch.nn.functional as F
 import torch_geometric
-from ogb.graphproppred import GraphPropPredDataset, DglGraphPropPredDataset
-from torch.utils.data import Subset
+from ogb.graphproppred import GraphPropPredDataset
 
 
 class OGBGDatasetExtension(GraphPropPredDataset):

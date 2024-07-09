@@ -1,20 +1,10 @@
-import os
-
 import dgl
-import numpy as np
-import pandas as pd
 import torch
-import torch.nn.functional as F
-import torch_geometric
-from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector, get_atom_feature_dims, \
-    get_bond_feature_dims
+from ogb.utils.features import atom_to_feature_vector, bond_to_feature_vector
 from rdkit import Chem
-from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from scipy.constants import physical_constants
 from torch.utils.data import Dataset
 from tqdm import tqdm
-
-from ..commons.spherical_encoding import dist_emb
 
 hartree2eV = physical_constants['hartree-electron volt relationship'][0]
 

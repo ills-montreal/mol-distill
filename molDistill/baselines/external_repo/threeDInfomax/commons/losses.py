@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 from torch.distributions import MultivariateNormal
-from torch.nn.modules.loss import _Loss, L1Loss, MSELoss, BCEWithLogitsLoss
+from torch.nn.modules.loss import _Loss, MSELoss, BCEWithLogitsLoss
 
 
 class OGBNanLabelBCEWithLogitsLoss(_Loss):

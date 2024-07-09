@@ -1,31 +1,14 @@
-import glob
-import json
 import os
-import os.path as osp
-import pickle
-import pickle
-import random
 
-import dgl
-import numpy as np
 import pandas as pd
 import torch
-import torch
-import torch.nn.functional as F
 import torch.nn.functional as F
 from commons.utils import get_random_indices
-from ogb.utils.features import bond_to_feature_vector, atom_to_feature_vector, get_atom_feature_dims, \
-    get_bond_feature_dims
-from rdkit import Chem
 from rdkit import Chem
 from rdkit.Chem.rdchem import BondType as BT
 from rdkit.Chem.rdchem import ChiralType
-from rdkit.Chem.rdchem import HybridizationType
-from rdkit.Chem.rdmolops import GetAdjacencyMatrix
-from torch.utils.data import Dataset
-from torch_geometric.data import Dataset, Data, DataLoader, InMemoryDataset
+from torch_geometric.data import Data, InMemoryDataset
 from torch_scatter import scatter
-from tqdm import tqdm
 
 dihedral_pattern = Chem.MolFromSmarts('[*]~[*]~[*]~[*]')
 chirality = {ChiralType.CHI_TETRAHEDRAL_CW: -1.,

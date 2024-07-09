@@ -1,12 +1,8 @@
-import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from commons.mol_encoder import BondEncoder, AtomEncoder
 from models.base_layers import MLP
 from models.geomol_mpnn import GeomolMLP, GeomolMetaLayer, EdgeModel, GeomolNodeModel
-from torch.nn import Sequential as Seq, Linear as Lin, ReLU, TransformerEncoderLayer
 from torch_geometric.nn import global_mean_pool
-from torch_scatter import scatter_sum
 
 
 class GeomolGNNOGBFeat(nn.Module):

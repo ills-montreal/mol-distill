@@ -1,6 +1,5 @@
 import argparse
 import concurrent.futures
-import copy
 # turn on for debugging C code like Segmentation Faults
 import faulthandler
 import os
@@ -9,16 +8,11 @@ import re
 import seaborn
 import yaml
 from icecream import install
-from ogb.lsc import DglPCQM4MDataset, PCQM4MEvaluator
+from ogb.lsc import DglPCQM4MDataset
 from ogb.utils import smiles2graph
-from torch.nn import *  # do not remove
-from torch.optim import *  # do not remove
-from torch.optim.lr_scheduler import *  # do not remove
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader
 
-from models.geomol_mpnn import GeomolGNNWrapper
 from trainer.byol_trainer import BYOLTrainer
-from trainer.byol_wrapper import BYOLwrapper
 from trainer.graphcl_trainer import GraphCLTrainer
 from trainer.optimal_transport_trainer import OptimalTransportTrainer
 from trainer.philosophy_trainer import PhilosophyTrainer
@@ -51,7 +45,6 @@ from .datasets.qm9_dataset_rdkit_conformers import QM9DatasetRDKITConformers
 from .datasets.qm9_geomol_featurization import QM9GeomolFeaturization
 from .datasets.qmugs_dataset import QMugsDataset
 from .datasets.samplers import *  # do not remove
-from .models import *  # do not remove
 from .trainer.metrics import QM9DenormalizedL1, QM9DenormalizedL2, \
     QM9SingleTargetDenormalizedL1, Rsquared, NegativeSimilarity, MeanPredictorLoss, \
     PositiveSimilarity, ContrastiveAccuracy, TrueNegativeRate, TruePositiveRate, Alignment, Uniformity, \

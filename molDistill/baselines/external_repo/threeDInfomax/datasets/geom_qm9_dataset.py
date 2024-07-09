@@ -8,7 +8,6 @@ import torch
 import torch.nn.functional as F
 from ogb.utils.features import bond_to_feature_vector, atom_to_feature_vector, get_atom_feature_dims, \
     get_bond_feature_dims
-from rdkit import Chem
 from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from scipy.constants import physical_constants
 from torch.utils.data import Dataset

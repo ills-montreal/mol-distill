@@ -10,11 +10,9 @@ import pyaml
 import torch
 from commons.utils import flatten_dict, tensorboard_gradient_magnitude, move_to_device
 from models import *  # do not remove
-from torch.optim.lr_scheduler import *  # For loading optimizer specified in config
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torch.utils.tensorboard.summary import hparams
-from trainer.byol_wrapper import BYOLwrapper
 from trainer.lr_schedulers import WarmUpWrapper  # do not remove
 
 

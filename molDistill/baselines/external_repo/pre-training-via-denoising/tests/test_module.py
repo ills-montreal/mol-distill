@@ -1,4 +1,3 @@
-from glob import glob
 from os.path import dirname, join
 
 import pytorch_lightning as pl

@@ -1,5 +1,3 @@
-from typing import List
-
 import dgl
 import dgl.function as fn
 import torch

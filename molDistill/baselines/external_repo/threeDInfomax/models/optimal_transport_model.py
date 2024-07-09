@@ -6,15 +6,7 @@ import torch
 import torch.nn.functional as F
 from commons.geomol_utils import *
 from models.base_layers import MLP
-from models.geomol_mpnn import GeomolGNN, GeomolMLP
-from models.geomol_mpnn_ogb_feat import GeomolGNNOGBFeat
-from models.geomol_mpnn_ogb_feat_random import GeomolGNNOGBFeatRandom
-from models.geomol_mpnn_ogb_feat_random_non_shared import GeomolGNNOGBFeatRandomNonShared
-from models.gin_random import GNN_nodeRandom
-from models.gin_random import GNN_node_VirtualnodeRandom
-from models.pna_edge_update_random import PNAGNNRandomEdgeUpdate
-from models.pna_gnn_random import PNAGNNRandom
-from models.pna_original_random import PNAGNNSimpleRandom
+from models.geomol_mpnn import GeomolMLP
 from torch import nn
 from torch.nn import TransformerEncoderLayer
 from torch_geometric.nn import global_add_pool

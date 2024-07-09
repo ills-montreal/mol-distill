@@ -322,7 +322,6 @@ def add_equi_noise(opt_mol, bond_var=0.04, angle_var=0.04, torsion_var=2):
 
 
 if __name__ == "__main__":
-    from tqdm import tqdm
     mol = Chem.SDMolSupplier('org_2.sdf')[0]
     rotate_bonds = get_torsions([mol])
     print(rotate_bonds)

@@ -6,11 +6,8 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn.functional as F
-from commons.spherical_encoding import dist_emb
 from rdkit import Chem
-from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from scipy.constants import physical_constants
-from scipy.sparse import csr_matrix
 from torch.utils.data import Dataset
 from tqdm import tqdm
 

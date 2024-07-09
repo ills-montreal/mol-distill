@@ -1,8 +1,6 @@
-from glob import glob
 from os.path import dirname, join
 
 import torch
-from pytest import mark
 from torch.testing import assert_allclose
 from torchmdnet.calculators import External
 from torchmdnet.models.model import load_model

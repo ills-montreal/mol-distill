@@ -1,10 +1,8 @@
-import math
-
 import torch
 import torch.nn.functional as F
 from ogb.graphproppred.mol_encoder import AtomEncoder, BondEncoder
 from torch_geometric.nn import MessagePassing
-from torch_geometric.nn import global_mean_pool, global_add_pool
+from torch_geometric.nn import global_add_pool
 from torch_geometric.utils import degree
 
 

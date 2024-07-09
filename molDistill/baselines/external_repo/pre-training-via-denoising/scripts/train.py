@@ -4,7 +4,6 @@ import os
 import sys
 from pathlib import Path
 
-import numpy as np  # sometimes needed to avoid mkl-service error
 import pytorch_lightning as pl
 import wandb
 from pytorch_lightning.callbacks import EarlyStopping

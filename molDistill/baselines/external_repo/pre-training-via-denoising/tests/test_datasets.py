@@ -1,7 +1,6 @@
 from os.path import join
 
 import numpy as np
-import pytest
 from pytest import mark, raises
 from torchmdnet.datasets import Custom
 

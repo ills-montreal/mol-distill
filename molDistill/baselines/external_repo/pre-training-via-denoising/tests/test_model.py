@@ -1,7 +1,6 @@
 import pickle
 from os.path import exists, dirname, join
 
-import pytest
 import pytorch_lightning as pl
 import torch
 from pytest import mark

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from models.base_layers import MLP
-from torch.nn import Sequential as Seq, Linear as Lin, ReLU, TransformerEncoderLayer
+from torch.nn import Linear as Lin
 from torch_geometric.nn import global_mean_pool
 from torch_scatter import scatter_sum
 

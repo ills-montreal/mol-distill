@@ -2,7 +2,6 @@ from typing import Tuple, Union, Dict
 
 import torch
 from torch.utils.data import DataLoader
-from trainer.lr_schedulers import WarmUpWrapper
 from trainer.self_supervised_trainer import SelfSupervisedTrainer
 
 

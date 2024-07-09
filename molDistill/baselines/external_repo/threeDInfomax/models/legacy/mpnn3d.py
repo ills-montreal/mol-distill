@@ -5,7 +5,6 @@ import dgl.function as fn
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from dgl.nn.pytorch import GraphConv
 from models.base_layers import MLP
 
 

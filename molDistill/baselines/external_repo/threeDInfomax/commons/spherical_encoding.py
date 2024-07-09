@@ -1,7 +1,7 @@
 # Based on the code from: https://github.com/klicperajo/dimenet,
 # https://github.com/rusty1s/pytorch_geometric/blob/master/torch_geometric/nn/models/dimenet_utils.py
 
-from math import sqrt, pi as PI
+from math import pi as PI
 
 import numpy as np
 import torch
