@@ -40,8 +40,10 @@ class ModelFactory:
             from .threedinfomax import get_embeddings_from_model_threedinfomax
 
             return get_embeddings_from_model_threedinfomax
+        elif name.startswith("custom:"):
+            from molDistill.utils.embeddings import get_embeddings_from_distill_model
 
-
+            return get_embeddings_from_distill_model
         else:
             from .transformers_models import get_embeddings_from_transformers
 

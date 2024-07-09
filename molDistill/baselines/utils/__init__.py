@@ -31,7 +31,7 @@ class MolecularFeatureExtractor:
     def get_features(
         self,
         smiles: List[str],
-        name: str,
+        name: str,  # if custom : "custom:ckpt_path"
         mols: Optional[List[dm.Mol]] = None,
     ):
         device = self.device
@@ -40,9 +40,10 @@ class MolecularFeatureExtractor:
 
         if name in self.model_path:
             path = self.model_path[name]
+        elif "custom" in name:
+            path = name.replace("custom:", "")
         else:
             path = self.path_ckpt
-
 
         if os.path.exists(f"{self.data_dir}/{name}.npy"):
             molecular_embedding = torch.tensor(
@@ -58,7 +59,8 @@ class MolecularFeatureExtractor:
                 dataset=dataset,
                 DATA_PATH=self.data_dir,
             )
-            np.save(f"{self.data_dir}/{name}.npy", molecular_embedding.cpu().numpy())
+            if not name.startswith("custom:"):
+                np.save(f"{self.data_dir}/{name}.npy", molecular_embedding.cpu().numpy())
 
         if normalize:
             molecular_embedding = (
@@ -74,7 +76,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
-    parser.add_argument("--dataset", type=str, default="ClinTox")
+    parser.add_argument("--dataset", type=str, default="hERG")
     parser.add_argument(
         "--model-names",
         nargs="+",

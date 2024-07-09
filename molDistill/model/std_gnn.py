@@ -3,7 +3,7 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from data.data_encoding import (
+from molDistill.data.data_encoding import (
     allowable_features,
     allowable_features_edge,
     node_embedding_order,

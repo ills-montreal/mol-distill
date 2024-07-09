@@ -174,7 +174,6 @@ def main(args):
     model = Model_GM(
         mol_model,
     )
-    model = torch.compile(model, dynamic=True, fullgraph=True, disable=True)
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
             knifes_config = yaml.safe_load(f)

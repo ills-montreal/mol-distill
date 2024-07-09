@@ -7,16 +7,6 @@ from sklearn.metrics import roc_auc_score, r2_score
 from torch.utils.data import DataLoader
 from tqdm import trange
 
-from functools import partial
-
-def get_embedders(all_embedders, feature_extractor):
-    embeddings_fn = {}
-    for model_name in all_embedders:
-        embeddings_fn[model_name] = partial(
-            feature_extractor.get_features,
-            name=model_name,
-        )
-    return embeddings_fn
 
 def get_dataloaders(
     split_emb: Dict[str, Dict[str, torch.Tensor]],

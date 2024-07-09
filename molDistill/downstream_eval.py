@@ -1,8 +1,13 @@
+import os
+import sys
+
+sys.path.append("molDistill")
+
 import argparse
 import json
 import logging
-import os
 from typing import Dict, List, Callable, Optional, Tuple
+from functools import partial
 
 import datamol as dm
 import pandas as pd
@@ -14,7 +19,6 @@ from molDistill.baselines.utils.evaluation import (
     Feed_forward,
     FFConfig,
     FF_trainer,
-    get_embedders,
 )
 from molDistill.baselines.utils.tdc_dataset import get_dataset_split
 from tqdm import tqdm
@@ -158,6 +162,7 @@ def launch_evaluation(
     embedders: Dict[str, Callable],
     plot_loss: bool = False,
     run_num: Optional[Tuple[int, int]] = None,
+    test: bool = False,
 ):
     split_emb = get_split_emb(split_idx, embedders, smiles, mols, embedder_name)
 
@@ -204,7 +209,10 @@ def launch_evaluation(
     for r2 in model.r2_val:
         wandb.log({f"r2_val": r2})
 
-    test_metric = trainer.eval_on_test(dataloader_test)
+    if test:
+        test_metric = trainer.eval_on_test(dataloader_test)
+    else:
+        test_metric = 0
 
     df_results = pd.DataFrame(
         {
@@ -250,7 +258,13 @@ def main(args):
                         device=args.device,
                         data_dir=args.data_path,
                     )
-                    embedders = get_embedders(MODELS, feature_extractor)
+                    embedders = {
+                        model_name: partial(
+                            feature_extractor.get_features,
+                            name=model_name,
+                        )
+                        for model_name in args.embedders
+                    }
 
                     final_res.append(
                         launch_evaluation(
@@ -264,6 +278,7 @@ def main(args):
                             embedders=embedders,
                             plot_loss=args.plot_loss,
                             run_num=(i, len(args.embedders)),
+                            test=args.test
                         )
                     )
 
@@ -302,6 +317,8 @@ def add_downstream_args(parser: argparse.ArgumentParser):
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--plot-loss", action="store_true")
     parser.add_argument("--split-method", type=str, default="scaffold")
+
+    parser.add_argument("--test", action="store_true")
     return parser
 
 
