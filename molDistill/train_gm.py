@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-sys.path.append("molDistill")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 import torch
 import wandb
@@ -244,7 +244,7 @@ if __name__ == "__main__":
             allow_val_change=True,
         )
         args.out_dir = os.path.join(args.out_dir, wandb.run.name)
-
+        print(args.out_dir)
         wandb.define_metric("train_loss", step_metric="epoch")
         wandb.define_metric("eval_loss", step_metric="epoch")
         wandb.define_metric("lr", step_metric="epoch")
@@ -259,3 +259,7 @@ if __name__ == "__main__":
         yaml.dump(args.__dict__, f)
 
     main(args)
+
+    # Create a stop.txt file to indicate the end of the training
+    with open("stop.txt", "w") as f:
+        f.write("Training finished")

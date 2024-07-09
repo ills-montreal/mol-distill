@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-sys.path.append("molDistill")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 import numpy as np
 import torch
@@ -155,3 +155,5 @@ if __name__ == "__main__":
         wandb.define_metric("lr", step_metric="epoch")
 
     main(args)
+    with open("stop.txt", "w") as f:
+        f.write("Training finished")
