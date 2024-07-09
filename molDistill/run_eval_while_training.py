@@ -13,6 +13,7 @@ logger.setLevel(logging.INFO)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("MODEL_PATH", type=str)
+    parser.add_argument("--sbatch", action="store_true")
     args = parser.parse_args()
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
@@ -25,9 +26,14 @@ if __name__ == "__main__":
             # If the model has not been checked
             if model.endswith(".pth") and not model in checked_models:
                 # Launch the downstream eval script
-                os.system(
-                    f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)}"
-                )
+                if args.sbatch:
+                    os.system(
+                        f"sbatch molDistill/eval.sh custom:{os.path.join(MODEL_PATH, model)} 5"
+                    )
+                else:
+                    os.system(
+                        f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)}"
+                    )
                 # Add the model to the checked models
                 checked_models.append(model)
 
