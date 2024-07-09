@@ -26,6 +26,7 @@ if __name__ == "__main__":
             # If the model has not been checked
             if model.endswith(".pth") and not model in checked_models:
                 # Launch the downstream eval script
+                logger.info(f"Launching eval for {model}")
                 if args.sbatch:
                     os.system(
                         f"sbatch eval.sh custom:{os.path.join(MODEL_PATH, model)} 5"
