@@ -16,9 +16,12 @@ echo "Starting job on dataset $DATASET  and model $MODELS"
 cd $SLURM_TMPDIR
 mkdir tmp_dir
 cd tmp_dir
+mkdir distill
+cd distill
 
+cp -r /home/fransou/distill/mol-distill .
+cp -r /home/fransou/distill/data/$DATASET .
 
-cp -r /home/fransou/distill .
 
 module load python/3.11
 module load scipy-stack
@@ -33,4 +36,4 @@ wandb offline
 python molDistill/train_gm.py --dataset $DATASET --data-dir $SLURM_TMPDIR/tmp_dir/distill/data --wandb --dim $1 --gnn-type $2 --n-layer $3
 
 cp -r wandb/* /home/fransou/distill/wandb
-cp -r results/* /home/fransou/distill/results
+cp -r results/* /home/fransou/distill/mol-distill/results

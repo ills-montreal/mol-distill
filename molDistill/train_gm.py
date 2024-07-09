@@ -1,5 +1,8 @@
 import argparse
 import os
+import sys
+
+sys.path.append("molDistill")
 
 import torch
 import wandb

@@ -1,5 +1,8 @@
 import argparse
 import os
+import sys
+
+sys.path.append("molDistill")
 
 import numpy as np
 import torch
