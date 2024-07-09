@@ -45,4 +45,4 @@ if __name__ == "__main__":
                 analyze = False
 
         logger.info("Sleeping for 60 seconds")
-        time.sleep(10)
+        time.sleep(60)
