@@ -243,7 +243,10 @@ if __name__ == "__main__":
             project="mol-distill",
             allow_val_change=True,
         )
-        args.out_dir = os.path.join(args.out_dir, wandb.run.name)
+        if not wandb.run.name is None:
+            args.out_dir = os.path.join(args.out_dir, wandb.run.name)
+        else:
+            args.out_dir = os.path.join(args.out_dir, wandb.run.id)
         print(args.out_dir)
         wandb.define_metric("train_loss", step_metric="epoch")
         wandb.define_metric("eval_loss", step_metric="epoch")
