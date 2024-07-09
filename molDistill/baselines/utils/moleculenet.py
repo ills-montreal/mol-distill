@@ -4,11 +4,12 @@ from typing import List, Optional
 import datamol as dm
 import torch
 import torch_geometric.nn.pool as tgp
-from molDistill.baselines.models.moleculenet_models import GNN
-from molDistill.baselines.utils.moleculenet_encoding import mol_to_graph_data_obj_simple
 from torch_geometric.data import InMemoryDataset
 from torch_geometric.loader import DataLoader
 from tqdm import tqdm
+
+from molDistill.baselines.models.moleculenet_models import GNN
+from molDistill.baselines.utils.moleculenet_encoding import mol_to_graph_data_obj_simple
 
 MODEL_PARAMS = {
     "num_layer": 5,

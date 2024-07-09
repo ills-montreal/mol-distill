@@ -8,7 +8,6 @@ import torch
 from kymatio.scattering3d.backend.torch_backend import TorchBackend3D
 from kymatio.scattering3d.utils import generate_weighted_sum_of_gaussians
 from kymatio.torch import HarmonicScattering3D
-from rdkit import Chem
 from scipy.spatial.distance import pdist
 from tqdm import trange
 

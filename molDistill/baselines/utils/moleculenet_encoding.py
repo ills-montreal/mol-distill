@@ -1,17 +1,9 @@
-import os
-import pickle
-from itertools import chain, repeat
 from typing import Optional
 
-import networkx as nx
 import numpy as np
-import pandas as pd
 import torch
 from rdkit import Chem
-from rdkit.Chem import AllChem, Descriptors
-from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect
-from torch.utils import data
-from torch_geometric.data import Data, InMemoryDataset, download_url, extract_zip
+from torch_geometric.data import Data
 
 allowable_features = {
     "possible_atomic_num_list": list(range(1, 119)),

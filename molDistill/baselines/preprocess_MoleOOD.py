@@ -1,12 +1,10 @@
-from rdkit.Chem import BRICS
 import argparse
+import json
 import os
 import pickle
-import subprocess
-from tqdm import tqdm
-import json
 
 from molecule.external_repo.MoleOOD.OGB.modules.ChemistryProcess import get_substructure
+from tqdm import tqdm
 
 
 def get_result_dir(work_dir):

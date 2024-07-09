@@ -3,10 +3,20 @@ from typing import Dict
 
 import matplotlib.pyplot as plt
 import torch
-from sklearn.metrics import f1_score, roc_auc_score, r2_score
+from sklearn.metrics import roc_auc_score, r2_score
 from torch.utils.data import DataLoader
 from tqdm import trange
 
+from functools import partial
+
+def get_embedders(all_embedders, feature_extractor):
+    embeddings_fn = {}
+    for model_name in all_embedders:
+        embeddings_fn[model_name] = partial(
+            feature_extractor.get_features,
+            name=model_name,
+        )
+    return embeddings_fn
 
 def get_dataloaders(
     split_emb: Dict[str, Dict[str, torch.Tensor]],
@@ -241,3 +251,7 @@ class FF_trainer():
         self.model.load_state_dict(self.best_ckpt)
         self.model.evaluate(dataloader_test, record=False)
         return self.model.val_roc[-1] if self.model.task == "classification" else self.model.r2_val[-1]
+
+
+
+

@@ -3,14 +3,12 @@ from typing import List, Optional
 import datamol as dm
 import selfies as sf
 import torch
-
 from tqdm import trange
+from transformers import GPTNeoForCausalLM
 from transformers.modeling_outputs import (
     MaskedLMOutput,
     BaseModelOutputWithPoolingAndCrossAttentions,
 )
-from transformers import GPTNeoForCausalLM
-
 
 from molDistill.baselines.models.transformers_models import get_hugging_face_model
 

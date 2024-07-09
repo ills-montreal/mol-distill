@@ -1,5 +1,4 @@
-import os
-from typing import List, Union, Optional
+from typing import List, Optional
 
 import datamol as dm
 import numpy as np
@@ -7,7 +6,6 @@ import torch
 from molfeat.calc.pharmacophore import Pharmacophore2D, Pharmacophore3D
 from molfeat.trans import MoleculeTransformer
 from molfeat.trans.fp import FPVecTransformer
-from torch_geometric.data import DataLoader
 from tqdm import tqdm
 
 threeD_method_fpvec = ["usrcat", "electroshape", "usr"]

@@ -5,6 +5,7 @@ from typing import List, Optional
 import datamol as dm
 import numpy as np
 import torch
+
 from molDistill.baselines.models.model_paths import get_model_path
 from molDistill.baselines.utils.model_factory import ModelFactory
 

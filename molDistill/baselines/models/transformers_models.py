@@ -5,7 +5,6 @@ from transformers import (
     RobertaModel,
     AutoModelForCausalLM,
 )
-from transformers import pipeline
 
 PIPELINE_CORRESPONDANCY = {
     "MolBert": "jonghyunlee/MoleculeBERT_ChEMBL-pretrained",

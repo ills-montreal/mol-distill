@@ -1,7 +1,7 @@
 import argparse
 import os
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from inspect import signature
 from typing import List
 
@@ -15,7 +15,6 @@ from molecule.external_repo.threeDInfomax.datasets.custom_collate import (
 from molecule.external_repo.threeDInfomax.datasets.inference_dataset import (
     InferenceDataset,
 )
-from molecule.external_repo.threeDInfomax.models.pna import PNA
 from torch.utils.data import DataLoader
 
 
