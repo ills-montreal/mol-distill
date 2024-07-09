@@ -181,6 +181,7 @@ def main(args):
             knifes_config = KNIFEArgs(**knifes_config)
     else:
         knifes_config = KNIFEArgs(device=args.device)
+        os.makedirs(os.path.dirname(args.knifes_config), exist_ok=True)
         with open(args.knifes_config, "w") as f:
             yaml.dump(knifes_config.__dict__, f)
 
