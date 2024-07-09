@@ -278,7 +278,7 @@ def main(args):
                             embedders=embedders,
                             plot_loss=args.plot_loss,
                             run_num=(i, len(args.embedders)),
-                            test=args.test
+                            test=args.test,
                         )
                     )
 
@@ -287,6 +287,10 @@ def main(args):
     df = df.groupby(["embedder", "dataset"]).mean().reset_index()
 
     wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
+
+    if len(args.embedders) == 1 and args.embedders[0].startswith("custom:"):
+        path = args.embedders[0].split(":")[1]
+        df.to_csv(path.replace(".pth", ".csv"))
 
 
 def add_downstream_args(parser: argparse.ArgumentParser):

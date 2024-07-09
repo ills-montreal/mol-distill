@@ -15,7 +15,8 @@ if __name__ == "__main__":
     parser.add_argument("MODEL_PATH", type=str)
     args = parser.parse_args()
     MODEL_PATH = args.MODEL_PATH
-    checked_models = []
+    checked_models = ["best_model.pth"]
+    analyze = True
     while True:
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
@@ -25,13 +26,16 @@ if __name__ == "__main__":
             if model.endswith(".pth") and not model in checked_models:
                 # Launch the downstream eval script
                 os.system(
-                    f"python molDistill/downstream_eval.py --embedder custom:{os.path.join(MODEL_PATH, model)} &"
+                    f"python molDistill/downstream_eval.py --embedder custom:{os.path.join(MODEL_PATH, model)}"
                 )
                 # Add the model to the checked models
                 checked_models.append(model)
 
             # if stop.txt is in the directory, stop the script
             if model == "stop.txt":
-                break
+                if not analyze:
+                    break
+                analyze = False
+
         logger.info("Sleeping for 60 seconds")
-        time.sleep(60)
+        time.sleep(10)

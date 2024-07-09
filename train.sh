@@ -34,7 +34,7 @@ python molDistill/train_gm.py \
   --dim $1 \
   --gnn-type $2 \
   --n-layer $3 \
-  --out-dir $DISTILL_DIR/mol-distill/results
+  --out-dir $DISTILL_DIR/mol-distill/results/$4
 
 cp -r wandb/* $DISTILL_DIR/wandb
 cp -r results/* $DISTILL_DIR/mol-distill/results

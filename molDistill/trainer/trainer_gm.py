@@ -125,6 +125,8 @@ class TrainerGM:
             train_loss, train_loss_per_embedder = self.train_epoch(
                 input_loader, embedding_loader, epoch
             )
+
+
             t1 = time.time()
 
             dict_to_log = {
@@ -136,6 +138,11 @@ class TrainerGM:
             # z = self.encode_loader(input_loader)
             mean_time += t1 - t0
             if epoch % log_interval == 0:
+                torch.save(
+                    self.model.state_dict(),
+                    os.path.join(self.out_dir, f"model_{epoch}.pth"),
+                )
+
                 mean_time /= log_interval
                 eval_loss, test_loss_per_embedder = self.eval(
                     input_loader_valid, embedding_loader_valid, epoch
