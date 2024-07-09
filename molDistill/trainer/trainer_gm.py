@@ -126,7 +126,6 @@ class TrainerGM:
                 input_loader, embedding_loader, epoch
             )
 
-
             t1 = time.time()
 
             dict_to_log = {

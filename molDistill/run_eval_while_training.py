@@ -26,7 +26,7 @@ if __name__ == "__main__":
             if model.endswith(".pth") and not model in checked_models:
                 # Launch the downstream eval script
                 os.system(
-                    f"python molDistill/downstream_eval.py --embedder custom:{os.path.join(MODEL_PATH, model)}"
+                    f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)}"
                 )
                 # Add the model to the checked models
                 checked_models.append(model)
