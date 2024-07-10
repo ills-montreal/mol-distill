@@ -126,14 +126,18 @@ def get_dataset_split(dataset: str, random_seed: int = 42, method="random"):
             label_list = retrieve_label_name_list(dataset)
             split = []
             for l in tqdm(label_list):
-                subsplit = correspondancy_dict[dataset](
-                    name=dataset, label_name=l
-                ).get_split(seed=random_seed, method=method)
-                for k in subsplit:
-                    if subsplit[k].Y.nunique() < 2:
-                        return get_dataset_split(
-                            dataset, random_seed=random_seed + 10, method=method
-                        )
+                non_valid = True
+                i_rs = 0
+                while non_valid:
+                    non_valid = False
+                    subsplit = correspondancy_dict[dataset](
+                        name=dataset, label_name=l
+                    ).get_split(seed=random_seed + 100*i_rs, method=method)
+                    for k in subsplit:
+                        if subsplit[k].Y.nunique() < 2:
+                            non_valid = True
+                    i_rs += 1
+
                 split.append(subsplit)
             return split
         else:
