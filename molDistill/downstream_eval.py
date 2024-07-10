@@ -245,9 +245,14 @@ def main(args):
         for random_seed in tqdm(
             range(args.n_runs), desc=f"Dataset {dataset}", position=1, leave=False
         ):
-            splits = get_dataset_split(
-                dataset, random_seed=random_seed, method=args.split_method
-            )
+            try:
+                splits = get_dataset_split(
+                    dataset, random_seed=random_seed, method=args.split_method
+                )
+            except Exception as e:
+                logger.error(f"Error in dataset {dataset} with seed {random_seed}")
+                logger.error(e)
+                continue
 
             for i, embedder_name in enumerate(args.embedders):
                 for split in splits:
@@ -265,25 +270,20 @@ def main(args):
                         )
                         for model_name in args.embedders
                     }
-                    try:
-                        res = launch_evaluation(
-                            dataset=dataset,
-                            embedder_name=embedder_name,
-                            split_idx=split_idx,
-                            device=args.device,
-                            model_config=model_config,
-                            smiles=smiles,
-                            mols=mols,
-                            embedders=embedders,
-                            plot_loss=args.plot_loss,
-                            run_num=(i, len(args.embedders)),
-                            test=args.test,
-                        )
-                        final_res.append(res)
-                    except Exception as e:
-                        logger.error(
-                            f"Error while evaluating {dataset} with {embedder_name} : {e}, Skipping..."
-                        )
+                    res = launch_evaluation(
+                        dataset=dataset,
+                        embedder_name=embedder_name,
+                        split_idx=split_idx,
+                        device=args.device,
+                        model_config=model_config,
+                        smiles=smiles,
+                        mols=mols,
+                        embedders=embedders,
+                        plot_loss=args.plot_loss,
+                        run_num=(i, len(args.embedders)),
+                        test=args.test,
+                    )
+                    final_res.append(res)
 
     df = pd.concat(final_res).reset_index(drop=True)
     wandb.log({"results_df": wandb.Table(dataframe=df)})
