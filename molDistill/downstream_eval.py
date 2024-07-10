@@ -308,7 +308,7 @@ def add_downstream_args(parser: argparse.ArgumentParser):
         type=str,
         default="../data",
     )
-    parser.add_argument("--datasets", type=str, nargs="+", default=["Tox", "ADME"])
+    parser.add_argument("--datasets", type=str, nargs="+", default=["TOX", "ADME"])
     parser.add_argument(
         "--embedders",
         type=str,
