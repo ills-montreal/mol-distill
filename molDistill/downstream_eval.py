@@ -265,9 +265,8 @@ def main(args):
                         )
                         for model_name in args.embedders
                     }
-
-                    final_res.append(
-                        launch_evaluation(
+                    try:
+                        res = launch_evaluation(
                             dataset=dataset,
                             embedder_name=embedder_name,
                             split_idx=split_idx,
@@ -280,7 +279,11 @@ def main(args):
                             run_num=(i, len(args.embedders)),
                             test=args.test,
                         )
-                    )
+                        final_res.append(res)
+                    except Exception as e:
+                        logger.error(
+                            f"Error while evaluating {dataset} with {embedder_name} : {e}, Skipping..."
+                        )
 
     df = pd.concat(final_res).reset_index(drop=True)
     wandb.log({"results_df": wandb.Table(dataframe=df)})

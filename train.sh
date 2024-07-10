@@ -20,7 +20,7 @@ mkdir -p $SLURM_DIR/data $SLURM_DIR/mol-distill
 cp -r $DISTILL_DIR/mol-distill $SLURM_DIR
 cp -r $DISTILL_DIR/data/$DATASET $SLURM_DIR/data
 
-module load python/3.11 scipy-stack rdkit
+module load python/3.10 scipy-stack rdkit
 source /home/fransou/DISTILL/bin/activate
 
 echo "Running script on dataset $DATASET with dim $1, gnn-type $2 and n-layer $3"
