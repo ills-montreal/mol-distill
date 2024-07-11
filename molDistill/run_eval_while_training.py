@@ -75,6 +75,17 @@ def log_eval_results(model, MODEL_PATH):
 
 
 if __name__ == "__main__":
+
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("MODEL_PATH", type=str)
+    parser.add_argument("--sbatch", action="store_true")
+    args = parser.parse_args()
+
+    while not os.path.exists(args.MODEL_PATH):
+        logger.info(f"Waiting for {args.MODEL_PATH} to be created")
+        time.sleep(300)
+
     wandb.init(
         project="mol-distill-downs-ckpt",
         allow_val_change=True,
@@ -83,10 +94,7 @@ if __name__ == "__main__":
         wandb.define_metric(f"eval_perfs_{dataset}", step_metric="epoch")
     wandb.define_metric("eval_perfs", step_metric="epoch")
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("MODEL_PATH", type=str)
-    parser.add_argument("--sbatch", action="store_true")
-    args = parser.parse_args()
+
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
     logged_models = ["best_model.pth"]
