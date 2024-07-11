@@ -204,10 +204,11 @@ def launch_evaluation(
     )
 
     model = trainer.model
-    for val_roc in model.val_roc:
-        wandb.log({f"val_roc": val_roc})
-    for r2 in model.r2_val:
-        wandb.log({f"r2_val": r2})
+    if args.wandb:
+        for val_roc in model.val_roc:
+            wandb.log({f"val_roc": val_roc})
+        for r2 in model.r2_val:
+            wandb.log({f"r2_val": r2})
 
     if test:
         test_metric = trainer.eval_on_test(dataloader_test)
@@ -286,10 +287,12 @@ def main(args):
                     final_res.append(res)
 
     df = pd.concat(final_res).reset_index(drop=True)
-    wandb.log({"results_df": wandb.Table(dataframe=df)})
+    if args.wandb:
+        wandb.log({"results_df": wandb.Table(dataframe=df)})
     df = df.groupby(["embedder", "dataset"]).mean().reset_index()
 
-    wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
+    if args.wandb:
+        wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
 
     if len(args.embedders) == 1 and args.embedders[0].startswith("custom:"):
         path = args.embedders[0].split(":")[1]
@@ -326,6 +329,7 @@ def add_downstream_args(parser: argparse.ArgumentParser):
     parser.add_argument("--split-method", type=str, default="scaffold")
 
     parser.add_argument("--test", action="store_true")
+    parser.add_argument("--wandb", action="store_true")
     return parser
 
 
@@ -339,10 +343,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.split_method == "scaffold":
-        wandb.init(project="distill-downstream", tags=["scaffold"])
-    else:
-        wandb.init(project="distill-downstream")
 
     if args.embedders is None:
         args.embedders = MODELS
@@ -352,5 +352,11 @@ if __name__ == "__main__":
             args.datasets.remove(group)
             args.datasets += DATASETS_GROUP[group]
 
-    wandb.config.update(args)
+    if args.wandb:
+        if args.split_method == "scaffold":
+            wandb.init(project="distill-downstream", tags=["scaffold"])
+        else:
+            wandb.init(project="distill-downstream")
+
+        wandb.config.update(args)
     main(args)
