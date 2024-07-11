@@ -20,7 +20,7 @@ if __name__ == "__main__":
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
     last_round = False
-    continue_training = False
+    continue_training = True
     while continue_training:
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
