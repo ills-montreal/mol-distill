@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-01:00:00
+#SBATCH --time=0-00:40:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=40G
 #SBATCH --cpus-per-task=4
@@ -26,6 +26,7 @@ wandb offline
 python molDistill/downstream_eval.py \
   --embedders $1 \
   --data-path $SLURM_DIR/data \
-  --n-runs $2
+  --n-runs $2 \
+  --test
 
 cp -r wandb/* $DISTILL_DIR/wandb

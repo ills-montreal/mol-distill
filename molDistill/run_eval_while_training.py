@@ -36,7 +36,7 @@ if __name__ == "__main__":
                     )
                 else:
                     os.system(
-                        f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets hERG"
+                        f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets hERG --test"
                     )
                 # Add the model to the checked models
                 checked_models.append(model)
@@ -77,8 +77,25 @@ if __name__ == "__main__":
     )
     df["epoch"] = df.embedder.apply(lambda x: int(x.replace(".pth", "").split("_")[-1]))
     df = df.drop(axis=1, columns=["Unnamed: 0", "embedder"])
+    df = df.groupby(["epoch", "dataset"]).mean().reset_index()
     wandb.log({"table": wandb.Table(dataframe=df)})
-    df = df.groupby("epoch")["metric"].mean().reset_index()
-    for ep in df.epoch:
-        wandb.log({"eval_perfs": df[df.epoch == ep].metric.values[0], "epoch": ep})
+    df_grouped = df.groupby("epoch")["metric_test"].mean().reset_index()
+    for ep in df_grouped.epoch:
+        wandb.log(
+            {
+                "eval_perfs": df_grouped[df_grouped.epoch == ep].metric_test.values[0],
+                "epoch": ep,
+            }
+        )
+
+    # log one lineplot for each dataset
+    for dataset in df.dataset.unique():
+        df_dataset = wandb.Table(dataframe=df[df.dataset == dataset])
+        wandb.log(
+            {
+                f"eval_perfs_{dataset}": wandb.plot.line(
+                    df_dataset, x="epoch", y="metric_test", title=dataset
+                )
+            }
+        )
     wandb.finish()

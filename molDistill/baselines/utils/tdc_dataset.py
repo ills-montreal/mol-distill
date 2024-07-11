@@ -110,14 +110,17 @@ def get_dataset_split(dataset: str, random_seed: int = 42, method="random"):
     if dataset in correspondancy_dict_DTI.keys():
         return get_dataset_split_DTI(dataset, random_seed=random_seed)
     try:
-        split = correspondancy_dict[dataset](name=dataset).get_split(
-            seed=random_seed, method=method
-        )
-        for k in split:
-            if split[k].Y.nunique() < 2:
-                return get_dataset_split(
-                    dataset, random_seed=random_seed + 10, method=method
-                )
+        i_rs = 0
+        non_valid = True
+        while non_valid:
+            non_valid = False
+            split = correspondancy_dict[dataset](name=dataset).get_split(
+                seed=random_seed + i_rs * 100, method=method
+            )
+            for k in split:
+                if split[k].Y.nunique() < 2:
+                    non_valid = True
+                    i_rs += 1
         return [split]
     except Exception as e:
         if e.args[0].startswith(

@@ -42,13 +42,12 @@ def get_embeddings_from_distill_model(
     embeddings = []
     for graph in tqdm(dataloader, desc="Extracting embeddings"):
         graph = graph.to(device)
-        embeddings.append(
-            model(
-                graph.x,
-                graph.edge_index,
-                graph.edge_attr,
-                graph.batch,
-                size=len(graph.smiles),
-            ).cpu()
+        e = model(
+            graph.x,
+            graph.edge_index,
+            graph.edge_attr,
+            graph.batch,
+            size=len(graph.smiles),
         )
+        embeddings.append(e.cpu())
     return torch.cat(embeddings)
