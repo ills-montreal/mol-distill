@@ -137,7 +137,7 @@ def get_parser():
 
     # other parameters
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--log-interval", type=int, default=1)
+    parser.add_argument("--log-interval", type=int, default=5)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--save-dir", type=str, default="../results")
     parser.add_argument("--save-name", type=str, default="tmp")
