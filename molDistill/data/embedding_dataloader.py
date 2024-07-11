@@ -72,8 +72,8 @@ def get_embedding_loader(args):
     )
     n_data = len(dataset_train)
     idx_train = torch.randperm(n_data)
-    idx_valid = idx_train[: int(n_data * args.valid_prop)].tolist()
-    idx_train = idx_train[int(n_data * args.valid_prop) :].tolist()
+    idx_valid = idx_train[: int(n_data * args.valid_prop)].sort().tolist()
+    idx_train = idx_train[int(n_data * args.valid_prop) :].sort().tolist()
 
     dataset_train.update_idx(idx_train)
     dataset_valid = EmbeddingDataset(
