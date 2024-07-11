@@ -50,6 +50,8 @@ if __name__ == "__main__":
         logger.info("Sleeping for 10 seconds")
         time.sleep(10)
 
+    checked_models = checked_models[1:]
+
     logger.info("Finished logging all results")
 
     all_csv_exist = False
