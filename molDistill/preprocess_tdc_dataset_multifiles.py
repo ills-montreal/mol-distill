@@ -32,22 +32,17 @@ parser.add_argument(
     help="Path to the data folder",
 )
 
-parser.add_argument(
-    "--i0", type=int, default=0, help="Starting index for the dataset"
-)
+parser.add_argument("--i0", type=int, default=0, help="Starting index for the dataset")
 
 parser.add_argument(
     "--step", type=int, default=100000, help="Step size for the dataset"
 )
 
 
-
 def main():
     args = parser.parse_args()
     i0 = args.i0
     step = args.step
-
-
 
     for dataset in args.datasets:
         dataset = dataset.replace(".csv", "")
@@ -67,7 +62,9 @@ def main():
                 print(f"Loading 3D conformers from data/{dataset}_3d.sdf")
                 mols, smiles = precompute_3d(None, filepath)
             else:
-                df = get_dataset(dataset.replace("__", " ")).iloc[i0 : i0 + step]
+                df = get_dataset(dataset.replace("__", " ")).iloc[
+                    i0 * step : i0 * step + step
+                ]
                 if "Drug" in df.columns:
                     smiles = df["Drug"].tolist()
                 else:
@@ -107,7 +104,6 @@ def main():
             )
             smiles = pre_processed["smiles"].iloc[:, 0].tolist()
             mols = pre_processed["mols"].tolist()
-
 
 
 if __name__ == "__main__":
