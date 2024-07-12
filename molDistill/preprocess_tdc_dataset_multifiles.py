@@ -63,7 +63,7 @@ def main():
                 mols, smiles = precompute_3d(None, filepath)
             else:
                 df = get_dataset(dataset.replace("__", " ")).iloc[
-                    i0 * step : i0 * step + step
+                    i0 * step : min(i0 * step + step, len(df))
                 ]
                 if "Drug" in df.columns:
                     smiles = df["Drug"].tolist()
