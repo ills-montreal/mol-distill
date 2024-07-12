@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import torch
-import torch.utils.data as tdata
+import torch.utils.data as data
 
 
 @dataclass(frozen=True)
@@ -14,22 +14,40 @@ class Embedding:
     model_name: str = field(default=None)
 
 
-class EmbeddingDataset(tdata.Dataset):
-    def __init__(self, embeddings_models, smiles_models, model_names):
-        self.embeddings = []
-        for embeddings, smiles, model_name in zip(embeddings_models, smiles_models, model_names):
-            self.embeddings.append(
+class EmbeddingDataset(data.Dataset):
+    def __init__(self, data_dir, dataset, model_names, model_files, idx = None):
+        with open(os.path.join(data_dir, dataset, "smiles.json"), "r") as f:
+            self.smiles = np.array(json.load(f))
+            if not idx is None:
+                self.smiles = self.smiles[idx]
+
+        self.data = []
+        self.embs_dim = []
+        for model_name, model_file in zip(model_names, model_files):
+            embs = np.load(os.path.join(data_dir, dataset, model_file))
+            if not idx is None:
+                embs = embs[idx]
+            embs = (embs - embs.mean(axis=0)) / (embs.std(axis=0) + 1e-8)
+            embs = torch.tensor(embs, dtype=torch.float)
+
+            self.data.append(
                 [
                     Embedding(embedding, smiles, model_name)
-                    for embedding, smiles in zip(embeddings, smiles)
+                    for embedding, smiles in zip(embs, self.smiles)
                 ]
             )
+            self.embs_dim.append(embs.shape[1])
+
+    def update_idx(self, idx):
+        self.smiles = self.smiles[idx]
+        for i in range(len(self.data)):
+            self.data[i] = [self.data[i][j] for j in idx]
 
     def __getitem__(self, index):
-        return [embeddings[index] for embeddings in self.embeddings]
+        return [embeddings[index] for embeddings in self.data]
 
     def __len__(self):
-        return len(self.embeddings[0])
+        return len(self.smiles)
 
 
 def collate_fn(batch):
@@ -47,36 +65,22 @@ def collate_fn(batch):
 
 
 def get_embedding_loader(args):
-    all_embedders = []
-    embs_dim = []
-    model_names = []
-    with open(os.path.join(args.data_dir, args.dataset, "smiles.json"), "r") as f:
-        smiles = np.array(json.load(f))
-    for embedder in args.embedders_to_simulate:
-        embs = np.load(os.path.join(args.data_dir, args.dataset, f"{embedder}.npy"))
-        embs = (embs - embs.mean(axis=0)) / (embs.std(axis=0) + 1e-8)
-        embs = torch.tensor(embs, dtype=torch.float)
 
-        all_embedders.append(embs)
-        embs_dim.append(embs.shape[1])
-        model_names.append(embedder)
-
-    idx_train = torch.randperm(all_embedders[0].size(0))
-    idx_valid = idx_train[: int(all_embedders[0].size(0) * args.valid_prop)].tolist()
-    idx_train = idx_train[int(all_embedders[0].size(0) * args.valid_prop) :].tolist()
-
+    model_files = [f"{model_name}.npy" for model_name in args.embedders_to_simulate]
     dataset_train = EmbeddingDataset(
-        [e[idx_train] for e in all_embedders],
-        [smiles[idx_train] for _ in all_embedders],
-        model_names
+        args.data_dir, args.dataset, args.embedders_to_simulate, model_files
     )
+    n_data = len(dataset_train)
+    idx_train = torch.randperm(n_data)
+    idx_valid = idx_train[: int(n_data * args.valid_prop)].sort().tolist()
+    idx_train = idx_train[int(n_data * args.valid_prop) :].sort().tolist()
+
+    dataset_train.update_idx(idx_train)
     dataset_valid = EmbeddingDataset(
-        [e[idx_valid] for e in all_embedders],
-        [smiles[idx_valid] for _ in all_embedders],
-        model_names
+        args.data_dir, args.dataset, args.embedders_to_simulate, model_files, idx_valid
     )
 
-    emb_loader = tdata.DataLoader(
+    emb_loader = data.DataLoader(
         dataset_train,
         batch_size=args.batch_size,
         num_workers=0,
@@ -84,7 +88,7 @@ def get_embedding_loader(args):
         shuffle=False,
         collate_fn=collate_fn,
     )
-    emb_loader_valid = tdata.DataLoader(
+    emb_loader_valid = data.DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
         num_workers=0,
@@ -92,4 +96,4 @@ def get_embedding_loader(args):
         collate_fn=collate_fn,
     )
 
-    return emb_loader, emb_loader_valid, embs_dim, idx_train, idx_valid
+    return emb_loader, emb_loader_valid, dataset_train.embs_dim, idx_train, idx_valid

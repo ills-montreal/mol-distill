@@ -242,6 +242,7 @@ if __name__ == "__main__":
             project="mol-distill",
             allow_val_change=True,
         )
+
         if not wandb.run.name is None:
             args.out_dir = os.path.join(args.out_dir, wandb.run.name)
         print(args.out_dir)
@@ -261,5 +262,5 @@ if __name__ == "__main__":
     main(args)
 
     # Create a stop.txt file to indicate the end of the training
-    with open("stop.txt", "w") as f:
+    with open(os.path.join(args.out_dir,"stop.txt"), "w") as f:
         f.write("Training finished")

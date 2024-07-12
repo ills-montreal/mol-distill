@@ -37,4 +37,3 @@ python molDistill/train_gm.py \
   --out-dir $DISTILL_DIR/mol-distill/results/$4
 
 cp -r wandb/* $DISTILL_DIR/wandb
-cp -r results/* $DISTILL_DIR/mol-distill/results

@@ -80,12 +80,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("MODEL_PATH", type=str)
     parser.add_argument("--sbatch", action="store_true")
+    parser.add_argument("--timeout", type=int, default=10)
     args = parser.parse_args()
+
 
     while not os.path.exists(args.MODEL_PATH):
         logger.info(f"Waiting for {args.MODEL_PATH} to be created")
         time.sleep(300)
 
+    t0 = time.time()
     wandb.init(
         project="mol-distill-downs-ckpt",
         allow_val_change=True,
@@ -101,6 +104,8 @@ if __name__ == "__main__":
     last_round = False
     continue_training = True
     while continue_training:
+        if time.time() - t0 > args.timeout*60*60:
+            break
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
         models = [model for model in models if model.endswith(".pth")]

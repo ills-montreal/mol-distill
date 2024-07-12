@@ -31,11 +31,13 @@ def get_embeddings_from_model_moleculenet(
     batch_size: int = 2048,
     dataset: Optional[str] = None,
     DATA_PATH: str = "data",
+    i_file=None,
     **kwargs,
 ):
-    graph_input_path = (
-        f"{DATA_PATH}/graph_input" if dataset is not None else None
-    )
+    if i_file is None:
+        graph_input_path = f"{DATA_PATH}/graph_input" if dataset is not None else None
+    else:
+        graph_input_path = f"{DATA_PATH}/graph_input/graph_input_{i_file}"
     embeddings = []
     molecule_model = GNN(**MODEL_PARAMS).to(device)
     if not path == "":
