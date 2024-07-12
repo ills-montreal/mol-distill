@@ -40,7 +40,7 @@ def precompute_3d(
         return mols, smiles
 
     mols = []
-    for s in tqdm(smiles):
+    for s in tqdm(smiles, desc="Computing 3D conformers"):
         mol = compute_3d(s)
         if mol is not None:
             mols.append(mol)
