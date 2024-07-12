@@ -1,5 +1,4 @@
 import argparse
-import json
 import os
 
 import datamol as dm
@@ -9,6 +8,7 @@ from tqdm import tqdm
 
 from molDistill.baselines.utils.descriptors import can_be_2d_input
 from molDistill.baselines.utils.tdc_dataset import get_dataset
+from molDistill.utils.preprocessing import precompute_3d
 
 parser = argparse.ArgumentParser(
     description="Compute ",
@@ -32,20 +32,42 @@ parser.add_argument(
     help="Path to the data folder",
 )
 
+parser.add_argument(
+    "--i0", type=int, default=0, help="Starting index for the dataset"
+)
+
+parser.add_argument(
+    "--step", type=int, default=100000, help="Step size for the dataset"
+)
+
+
 
 def main():
     args = parser.parse_args()
+    i0 = args.i0
+    step = args.step
+
+
+
     for dataset in args.datasets:
         dataset = dataset.replace(".csv", "")
         data_path = os.path.join(args.data_path, dataset)
 
-        if not os.path.exists(f"{data_path}/preprocessed.sdf"):
-            filepath = f"{data_path}/{dataset}_3d.sdf"
+        preprocessed_dir = f"{data_path}/preprocessed"
+        td_dir = f"{data_path}/3d"
+
+        os.makedirs(preprocessed_dir, exist_ok=True)
+        os.makedirs(td_dir, exist_ok=True)
+
+        preprocessed_filepath = f"{preprocessed_dir}/preprocessed_{i0}.sdf"
+
+        if not os.path.exists(preprocessed_filepath):
+            filepath = os.path.join(td_dir, f"{dataset}_{i0}_3d.sdf")
             if os.path.exists(filepath):
                 print(f"Loading 3D conformers from data/{dataset}_3d.sdf")
                 mols, smiles = precompute_3d(None, filepath)
             else:
-                df = get_dataset(dataset.replace("__", " "))
+                df = get_dataset(dataset.replace("__", " ")).iloc[i0 : i0 + step]
                 if "Drug" in df.columns:
                     smiles = df["Drug"].tolist()
                 else:
@@ -63,7 +85,7 @@ def main():
                     continue
                 try:
                     _ = sf.encoder(s)
-                    if can_be_2d_input(s, mols[i]) and not "." in s:
+                    if not "." in s and can_be_2d_input(s, mols[i]):
                         valid_smiles.append(s)
                         valid_mols.append(mols[i])
                 except Exception as e:
@@ -76,10 +98,8 @@ def main():
                 os.makedirs(f"{data_path}")
 
             pre_processed = pd.DataFrame({"smiles": smiles, "mols": mols})
-            dm.to_sdf(pre_processed, f"{data_path}/preprocessed.sdf", mol_column="mols")
+            dm.to_sdf(pre_processed, preprocessed_filepath, mol_column="mols")
             # save the SMILES in a json file
-            with open(f"{data_path}/smiles.json", "w") as f:
-                json.dump(smiles, f)
 
         else:
             pre_processed = dm.read_sdf(
