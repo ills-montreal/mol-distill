@@ -23,7 +23,7 @@ module load python/3.10 scipy-stack rdkit
 cd $SLURM_DIR/mol-distill
 
 source /home/fransou/DISTILL/bin/activate
-python moDlistill/preprocess_tdc_dataset_multifiles.py \
+python molDistill/preprocess_tdc_dataset_multifiles.py \
   --dataset $1 \
   --data-path $DISTILL_DIR/data \
   --i0 $2
