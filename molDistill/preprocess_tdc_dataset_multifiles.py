@@ -65,9 +65,8 @@ def main():
                 print(f"Loading 3D conformers from data/{dataset}_3d.sdf")
                 mols, smiles = precompute_3d(None, filepath)
             else:
-                df = get_dataset(dataset.replace("__", " ")).iloc[
-                    i0 * step : min(i0 * step + step, len(df))
-                ]
+                df = get_dataset(dataset.replace("__", " "))
+                df = df.iloc[i0 * step : min(i0 * step + step, len(df))]
                 if "Drug" in df.columns:
                     smiles = df["Drug"].tolist()
                 else:
