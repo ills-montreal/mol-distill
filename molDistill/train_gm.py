@@ -13,7 +13,7 @@ from emir.estimators.knife_estimator import KNIFEArgs
 from torch_geometric.loader import DataLoader
 
 from molDistill.data.data_encoding import DistillGraphDataset
-from molDistill.data.embedding_dataloader import get_embedding_loader
+from molDistill.data.combined_dataset import get_embedding_loader
 from molDistill.model.model_gm import Model_GM
 from molDistill.model.std_gnn import GNN_graphpred, GNN
 from molDistill.trainer.trainer_gm import TrainerGM
@@ -150,27 +150,10 @@ def get_parser():
 
 def main(args):
     # get all embeddings datasets
-    emb_loader, emb_loader_valid, embs_dim, idx_train, idx_valid = get_embedding_loader(
+    train_loader, valid_loader, embs_dim= get_embedding_loader(
         args
     )
 
-    # get graph dataset
-
-    graph_input = DistillGraphDataset(os.path.join(args.data_dir, args.dataset))
-    graph_loader = DataLoader(
-        graph_input[idx_train],
-        batch_size=args.batch_size,
-        pin_memory=False,
-        drop_last=True,
-        shuffle=False,
-    )
-
-    graph_loader_valid = DataLoader(
-        graph_input[idx_valid],
-        batch_size=args.batch_size,
-        shuffle=False,
-        pin_memory=False,
-    )
 
     # get model
     gnn = GNN(**args.__dict__)
@@ -223,10 +206,8 @@ def main(args):
         out_dir=args.out_dir,
     )
     trainer.train(
-        graph_loader,
-        emb_loader,
-        graph_loader_valid,
-        emb_loader_valid,
+        train_loader,
+        valid_loader,
         args.num_epochs,
         args.log_interval,
     )

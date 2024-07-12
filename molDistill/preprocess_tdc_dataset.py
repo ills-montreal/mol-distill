@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 from molDistill.baselines.utils.descriptors import can_be_2d_input
 from molDistill.baselines.utils.tdc_dataset import get_dataset
+from molDistill.utils.preprocessing import precompute_3d
 
 parser = argparse.ArgumentParser(
     description="Compute ",

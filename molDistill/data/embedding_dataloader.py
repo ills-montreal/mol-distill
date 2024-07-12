@@ -50,50 +50,5 @@ class EmbeddingDataset(data.Dataset):
         return len(self.smiles)
 
 
-def collate_fn(batch):
-    n_embs = len(batch[0])
-    embeddings = [[] for _ in range(n_embs)]
-    smiles = [[] for _ in range(n_embs)]
-
-    for embeddings_models in batch:
-        for i in range(n_embs):
-            embeddings[i].append(embeddings_models[i].embedding)
-            smiles[i].append(embeddings_models[i].smiles)
-    embeddings = [torch.stack(e) for e in embeddings]
-    assert all(smiles[0] == s for s in smiles)
-    return embeddings, smiles[0]
 
 
-def get_embedding_loader(args):
-
-    model_files = [f"{model_name}.npy" for model_name in args.embedders_to_simulate]
-    dataset_train = EmbeddingDataset(
-        args.data_dir, args.dataset, args.embedders_to_simulate, model_files
-    )
-    n_data = len(dataset_train)
-    idx_train = torch.randperm(n_data)
-    idx_valid = idx_train[: int(n_data * args.valid_prop)].sort().tolist()
-    idx_train = idx_train[int(n_data * args.valid_prop) :].sort().tolist()
-
-    dataset_train.update_idx(idx_train)
-    dataset_valid = EmbeddingDataset(
-        args.data_dir, args.dataset, args.embedders_to_simulate, model_files, idx_valid
-    )
-
-    emb_loader = data.DataLoader(
-        dataset_train,
-        batch_size=args.batch_size,
-        num_workers=0,
-        drop_last=True,
-        shuffle=False,
-        collate_fn=collate_fn,
-    )
-    emb_loader_valid = data.DataLoader(
-        dataset_valid,
-        batch_size=args.batch_size,
-        num_workers=0,
-        shuffle=False,
-        collate_fn=collate_fn,
-    )
-
-    return emb_loader, emb_loader_valid, dataset_train.embs_dim, idx_train, idx_valid

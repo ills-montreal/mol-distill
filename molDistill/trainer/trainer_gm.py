@@ -73,27 +73,21 @@ class TrainerGM:
             return loss, embeddings
         return loss
 
-    def train_epoch(self, input_loader, embedding_loader, epoch):
+    def train_epoch(self, train_loader, epoch):
         self.model.train()
         train_loss = 0
         train_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
         for batch_idx, (graph, embs) in enumerate(
-            zip(
-                input_loader,
-                tqdm(
-                    embedding_loader,
-                    desc=f"Training || epoch {epoch} ||  ",
-                    total=len(input_loader),
-                ),
-            )
+            tqdm(
+                train_loader,
+                desc=f"Training || epoch {epoch} ||  ",
+                total=len(train_loader),
+            ),
         ):
-            embs, smiles = embs
-
             self.optimizer.zero_grad()
             self.knife_optimizer.zero_grad()
 
             graph = graph.to(self.device)
-            assert graph.smiles == smiles
 
             loss = self.get_loss(
                 graph,
@@ -104,16 +98,14 @@ class TrainerGM:
             train_loss += loss
         for name in self.embedder_name_list:
             train_loss_per_embedder[name] = train_loss_per_embedder[name].item() / len(
-                input_loader
+                train_loader
             )
-        return train_loss.item() / len(input_loader), train_loss_per_embedder
+        return train_loss.item() / len(train_loader), train_loss_per_embedder
 
     def train(
         self,
-        input_loader,
-        embedding_loader,
-        input_loader_valid,
-        embedding_loader_valid,
+        train_loader,
+        valid_loader,
         num_epochs,
         log_interval,
     ):
@@ -122,9 +114,7 @@ class TrainerGM:
 
         for epoch in range(num_epochs):
             t0 = time.time()
-            train_loss, train_loss_per_embedder = self.train_epoch(
-                input_loader, embedding_loader, epoch
-            )
+            train_loss, train_loss_per_embedder = self.train_epoch(train_loader, epoch)
 
             t1 = time.time()
 
@@ -143,9 +133,7 @@ class TrainerGM:
                 )
 
                 mean_time /= log_interval
-                eval_loss, test_loss_per_embedder = self.eval(
-                    input_loader_valid, embedding_loader_valid, epoch
-                )
+                eval_loss, test_loss_per_embedder = self.eval(valid_loader, epoch)
                 print(f"Epoch {epoch}, Loss: {train_loss} --- {mean_time:.2f} s/epoch")
                 print(f"----\tEval Loss: {eval_loss}")
                 mean_time = 0
@@ -171,22 +159,18 @@ class TrainerGM:
         return
 
     @torch.no_grad()
-    def eval(self, input_loader, embedding_loader, epoch):
+    def eval(self, valid_loader, epoch):
         self.model.eval()
         eval_loss = 0
         embeddings = []
         test_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
         for batch_idx, (graph, embs) in enumerate(
-            zip(
-                input_loader,
-                tqdm(
-                    embedding_loader,
-                    desc=f"Eval || epoch {epoch} ||  ",
-                    total=len(input_loader),
-                ),
+            tqdm(
+                valid_loader,
+                desc=f"Eval || epoch {epoch} ||  ",
+                total=len(valid_loader),
             )
         ):
-            embs, smiles = embs
             graph = graph.to(self.device)
             l, embs = self.get_loss(
                 graph,
@@ -199,9 +183,9 @@ class TrainerGM:
 
         for name in self.embedder_name_list:
             test_loss_per_embedder[name] = test_loss_per_embedder[name].item() / len(
-                input_loader
+                valid_loader
             )
-        return eval_loss.item() / len(input_loader), test_loss_per_embedder
+        return eval_loss.item() / len(valid_loader), test_loss_per_embedder
 
     @torch.no_grad()
     def encode_loader(self, input_loader):
