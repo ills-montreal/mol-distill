@@ -16,7 +16,7 @@ def get_embeddings_from_model_denoising(
     normalize: bool = False,
     transformer_name: str = "",
     device: str = "cpu",
-    batch_size: int = 16,
+    batch_size: int = 512,
     **kwargs
 ):
     model = DenoisingModel(transformer_name).to(device)

@@ -15,9 +15,9 @@ class Embedding:
 
 
 class EmbeddingDataset(data.Dataset):
-    def __init__(self, data_dir, dataset, model_names, model_files, idx = None):
+    def __init__(self, data_dir, dataset, model_names, model_files, idx = None, initial_pointer = 0):
         with open(os.path.join(data_dir, dataset, "smiles.json"), "r") as f:
-            self.smiles = np.array(json.load(f))
+            self.smiles = np.array(json.load(f))[initial_pointer:]
             if not idx is None:
                 self.smiles = self.smiles[idx]
 
@@ -37,6 +37,7 @@ class EmbeddingDataset(data.Dataset):
                 ]
             )
             self.embs_dim.append(embs.shape[1])
+        self.smiles = self.smiles[:len(self.data[0])]
 
     def update_idx(self, idx):
         self.smiles = self.smiles[idx]

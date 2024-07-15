@@ -57,7 +57,6 @@ class MolecularFeatureExtractor:
             embedding_path = os.path.join(self.data_dir, f"{name}.npy")
         else:
             embedding_path = os.path.join(self.data_dir, name, f"{name}_{i_file}.npy")
-
         if os.path.exists(embedding_path):
             molecular_embedding = torch.tensor(np.load(embedding_path), device=device)
         else:
@@ -105,7 +104,8 @@ def compute_embeddings(args, i_file=None):
         mols = pre_processed["mols"].tolist()
 
     embs = {}
-    for name in tqdm(args.model_names):
+    for name in tqdm(args.model_names, desc="Computing embeddings :"):
+        print(f"Computing embeddings for {name}")
         embs[name] = mfe.get_features(smiles, name, mols=mols, i_file=i_file)
 
     print("Done!")
@@ -123,19 +123,19 @@ if __name__ == "__main__":
         nargs="+",
         type=str,
         default=[
-            "ContextPred",
-            "GPT-GNN",
+            # "ContextPred",
+            # "GPT-GNN",
             "GraphMVP",
             "GROVER",
-            "AttributeMask",
+            # "AttributeMask",
             "GraphLog",
             "GraphCL",
             "InfoGraph",
-            "MolBert",
-            "ChemBertMLM-5M",
+            # "MolBert",
+            # "ChemBertMLM-5M",
             "ChemBertMLM-10M",
-            "ChemBertMLM-77M",
-            "ChemBertMTR-5M",
+            # "ChemBertMLM-77M",
+            # "ChemBertMTR-5M",
             "ChemBertMTR-10M",
             "ChemBertMTR-77M",
             # "ChemGPT-1.2B",
@@ -144,10 +144,10 @@ if __name__ == "__main__":
             "DenoisingPretrainingPQCMv4",
             "FRAD_QM9",
             "MolR_gat",
-            "MolR_gcn",
+            # "MolR_gcn",
             "MolR_tag",
-            "MoleOOD_OGB_GIN",
-            "MoleOOD_OGB_GCN",
+            # "MoleOOD_OGB_GIN",
+            # "MoleOOD_OGB_GCN",
             # "MoleOOD_OGB_SAGE",
             "ThreeDInfomax",
         ],
@@ -162,6 +162,7 @@ if __name__ == "__main__":
 
     mfe = MolecularFeatureExtractor(
         dataset=args.dataset,
+        data_dir=args.data_dir,
     )
     if i_file is None or i_file >= 0:
         compute_embeddings(args, i_file=i_file)
@@ -170,5 +171,9 @@ if __name__ == "__main__":
             os.path.join(args.data_dir, args.dataset, "preprocessed")
         )
         i_files = [int(f.split("_")[-1].replace(".sdf", "")) for f in data_files]
+        np.random.shuffle(i_files)
+        p_bar = tqdm(total=len(i_files), desc="Computing embeddings for all files")
         for i_file in i_files:
+            p_bar.desc = f"Computing embeddings for file {i_file} :"
+            p_bar.update(1)
             compute_embeddings(args, i_file=i_file)

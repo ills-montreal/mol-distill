@@ -44,7 +44,6 @@ class DistillDataset(IterableDataset):
                         self.embedder_files[-1].append(
                             os.path.join(model_file, f"{model_file}_{i}.npy")
                         )
-
         self.idx = idx
 
         self.shuffle = shuffle
@@ -60,14 +59,12 @@ class DistillDataset(IterableDataset):
     def load_next_file(self):
         self.current_file_id += 1
         if self.current_file_id < len(self.embedder_files):
-            if not self.embedder_dataset is None:
-                self.len_prev_files += len(self.embedder_dataset)
-
             self.embedder_dataset = EmbeddingDataset(
                 self.data_dir,
                 self.dataset,
                 self.model_names,
                 self.embedder_files[self.current_file_id],
+                initial_pointer=self.len_prev_files,
             )
             n_data = len(self.embedder_dataset)
             if not self.idx is None:
@@ -78,6 +75,8 @@ class DistillDataset(IterableDataset):
                 ]
                 self.embedder_dataset.update_idx(self.file_conditioned_idx)
 
+            self.len_prev_files += n_data
+
         else:
             self.embedder_dataset = None
             self.current_file_id = -1
@@ -87,10 +86,11 @@ class DistillDataset(IterableDataset):
     def __iter__(self):
         while not self.embedder_dataset is None:
             for i in range(len(self.embedder_dataset)):
-                graph = self.graph_dataset[i + self.len_prev_files]
+                graph = self.graph_dataset[self.graph_dataset_idx]
                 embs = self.embedder_dataset[i]
                 assert graph.smiles == embs[0].smiles
-                yield self.graph_dataset[i + self.len_prev_files], self.embedder_dataset[i]
+                yield graph, embs
+                self.graph_dataset_idx += 1
             self.load_next_file()
         self.load_next_file()
 
@@ -140,14 +140,12 @@ def get_embedding_loader(args):
         batch_size=args.batch_size,
         num_workers=0,
         drop_last=True,
-        shuffle=False,
         collate_fn=collate_fn,
     )
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
         num_workers=0,
-        shuffle=False,
         collate_fn=collate_fn,
     )
 
@@ -156,6 +154,8 @@ def get_embedding_loader(args):
 
 if __name__ == "__main__":
     import argparse
+    from tqdm import tqdm
+    import numpy as np
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
@@ -164,12 +164,21 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     data_dir = args.data_dir
-    dataset = args.dataset
-    data_path = f"{data_dir}/{dataset}"
+    data = args.dataset
+    data_path = f"{data_dir}/{data}"
 
-    dataset = DistillDataset(data_dir, dataset, ["GraphMVP"], idx=None, shuffle=False)
+    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    dataset.load_next_file()
 
-    for graph, embs in dataset:
-        None
+    for graph, embs in tqdm(dataset.__iter__()):
+        assert graph.smiles == embs[0].smiles
 
-    print(f"Saved graph data object")
+    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    idx = np.random.choice(len(dataset), 500)
+    idx.sort()
+    dataset.update_idx(idx)
+    dataset.load_next_file()
+
+    for graph, embs in tqdm(dataset.__iter__()):
+        assert graph.smiles == embs[0].smiles
+
