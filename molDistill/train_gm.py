@@ -20,28 +20,28 @@ from molDistill.trainer.trainer_gm import TrainerGM
 
 GROUPED_MODELS = {
     "GNN": [
-        "ContextPred",
-        "GPT-GNN",
+        #"ContextPred",
+        #"GPT-GNN",
         "GraphMVP",
         "GROVER",
-        "AttributeMask",
+        #"AttributeMask",
         "GraphLog",
         "GraphCL",
         "InfoGraph",
     ],
     "BERT": [
-        "MolBert",
-        "ChemBertMLM-5M",
+        #"MolBert",
+        #"ChemBertMLM-5M",
         "ChemBertMLM-10M",
-        "ChemBertMLM-77M",
-        "ChemBertMTR-5M",
+        #"ChemBertMLM-77M",
+        #"ChemBertMTR-5M",
         "ChemBertMTR-10M",
         "ChemBertMTR-77M",
     ],
     "GPT": [
         "ChemGPT-1.2B",
-        "ChemGPT-19M",
-        "ChemGPT-4.7M",
+        #"ChemGPT-19M",
+        #"ChemGPT-4.7M",
     ],
     "Denoising": [
         "DenoisingPretrainingPQCMv4",
@@ -49,7 +49,7 @@ GROUPED_MODELS = {
     ],
     "MolR": [
         "MolR_gat",
-        "MolR_gcn",
+        # "MolR_gcn",
         "MolR_tag",
     ],
     "MoleOOD": [
@@ -109,7 +109,7 @@ def get_parser():
         "--embedders-to-simulate",
         nargs="+",
         type=str,
-        default=["GNN", "BERT", "GPT", "Denoising", "ThreeD", "MolR", "MoleOOD"],
+        default=["GNN", "BERT", "GPT", "Denoising", "ThreeD", "MolR"],
     )
 
     # training parameters
