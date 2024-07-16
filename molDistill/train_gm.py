@@ -39,9 +39,9 @@ GROUPED_MODELS = {
         "ChemBertMTR-77M",
     ],
     "GPT": [
-        "ChemGPT-1.2B",
+        #"ChemGPT-1.2B",
         #"ChemGPT-19M",
-        #"ChemGPT-4.7M",
+        "ChemGPT-4.7M",
     ],
     "Denoising": [
         "DenoisingPretrainingPQCMv4",
