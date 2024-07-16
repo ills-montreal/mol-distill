@@ -80,7 +80,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("MODEL_PATH", type=str)
     parser.add_argument("--sbatch", action="store_true")
-    parser.add_argument("--timeout", type=int, default=10)
+    parser.add_argument("--timeout", type=int, default=24*3)
     args = parser.parse_args()
 
 
