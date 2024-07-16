@@ -114,7 +114,7 @@ def get_parser():
 
     # training parameters
     parser.add_argument("--batch-size", type=int, default=128)
-    parser.add_argument("--num-epochs", type=int, default=100)
+    parser.add_argument("--num-epochs", type=int, default=10)
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--weight-decay", type=float, default=0.0)
     parser.add_argument("--valid-prop", type=float, default=0.1)
@@ -137,7 +137,7 @@ def get_parser():
 
     # other parameters
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--log-interval", type=int, default=5)
+    parser.add_argument("--log-interval", type=int, default=1)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--save-dir", type=str, default="../results")
     parser.add_argument("--save-name", type=str, default="tmp")

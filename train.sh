@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-06:00:00
+#SBATCH --time=0-24:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=40G
 #SBATCH --cpus-per-task=4
@@ -18,7 +18,7 @@ echo "Starting job on dataset $DATASET"
 mkdir -p $SLURM_DIR/data $SLURM_DIR/mol-distill
 
 cp -r $DISTILL_DIR/mol-distill $SLURM_DIR
-cp -r $DISTILL_DIR/data/$DATASET.zip $SLURM_DIR/
+cp -r /home/fransou/scratch/distill/data_train/$DATASET.zip $SLURM_DIR/
 unzip $SLURM_DIR/$DATASET.zip -d $SLURM_DIR/data
 
 module load python/3.10 scipy-stack rdkit
