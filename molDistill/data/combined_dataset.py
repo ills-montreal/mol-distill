@@ -138,14 +138,14 @@ def get_embedding_loader(args):
     train_loader = DataLoader(
         dataset_train,
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=1,
         drop_last=True,
         collate_fn=collate_fn,
     )
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=1,
         collate_fn=collate_fn,
     )
 

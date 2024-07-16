@@ -18,7 +18,8 @@ echo "Starting job on dataset $DATASET"
 mkdir -p $SLURM_DIR/data $SLURM_DIR/mol-distill
 
 cp -r $DISTILL_DIR/mol-distill $SLURM_DIR
-cp -r $DISTILL_DIR/data/$DATASET $SLURM_DIR/data
+cp -r $DISTILL_DIR/data/$DATASET.zip $SLURM_DIR/
+unzip $SLURM_DIR/$DATASET.zip -d $SLURM_DIR/data
 
 module load python/3.10 scipy-stack rdkit
 source /home/fransou/DISTILL/bin/activate

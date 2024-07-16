@@ -13,13 +13,7 @@ from molDistill.model.std_gnn import GNN_graphpred, GNN
 
 @torch.no_grad()
 def get_embeddings_from_distill_model(
-    smiles,
-    mols,
-    path,
-    transformer_name,
-    device,
-    dataset,
-    DATA_PATH,
+    smiles, mols, path, transformer_name, device, dataset, DATA_PATH, **kwargs
 ):
     graph_input = DistillGraphDataset(DATA_PATH)
     dataloader = DataLoader(

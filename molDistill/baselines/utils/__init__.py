@@ -26,6 +26,7 @@ class MolecularFeatureExtractor:
         normalize: bool = True,
         data_dir: str = "../data",
         path_ckpt: str = "backbone_pretrained_models",
+        i_file=None,
     ):
         self.graph_input = None
         self.device = device
@@ -35,6 +36,31 @@ class MolecularFeatureExtractor:
         self.data_dir = os.path.join(data_dir, dataset)
         self.model_path = get_model_path(path_ckpt)
         self.path_ckpt = path_ckpt
+        self.i_file = i_file
+
+    @property
+    def mols_smiles(self):
+        if self.i_file is None:
+            mols = dm.read_sdf(
+                os.path.join(self.data_dir, self.dataset, "preprocessed.sdf")
+            )
+            with open(os.path.join(self.data_dir, self.dataset, "smiles.json"), "r") as f:
+                smiles = json.load(f)
+        else:
+            df = dm.read_sdf(
+                os.path.join(
+                    self.data_dir,
+                    self.dataset,
+                    "preprocessed",
+                    f"preprocessed_{self.i_file}.sdf",
+                ),
+                as_df=True,
+                mol_column="mols",
+            )
+            smiles = df["smiles"].iloc[:, 0].tolist()
+            mols = df["mols"].tolist()
+        return mols, smiles
+
 
     def get_features(
         self,
@@ -57,9 +83,12 @@ class MolecularFeatureExtractor:
             embedding_path = os.path.join(self.data_dir, f"{name}.npy")
         else:
             embedding_path = os.path.join(self.data_dir, name, f"{name}_{i_file}.npy")
+        print(embedding_path)
         if os.path.exists(embedding_path):
             molecular_embedding = torch.tensor(np.load(embedding_path), device=device)
         else:
+            if smiles is None:
+                mols, smiles = self.mols_smiles
             molecular_embedding = ModelFactory(name)(
                 smiles,
                 mols=mols,
@@ -83,30 +112,17 @@ class MolecularFeatureExtractor:
 
 
 def compute_embeddings(args, i_file=None):
-    if i_file is None:
-        mols = dm.read_sdf(
-            os.path.join(args.data_dir, args.dataset, "preprocessed.sdf")
-        )
-        with open(os.path.join(args.data_dir, args.dataset, "smiles.json"), "r") as f:
-            smiles = json.load(f)
-    else:
-        pre_processed = dm.read_sdf(
-            os.path.join(
-                args.data_dir,
-                args.dataset,
-                "preprocessed",
-                f"preprocessed_{i_file}.sdf",
-            ),
-            as_df=True,
-            mol_column="mols",
-        )
-        smiles = pre_processed["smiles"].iloc[:, 0].tolist()
-        mols = pre_processed["mols"].tolist()
+    mfe = MolecularFeatureExtractor(
+        dataset=args.dataset,
+        data_dir=args.data_dir,
+        device=device,
+        i_file=i_file,
+    )
 
     embs = {}
     for name in tqdm(args.model_names, desc="Computing embeddings :"):
         print(f"Computing embeddings for {name}")
-        embs[name] = mfe.get_features(smiles, name, mols=mols, i_file=i_file)
+        embs[name] = mfe.get_features(None, name, mols=None, i_file=i_file)
 
     print("Done!")
 
@@ -160,12 +176,11 @@ if __name__ == "__main__":
         args.dataset, i_file = args.dataset.split("*")
         i_file = int(i_file)
 
-    mfe = MolecularFeatureExtractor(
-        dataset=args.dataset,
-        data_dir=args.data_dir,
-    )
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+
+
     if i_file is None or i_file >= 0:
-        compute_embeddings(args, i_file=i_file)
+        compute_embeddings(args, i_file=i_file,)
     else:
         data_files = os.listdir(
             os.path.join(args.data_dir, args.dataset, "preprocessed")

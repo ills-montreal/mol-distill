@@ -16,6 +16,9 @@ mkdir -p $SLURM_DIR/data $SLURM_DIR/mol-distill
 
 cp -r $DISTILL_DIR/mol-distill $SLURM_DIR
 
+cp /home/fransou/scratch/distill/eval_data.zip $SLURM_DIR
+unzip $SLURM_DIR/eval_data.zip -d $SLURM_DIR
+
 module load python/3.10 scipy-stack rdkit
 
 cd $SLURM_DIR/mol-distill
@@ -24,7 +27,7 @@ source /home/fransou/DISTILL/bin/activate
 wandb offline
 python molDistill/downstream_eval.py \
   --embedders $1 \
-  --data-path $DISTILL_DIR/data \
+  --data-path $SLURM_DIR/data \
   --n-runs $2 \
   --test
 

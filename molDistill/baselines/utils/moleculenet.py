@@ -71,6 +71,7 @@ def get_embeddings_from_model_moleculenet(
         desc="Computing embeddings from model",
         total=len(graph_input) // batch_size + 1,
     ):
+        b = b.to(device)
         emb = pooling_method(molecule_model(b.x, b.edge_index, b.edge_attr), b.batch)
         embeddings.append(emb)
     embeddings = torch.cat(embeddings, dim=0)
