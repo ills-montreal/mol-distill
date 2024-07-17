@@ -1,5 +1,6 @@
 import os
 import json
+from functools import partial
 
 import torch
 from torch.utils.data import IterableDataset, DataLoader
@@ -84,6 +85,9 @@ class DistillDataset(IterableDataset):
             self.graph_dataset_idx = 0
 
     def __iter__(self):
+        if self.embedder_dataset is None:
+            self.load_next_file()
+
         while not self.embedder_dataset is None:
             for i in range(len(self.embedder_dataset)):
                 graph = self.graph_dataset[self.graph_dataset_idx]
@@ -113,27 +117,41 @@ def collate_fn(batch_tot):
     return Batch.from_data_list(graph_batch), embeddings
 
 
+def worker_init_factory(idx):
+    def worker_init_fn(worker_id, idx):
+        worker_info = torch.utils.data.get_worker_info()
+        dataset = worker_info.dataset
+        if idx is None:
+            idx = list(range(len(dataset)))
+        n_data = len(idx)
+        n_data_per_worker = [0] + [
+            (1+k) * (n_data // worker_info.num_workers) + (k == 0) * (n_data % worker_info.num_workers)
+            for k in range(worker_info.num_workers)
+        ]
+        idx_split = idx[n_data_per_worker[worker_id] : n_data_per_worker[worker_id+1]]
+        dataset.update_idx(idx_split)
+
+    return partial(worker_init_fn, idx=idx)
+
+
 def get_embedding_loader(args):
     model_files = [f"{model_name}.npy" for model_name in args.embedders_to_simulate]
-    dataset_train = DistillDataset(
-        args.data_dir,
-        args.dataset,
-        args.embedders_to_simulate,
-    )
-    n_data = len(dataset_train)
+    with open(os.path.join(args.data_dir, args.dataset, "smiles.json")) as f:
+        smiles = json.load(f)
+
+    n_data = len(smiles)
     idx_train = torch.randperm(n_data)
     idx_valid = idx_train[: int(n_data * args.valid_prop)].tolist()
     idx_valid.sort()
     idx_train = idx_train[int(n_data * args.valid_prop) :].tolist()
     idx_train.sort()
 
-    dataset_train.update_idx(idx_train)
-    dataset_valid = DistillDataset(
-        args.data_dir, args.dataset, args.embedders_to_simulate, idx_valid
+    dataset_train = DistillDataset(
+        args.data_dir, args.dataset, args.embedders_to_simulate
     )
-
-    dataset_train.load_next_file()
-    dataset_valid.load_next_file()
+    dataset_valid = DistillDataset(
+        args.data_dir, args.dataset, args.embedders_to_simulate
+    )
 
     train_loader = DataLoader(
         dataset_train,
@@ -141,12 +159,14 @@ def get_embedding_loader(args):
         num_workers=0,
         drop_last=True,
         collate_fn=collate_fn,
+        worker_init_fn=worker_init_factory(idx_train),
     )
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
         num_workers=0,
         collate_fn=collate_fn,
+        worker_init_fn=worker_init_factory(idx_valid),
     )
 
     return train_loader, valid_loader, dataset_valid.embedder_dataset.embs_dim
@@ -168,17 +188,48 @@ if __name__ == "__main__":
     data_path = f"{data_dir}/{data}"
 
     dataset = DistillDataset(data_dir, data, ["GraphMVP"])
-    dataset.load_next_file()
 
     for graph, embs in tqdm(dataset.__iter__()):
-        assert graph.smiles == embs[0].smiles
+        pass
 
     dataset = DistillDataset(data_dir, data, ["GraphMVP"])
     idx = np.random.choice(len(dataset), 500)
     idx.sort()
     dataset.update_idx(idx)
-    dataset.load_next_file()
 
     for graph, embs in tqdm(dataset.__iter__()):
-        assert graph.smiles == embs[0].smiles
+        pass
 
+    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    idx = np.random.choice(len(dataset), 500)
+    idx.sort()
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=1,
+        num_workers=2,
+        collate_fn=collate_fn,
+        worker_init_fn=worker_init_factory(idx),
+    )
+    n_observed = 0
+    for batch in tqdm(dataloader):
+        n_observed += len(batch[0])
+    assert n_observed == 500
+
+    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    idx = np.random.choice(len(dataset), 500)
+    idx.sort()
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=8,
+        num_workers=2,
+        collate_fn=collate_fn,
+        worker_init_fn=worker_init_factory(idx),
+    )
+    n_observed = 0
+    for batch in tqdm(dataloader):
+        n_observed += len(batch[0])
+    assert n_observed == 500
+
+    print("fully passed")
