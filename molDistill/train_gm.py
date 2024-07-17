@@ -198,7 +198,7 @@ def main(args):
     with profile(activities=[
         ProfilerActivity.CPU,
         ProfilerActivity.CUDA,
-    ], schedule=schedule(wait=700, warmup=0, active=5, repeat=1)) as prof:
+    ], schedule=schedule(wait=698, warmup=1, active=7, repeat=1)) as prof:
 
         trainer = TrainerGM(
             model,
