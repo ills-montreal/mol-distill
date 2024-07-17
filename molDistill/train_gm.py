@@ -18,6 +18,8 @@ from molDistill.model.model_gm import Model_GM
 from molDistill.model.std_gnn import GNN_graphpred, GNN
 from molDistill.trainer.trainer_gm import TrainerGM
 
+from torch.profiler import profile, ProfilerActivity, schedule
+
 GROUPED_MODELS = {
     "GNN": [
         #"ContextPred",
@@ -193,24 +195,34 @@ def main(args):
     # optimizer, T_0=(args.num_epochs * 4) // 10, eta_min=args.lr / 100, T_mult=1
     # )
 
-    trainer = TrainerGM(
-        model,
-        knifes,
-        optimizer,
-        criterion,
-        scheduler=scheduler,
-        device=args.device,
-        batch_size=args.batch_size,
-        wandb=args.wandb,
-        embedder_name_list=args.embedders_to_simulate,
-        out_dir=args.out_dir,
-    )
-    trainer.train(
-        train_loader,
-        valid_loader,
-        args.num_epochs,
-        args.log_interval,
-    )
+    with profile(activities=[
+        ProfilerActivity.CPU,
+        ProfilerActivity.CUDA,
+    ], schedule=schedule(wait=700, warmup=0, active=5, repeat=1)) as prof:
+
+        trainer = TrainerGM(
+            model,
+            knifes,
+            optimizer,
+            criterion,
+            scheduler=scheduler,
+            device=args.device,
+            batch_size=args.batch_size,
+            wandb=args.wandb,
+            embedder_name_list=args.embedders_to_simulate,
+            out_dir=args.out_dir,
+            profiler=prof,
+        )
+
+        trainer.train(
+            train_loader,
+            valid_loader,
+            args.num_epochs,
+            args.log_interval,
+        )
+
+    prof.export_chrome_trace("trace.json")
+
 
 
 if __name__ == "__main__":
