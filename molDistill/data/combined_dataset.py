@@ -1,6 +1,13 @@
 import os
+import sys
+
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+)
+
 import json
 from functools import partial
+import numpy as np
 
 import torch
 from torch.utils.data import IterableDataset, DataLoader
@@ -60,23 +67,35 @@ class DistillDataset(IterableDataset):
     def load_next_file(self):
         self.current_file_id += 1
         if self.current_file_id < len(self.embedder_files):
-            self.embedder_dataset = EmbeddingDataset(
-                self.data_dir,
-                self.dataset,
-                self.model_names,
-                self.embedder_files[self.current_file_id],
-                initial_pointer=self.len_prev_files,
+
+            shape = np.load(
+                os.path.join(
+                    self.data_dir, self.dataset, self.embedder_files[self.current_file_id][0].replace(".npy", "_shape.npy")
+                )
             )
-            n_data = len(self.embedder_dataset)
+            n_data = shape[0]
             if not self.idx is None:
                 self.file_conditioned_idx = [
                     idx - self.len_prev_files
                     for idx in self.idx
                     if idx >= self.len_prev_files and idx < self.len_prev_files + n_data
                 ]
-                self.embedder_dataset.update_idx(self.file_conditioned_idx)
 
-            self.len_prev_files += n_data
+            if self.file_conditioned_idx == []:
+                self.len_prev_files += n_data
+                self.load_next_file()
+            else:
+                self.embedder_dataset = EmbeddingDataset(
+                    self.data_dir,
+                    self.dataset,
+                    self.model_names,
+                    self.embedder_files[self.current_file_id],
+                    initial_pointer=self.len_prev_files,
+                )
+                if self.idx is not None:
+                    self.embedder_dataset.update_idx(self.file_conditioned_idx)
+
+                self.len_prev_files += n_data
 
         else:
             self.embedder_dataset = None
@@ -125,10 +144,11 @@ def worker_init_factory(idx):
             idx = list(range(len(dataset)))
         n_data = len(idx)
         n_data_per_worker = [0] + [
-            (1+k) * (n_data // worker_info.num_workers) + (k == 0) * (n_data % worker_info.num_workers)
+            (1 + k) * (n_data // worker_info.num_workers)
+            + (k == 0) * (n_data % worker_info.num_workers)
             for k in range(worker_info.num_workers)
         ]
-        idx_split = idx[n_data_per_worker[worker_id] : n_data_per_worker[worker_id+1]]
+        idx_split = idx[n_data_per_worker[worker_id] : n_data_per_worker[worker_id + 1]]
         dataset.update_idx(idx_split)
 
     return partial(worker_init_fn, idx=idx)
@@ -156,20 +176,30 @@ def get_embedding_loader(args):
     train_loader = DataLoader(
         dataset_train,
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=4,
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
+        prefetch_factor=10,
     )
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
-        num_workers=0,
+        num_workers=4,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_valid),
+        prefetch_factor=10,
     )
 
-    return train_loader, valid_loader, dataset_valid.embedder_dataset.embs_dim
+    # clear hack
+    dummy = dataset_train = DistillDataset(
+        args.data_dir, args.dataset, args.embedders_to_simulate
+    )
+    dummy.load_next_file()
+    embs_dim = dummy.embedder_dataset.embs_dim
+    del dummy
+
+    return train_loader, valid_loader, embs_dim
 
 
 if __name__ == "__main__":
@@ -183,16 +213,43 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    MODELS = [
+        #"ContextPred",
+        #"GPT-GNN",
+        "GraphMVP",
+        "GROVER",
+        #"AttributeMask",
+        "GraphLog",
+        "GraphCL",
+        "InfoGraph",
+        #"MolBert",
+        #"ChemBertMLM-5M",
+        "ChemBertMLM-10M",
+        #"ChemBertMLM-77M",
+        #"ChemBertMTR-5M",
+        "ChemBertMTR-10M",
+        "ChemBertMTR-77M",
+        #"ChemGPT-1.2B",
+        #"ChemGPT-19M",
+        "ChemGPT-4.7M",
+        "DenoisingPretrainingPQCMv4",
+        "FRAD_QM9",
+        "MolR_gat",
+        # "MolR_gcn",
+        "MolR_tag",
+        "ThreeDInfomax",
+    ]
+
     data_dir = args.data_dir
     data = args.dataset
     data_path = f"{data_dir}/{data}"
 
-    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    dataset = DistillDataset(data_dir, data, MODELS)
 
     for graph, embs in tqdm(dataset.__iter__()):
         pass
 
-    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
+    dataset = DistillDataset(data_dir, data, MODELS)
     idx = np.random.choice(len(dataset), 500)
     idx.sort()
     dataset.update_idx(idx)

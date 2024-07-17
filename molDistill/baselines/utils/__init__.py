@@ -102,6 +102,8 @@ class MolecularFeatureExtractor:
             if not name.startswith("custom:"):
                 os.makedirs(os.path.dirname(embedding_path), exist_ok=True)
                 np.save(embedding_path, molecular_embedding.cpu().numpy())
+                np.save(embedding_path.replace(".npy", "_shape.npy"), np.array(molecular_embedding.cpu().numpy().shape))
+
 
         if normalize:
             molecular_embedding = (

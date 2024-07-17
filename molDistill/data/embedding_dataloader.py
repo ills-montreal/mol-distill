@@ -25,6 +25,10 @@ class EmbeddingDataset(data.Dataset):
         self.embs_dim = []
         for model_name, model_file in zip(model_names, model_files):
             embs = np.load(os.path.join(data_dir, dataset, model_file))
+
+            if not os.path.exists(os.path.join(data_dir, dataset, model_file).replace(".npy", "_shape.npy")):
+                np.save(os.path.join(data_dir, dataset, model_file).replace(".npy", "_shape.npy"), np.array(embs.shape))
+
             if not idx is None:
                 embs = embs[idx]
             embs = (embs - embs.mean(axis=0)) / (embs.std(axis=0) + 1e-8)
