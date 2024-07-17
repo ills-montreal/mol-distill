@@ -11,29 +11,24 @@
 
 export DATASET=MOSES
 export WORKING_DIR=/home/fransou/distill
-export SLURM_DIR=$SLURM_TMPDIR/tmp_dir/distill
-export DATA_DIR=/home/fransou/scratch/distill/data_train
+export SLURM_DIR=$SLURM_TMPDIR/tmp_dir
+export DATA_DIR=/home/fransou/scratch/distill
 
 echo "Starting job on dataset $DATASET"
-
-mkdir -p $SLURM_DIR/data
-
-#cp -r /home/fransou/scratch/distill/data_train/$DATASET.zip $SLURM_DIR/
-#unzip $SLURM_DIR/$DATASET.zip -d $SLURM_DIR/data
 
 module load python/3.10 scipy-stack rdkit
 source /home/fransou/DISTILL/bin/activate
 
 echo "Running script on dataset $DATASET with dim $1, gnn-type $2 and n-layer $3"
-cd $SLURM_DIR/mol-distill
+cd $WORKING_DIR/mol-distill
 
 wandb offline
 python molDistill/train_gm.py \
   --dataset $DATASET \
-  --data-dir $DATA_DIR \
+  --data-dir $DATA_DIR/data_train \
   --wandb \
   --dim $1 \
   --gnn-type $2 \
   --n-layer $3 \
-  --out-dir $DISTILL_DIR/mol-distill/results/$4
+  --out-dir $DATA_DIR/ckpt/$4
 
