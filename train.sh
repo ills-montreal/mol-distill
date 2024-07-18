@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-03:00:00
+#SBATCH --time=0-00:30:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=40G
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=8
 #SBATCH --tasks-per-node=1
 #SBATCH --nodes=1
 #SBATCH --output=logs/%x-%j.out
