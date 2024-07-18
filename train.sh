@@ -3,8 +3,8 @@
 #SBATCH --account=def-ibenayed
 #SBATCH --time=0-00:30:00
 #SBATCH --gres=gpu:1
-#SBATCH --mem=150G
-#SBATCH --cpus-per-task=8
+#SBATCH --mem=200G
+#SBATCH --cpus-per-task=9
 #SBATCH --tasks-per-node=1
 #SBATCH --nodes=1
 #SBATCH --output=logs/%x-%j.out
