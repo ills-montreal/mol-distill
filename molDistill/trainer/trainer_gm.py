@@ -35,7 +35,10 @@ class TrainerGM:
 
     @tracing_decorator("knife")
     def get_knife_loss(self, embeddings, embs, loss_per_embedder=None):
-        losses = [self.knifes[i](embeddings, embs[i]) for i in range(len(embs))]
+        losses = [
+            self.knifes[i](embeddings, embs[i]) / embs[i].shape[1]
+            for i in range(len(embs))
+        ]
         loss = sum(losses)
         if loss_per_embedder is not None:
             for i, l in enumerate(losses):
