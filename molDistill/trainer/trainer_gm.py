@@ -175,11 +175,10 @@ class TrainerGM:
             )
         ):
             graph = graph.to(self.device)
-            l, embs = self.get_loss(
+            l = self.get_loss(
                 graph,
                 embs,
                 backward=False,
-                return_embs=True,
                 loss_per_embedder=test_loss_per_embedder,
             )
             eval_loss += l

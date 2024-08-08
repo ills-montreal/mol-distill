@@ -20,27 +20,27 @@ from molDistill.trainer.trainer_gm import TrainerGM
 
 GROUPED_MODELS = {
     "GNN": [
-        #"ContextPred",
-        #"GPT-GNN",
+        "ContextPred",
+        "GPT-GNN",
         "GraphMVP",
         "GROVER",
-        #"AttributeMask",
+        "AttributeMask",
         "GraphLog",
         "GraphCL",
         "InfoGraph",
     ],
     "BERT": [
-        #"MolBert",
-        #"ChemBertMLM-5M",
+        "MolBert",
+        "ChemBertMLM-5M",
         "ChemBertMLM-10M",
-        #"ChemBertMLM-77M",
-        #"ChemBertMTR-5M",
+        "ChemBertMLM-77M",
+        "ChemBertMTR-5M",
         "ChemBertMTR-10M",
         "ChemBertMTR-77M",
     ],
     "GPT": [
-        #"ChemGPT-1.2B",
-        #"ChemGPT-19M",
+        "ChemGPT-1.2B",
+        "ChemGPT-19M",
         "ChemGPT-4.7M",
     ],
     "Denoising": [
@@ -59,32 +59,6 @@ GROUPED_MODELS = {
     ],
     "ThreeD": [
         "ThreeDInfomax",
-    ],
-    "Descriptors": [
-        "usrcat",
-        "electroshape",
-        "usr",
-        "ecfp",
-        "estate",
-        "erg",
-        "rdkit",
-        "topological",
-        "avalon",
-        "maccs",
-        "atompair-count",
-        "topological-count",
-        "fcfp-count",
-        "secfp",
-        "pattern",
-        "fcfp",
-        "scaffoldkeys",
-        "cats",
-        "default",
-        "gobbi",
-        "pmapper",
-        "cats/3D",
-        "gobbi/3D",
-        "pmapper/3D",
     ],
 }
 
@@ -115,7 +89,7 @@ def get_parser():
     # training parameters
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--num-epochs", type=int, default=10)
-    parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--lr", type=float, default=1e-5)
     parser.add_argument("--weight-decay", type=float, default=0.0)
     parser.add_argument("--valid-prop", type=float, default=0.1)
 

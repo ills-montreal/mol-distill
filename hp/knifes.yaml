@@ -7,7 +7,7 @@ device: cuda
 eps: 0.001
 eval_batch_size: 1024
 ff_activation: relu
-ff_dim_hidden: 0
+ff_dim_hidden: 512
 ff_layer_norm: true
 ff_layers: 2
 ff_residual_connection: false
