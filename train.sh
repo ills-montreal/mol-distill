@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-04:00:00
+#SBATCH --time=0-30:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=200G
 #SBATCH --cpus-per-task=8
@@ -30,5 +30,6 @@ python molDistill/train_gm.py \
   --dim $1 \
   --gnn-type $2 \
   --n-layer $3 \
-  --out-dir $DATA_DIR/ckpt/$4
+  --out-dir $DATA_DIR/ckpt/$4 \
+  --num-epochs 100 \
 
