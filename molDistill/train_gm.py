@@ -124,7 +124,7 @@ def get_parser():
 
 def main(args):
     # get all embeddings datasets
-    train_loader, valid_loader, embs_dim= get_embedding_loader(
+    train_loader, valid_loader, embs_dim, sizes = get_embedding_loader(
         args
     )
 
@@ -178,6 +178,7 @@ def main(args):
         wandb=args.wandb,
         embedder_name_list=args.embedders_to_simulate,
         out_dir=args.out_dir,
+        sizes=sizes,
     )
     trainer.train(
         train_loader,

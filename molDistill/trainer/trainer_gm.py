@@ -16,6 +16,7 @@ class TrainerGM:
         criterion,
         device,
         batch_size,
+        sizes,
         scheduler=None,
         wandb=False,
         embedder_name_list=None,
@@ -30,8 +31,12 @@ class TrainerGM:
         self.wandb = wandb
         self.embedder_name_list = embedder_name_list
         self.batch_size = batch_size
-        self.knife_optimizer = torch.optim.AdamW(knifes.parameters(), lr=1e-3)
+        self.knife_optimizer = torch.optim.AdamW(
+            knifes.parameters(), lr=self.optimizer.param_groups[0]["lr"]
+        )
         self.out_dir = out_dir
+
+        self.sizes = sizes
 
     @tracing_decorator("knife")
     def get_knife_loss(self, embeddings, embs, loss_per_embedder=None):
@@ -43,7 +48,6 @@ class TrainerGM:
         if loss_per_embedder is not None:
             for i, l in enumerate(losses):
                 loss_per_embedder[self.embedder_name_list[i]] += l
-
         return loss
 
     def get_loss(

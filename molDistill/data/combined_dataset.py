@@ -164,7 +164,7 @@ def get_embedding_loader(args):
     idx_valid = idx_train[: int(n_data * args.valid_prop)].tolist()
     idx_valid.sort()
     idx_train = idx_train[int(n_data * args.valid_prop) :].tolist()
-    idx_train.sort()
+    idx_train.sort() # idx are used by the workers when initialized
 
     dataset_train = DistillDataset(
         args.data_dir, args.dataset, args.embedders_to_simulate
@@ -201,7 +201,7 @@ def get_embedding_loader(args):
     embs_dim = dummy.embedder_dataset.embs_dim
     del dummy
 
-    return train_loader, valid_loader, embs_dim
+    return train_loader, valid_loader, embs_dim, {"train": len(idx_train), "valid": len(idx_valid)}
 
 
 if __name__ == "__main__":
@@ -211,33 +211,22 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
-    parser.add_argument("--dataset", type=str, default="hERG_Karim")
+    parser.add_argument("--dataset", type=str, default="hERG")
 
     args = parser.parse_args()
 
     MODELS = [
-        #"ContextPred",
-        #"GPT-GNN",
         "GraphMVP",
         "GROVER",
-        #"AttributeMask",
         "GraphLog",
         "GraphCL",
         "InfoGraph",
-        #"MolBert",
-        #"ChemBertMLM-5M",
         "ChemBertMLM-10M",
-        #"ChemBertMLM-77M",
-        #"ChemBertMTR-5M",
-        "ChemBertMTR-10M",
-        "ChemBertMTR-77M",
-        #"ChemGPT-1.2B",
-        #"ChemGPT-19M",
         "ChemGPT-4.7M",
         "DenoisingPretrainingPQCMv4",
         "FRAD_QM9",
         "MolR_gat",
-        # "MolR_gcn",
+        "MolR_gcn",
         "MolR_tag",
         "ThreeDInfomax",
     ]
@@ -265,8 +254,8 @@ if __name__ == "__main__":
 
     dataloader = DataLoader(
         dataset,
-        batch_size=1,
-        num_workers=2,
+        batch_size=128,
+        num_workers=10,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx),
     )
