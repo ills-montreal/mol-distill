@@ -104,10 +104,10 @@ class TrainerGM:
             )
             train_loss += loss
         for name in self.embedder_name_list:
-            train_loss_per_embedder[name] = train_loss_per_embedder[name].item() / len(
-                train_loader
+            train_loss_per_embedder[name] = (
+                train_loss_per_embedder[name].item() / self.sizes["train"]
             )
-        return train_loss.item() / len(train_loader), train_loss_per_embedder
+        return train_loss.item() / self.sizes["train"], train_loss_per_embedder
 
     def train(
         self,
@@ -186,12 +186,11 @@ class TrainerGM:
                 loss_per_embedder=test_loss_per_embedder,
             )
             eval_loss += l
-
         for name in self.embedder_name_list:
-            test_loss_per_embedder[name] = test_loss_per_embedder[name].item() / len(
-                valid_loader
+            test_loss_per_embedder[name] = (
+                test_loss_per_embedder[name].item() / self.sizes["valid"]
             )
-        return eval_loss.item() / len(valid_loader), test_loss_per_embedder
+        return eval_loss.item() / self.sizes["valid"], test_loss_per_embedder
 
     @torch.no_grad()
     def encode_loader(self, input_loader):
