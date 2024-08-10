@@ -104,7 +104,7 @@ class MolecularFeatureExtractor:
                 np.save(embedding_path.replace(".npy", "_shape.npy"), np.array(molecular_embedding.cpu().numpy().shape))
 
 
-        if normalize:
+        if normalize and i_file is None:
             molecular_embedding = (
                 molecular_embedding - molecular_embedding.mean(dim=0)
             ) / (molecular_embedding.std(dim=0) + 1e-8)
