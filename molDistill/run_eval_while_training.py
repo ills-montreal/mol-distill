@@ -101,6 +101,7 @@ if __name__ == "__main__":
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
     logged_models = ["best_model.pth"]
+
     last_round = False
     continue_training = True
     while continue_training:
@@ -111,16 +112,17 @@ if __name__ == "__main__":
         models = [model for model in models if model.endswith(".pth")]
         # For every model
         for model in models:
-            # If the model has not been checked
-            if not model in checked_models:
-                launch_model_eval(model, MODEL_PATH)
-                checked_models.append(model)
             if (
                 os.path.exists(os.path.join(MODEL_PATH, model.replace(".pth", ".csv")))
                 and not model in logged_models
             ):
+                if not model in checked_models:
+                    checked_models.append(model)
                 log_eval_results(model, MODEL_PATH)
                 logged_models.append(model)
+            if not model in checked_models:
+                launch_model_eval(model, MODEL_PATH)
+                checked_models.append(model)
 
         if (
             os.path.exists(os.path.join(MODEL_PATH, "stop.txt"))
