@@ -40,12 +40,13 @@ class MolecularFeatureExtractor:
 
     @property
     def mols_smiles(self):
+
         if self.i_file is None:
-            mols = dm.read_sdf(
-                os.path.join(self.data_dir, self.dataset, "preprocessed.sdf")
-            )
-            with open(os.path.join(self.data_dir, self.dataset, "smiles.json"), "r") as f:
+            with open(os.path.join(self.data_dir, "smiles.json"), "r") as f:
                 smiles = json.load(f)
+            mols = dm.read_sdf(
+                os.path.join(self.data_dir, "preprocessed.sdf")
+            )
         else:
             df = dm.read_sdf(
                 os.path.join(
@@ -56,8 +57,10 @@ class MolecularFeatureExtractor:
                 as_df=True,
                 mol_column="mols",
             )
-            smiles = df["smiles"].iloc[:, 0].tolist()
+
             mols = df["mols"].tolist()
+            print(df.head())
+            smiles = df["smiles"].iloc[:, 1].tolist()
         return mols, smiles
 
 
