@@ -111,13 +111,16 @@ def get_parser():
 
     # other parameters
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--log-interval", type=int, default=5)
+    parser.add_argument("--log-interval", type=int, default=1)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--save-dir", type=str, default="../results")
     parser.add_argument("--save-name", type=str, default="tmp")
 
     parser.add_argument("--wandb", action="store_true")
     parser.add_argument("--out-dir", type=str, default="results")
+
+    parser.add_argument("--use-teacher-bn", action="store_true")
+    parser.set_defaults(use_teacher_bn=True)
 
     return parser
 
@@ -146,6 +149,10 @@ def main(args):
             yaml.dump(knifes_config.__dict__, f)
 
     knifes = []
+    if args.use_teacher_bn:
+        teacher_bn = []
+    else:
+        teacher_bn = None
     for emb_dm in embs_dim:
         knife = KNIFE(
             args=knifes_config,
@@ -154,8 +161,13 @@ def main(args):
         ).kernel_cond
 
         knifes.append(knife)
+        if args.use_teacher_bn:
+            teacher_bn.append(torch.nn.BatchNorm1d(emb_dm, affine=False, device=args.device))
+
 
     knifes = torch.nn.ModuleList(knifes)
+    if args.use_teacher_bn:
+        teacher_bn = torch.nn.ModuleList(teacher_bn)
 
     model = model.to(args.device)
     # get optimizer
@@ -179,6 +191,7 @@ def main(args):
         embedder_name_list=args.embedders_to_simulate,
         out_dir=args.out_dir,
         sizes=sizes,
+        teacher_bn=teacher_bn,
     )
     trainer.train(
         train_loader,

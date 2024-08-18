@@ -21,6 +21,7 @@ class TrainerGM:
         wandb=False,
         embedder_name_list=None,
         out_dir=None,
+        teacher_bn = None,
     ):
         self.model = model
         self.knifes = knifes
@@ -37,9 +38,13 @@ class TrainerGM:
         self.out_dir = out_dir
 
         self.sizes = sizes
+        self.teacher_bn = teacher_bn
 
     @tracing_decorator("knife")
     def get_knife_loss(self, embeddings, embs, loss_per_embedder=None):
+        if not self.teacher_bn is None:
+            for i in range(len(embs)):
+                embs[i] = self.teacher_bn[i](embs[i])
         losses = [
             self.knifes[i](embeddings, embs[i])# / embs[i].shape[1]
             for i in range(len(embs))
@@ -82,6 +87,10 @@ class TrainerGM:
 
     def train_epoch(self, train_loader, epoch):
         self.model.train()
+        self.knifes.train()
+        if self.teacher_bn is not None:
+            self.teacher_bn.train()
+
         train_loss = 0
         train_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
         for batch_idx, (graph, embs) in enumerate(
@@ -168,6 +177,10 @@ class TrainerGM:
     @torch.no_grad()
     def eval(self, valid_loader, epoch):
         self.model.eval()
+        self.knifes.eval()
+        if self.teacher_bn is not None:
+            self.teacher_bn.eval()
+
         eval_loss = 0
         embeddings = []
         test_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
