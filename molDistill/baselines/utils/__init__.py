@@ -123,6 +123,7 @@ def compute_embeddings(args, i_file=None):
     )
 
     embs = {}
+    np.random.shuffle(args.model_names)
     for name in tqdm(args.model_names, desc="Computing embeddings :"):
         print(f"Computing embeddings for {name}")
         embs[name] = mfe.get_features(None, name, mols=None, i_file=i_file)
