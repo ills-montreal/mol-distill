@@ -202,13 +202,15 @@ if __name__ == "__main__":
         if not wandb.run.name is None:
             args.out_dir = os.path.join(args.out_dir, wandb.run.name)
         print(args.out_dir)
+
+        wandb.config.update(args)
+
         wandb.define_metric("train_loss", step_metric="epoch")
         wandb.define_metric("eval_loss", step_metric="epoch")
         wandb.define_metric("lr", step_metric="epoch")
         for embedder in args.embedders_to_simulate:
             wandb.define_metric(f"train_loss_{embedder}", step_metric="epoch")
             wandb.define_metric(f"test_loss_{embedder}", step_metric="epoch")
-        wandb.config.update(args)
 
     os.makedirs(args.out_dir, exist_ok=True)
     # save args

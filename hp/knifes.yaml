@@ -20,4 +20,4 @@ n_epochs_marg: 5
 n_epochs_stop: 1
 optimize_mu: true
 stopping_criterion: max_epochs
-use_tanh: true
+use_tanh: false
