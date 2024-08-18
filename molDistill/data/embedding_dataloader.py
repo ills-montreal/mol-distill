@@ -31,9 +31,7 @@ class EmbeddingDataset(data.Dataset):
 
             if not idx is None:
                 embs = embs[idx]
-            embs = (embs - embs.mean(axis=0)) / (embs.std(axis=0) + 1e-8)
             embs = torch.tensor(embs, dtype=torch.float)
-
             self.data.append(
                 [
                     Embedding(embedding, smiles, model_name)
