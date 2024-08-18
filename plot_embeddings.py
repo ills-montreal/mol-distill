@@ -30,7 +30,8 @@ def get_all_embeddings(path, models):
     for dir in tqdm(models):
         if os.path.isdir(os.path.join(path, dir)):
             for file in os.listdir(os.path.join(path, dir)):
-                if file.endswith("_0.npy"):
+                if file.endswith(".npy") and not "shape" in file:
+                    print(file)
                     embeddings[file] = np.load(os.path.join(path, dir, file))
     return embeddings
 
@@ -38,17 +39,39 @@ def get_all_embeddings(path, models):
 
 if __name__ == "__main__":
     embeddings = get_all_embeddings(PATH, MODELS)
-    print(embeddings.keys())
-    N = len(embeddings.keys())
+    import pandas as pd
+    from sklearn.decomposition import PCA
+    df = pd.DataFrame()
+    pca = PCA(2)
+    pca.fit(
+        np.concatenate([embeddings[k] for k in embeddings.keys()])
+    )
 
-    fig,axes = plt.subplots(N//4 +1, 4, figsize=(10, 10))
-    axes = axes.flatten()
-    for i, key in enumerate(embeddings.keys()):
-        value = embeddings[key]
-        sns.scatterplot(x=value[:, 0], y=value[:, 1], ax=axes[i], alpha=0.1)
-        axes[i].set_title(key)
-    plt.tight_layout()
+    import json
+    with open(os.path.join(PATH, "smiles.json")) as f:
+        smiles = json.load(f)
+
+
+    for key in embeddings:
+        embs = pca.transform(embeddings[key])
+        print(f"{key} -- Mean L2 --\t {np.mean(embs, axis=0)}")
+        tmp_df = pd.DataFrame(embs, columns=['x','y'])
+        tmp_df['key'] = key
+        df = pd.concat([df, tmp_df])
+    df['smiles'] = smiles
+    df = df.sample(10000)
+    import datamol as dm
+    df_mols_prop = dm.descriptors.batch_compute_many_descriptors([dm.to_mol(s) for s in df['smiles']])
+    sns.scatterplot(df, x='x',y='y', hue='key', legend=False, alpha=0.5)
     plt.show()
+
+    print("Done")
+    df = pd.concat([df.reset_index(), df_mols_prop], axis=1)
+    for key in df_mols_prop.columns:
+        sns.histplot(df, x=key, hue="key", legend=False, alpha=0.5)
+        plt.show()
+
+
 
 
 

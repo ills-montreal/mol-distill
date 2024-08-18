@@ -40,7 +40,6 @@ class MolecularFeatureExtractor:
 
     @property
     def mols_smiles(self):
-
         if self.i_file is None:
             with open(os.path.join(self.data_dir, "smiles.json"), "r") as f:
                 smiles = json.load(f)
