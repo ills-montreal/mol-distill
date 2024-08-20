@@ -148,6 +148,8 @@ if __name__ == "__main__":
     df["epoch"] = df.embedder.apply(lambda x: int(x.replace(".pth", "").split("_")[-1]))
     df = df.drop(axis=1, columns=["Unnamed: 0", "embedder"])
     df = df.groupby(["epoch", "dataset"]).mean().reset_index()
-    wandb.log({"table": wandb.Table(dataframe=df)})
-
+    table= wandb.Table(dataframe=df)
+    wandb.log({"table": table})
+    for dataset in ALL_DATASETS:
+        wandb.define_metric(f"perfs_{dataset}", step_metric="epoch")
     wandb.finish()

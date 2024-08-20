@@ -46,7 +46,7 @@ class TrainerGM:
             for i in range(len(embs)):
                 embs[i] = self.teacher_bn[i](embs[i])
         losses = [
-            self.knifes[i](embeddings, embs[i])# / embs[i].shape[1]
+            self.knifes[i](embeddings, embs[i]) / embs[i].shape[1]
             for i in range(len(embs))
         ]
         loss = sum(losses)
