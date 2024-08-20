@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=distill_mol
 #SBATCH --account=def-ibenayed
-#SBATCH --time=0-30:00:00
+#SBATCH --time=0-48:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=200G
 #SBATCH --cpus-per-task=8
