@@ -48,6 +48,14 @@ ALL_DATASETS = [
     "HIV",
 ]
 
+COMMON_BENCHMARKS = [
+    "Tox21",
+    "ClinTox",
+    "HIV",
+    "HydrationFreeEnergy_FreeSolv",
+    "Lipophilicity_AstraZeneca",
+    "BBB_Martins",
+]
 
 def launch_model_eval(model, MODEL_PATH):
     logger.info(f"Launching eval for {model}")
@@ -70,6 +78,7 @@ def log_eval_results(model, MODEL_PATH):
         for dataset in df.dataset.unique()
     }
     all_logs["eval_perfs"] = df.metric_test.mean()
+    all_logs["eval-perfs-common-benchmarks"] = df[df.dataset.isin(COMMON_BENCHMARKS)].metric_test.mean()
     all_logs["epoch"] = epoch
     wandb.log(all_logs)
 
@@ -96,6 +105,7 @@ if __name__ == "__main__":
     for dataset in ALL_DATASETS:
         wandb.define_metric(f"eval_perfs_{dataset}", step_metric="epoch")
     wandb.define_metric("eval_perfs", step_metric="epoch")
+    wandb.define_metric("eval-perfs-common-benchmarks", step_metric="epoch")
 
 
     MODEL_PATH = args.MODEL_PATH
@@ -150,6 +160,4 @@ if __name__ == "__main__":
     df = df.groupby(["epoch", "dataset"]).mean().reset_index()
     table= wandb.Table(dataframe=df)
     wandb.log({"table": table})
-    for dataset in ALL_DATASETS:
-        wandb.define_metric(f"perfs_{dataset}", step_metric="epoch")
     wandb.finish()

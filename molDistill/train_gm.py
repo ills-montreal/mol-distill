@@ -89,7 +89,7 @@ def get_parser():
     # training parameters
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--num-epochs", type=int, default=10)
-    parser.add_argument("--lr", type=float, default=1e-5)
+    parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--weight-decay", type=float, default=0.0)
     parser.add_argument("--valid-prop", type=float, default=0.1)
 
