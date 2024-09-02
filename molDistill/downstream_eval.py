@@ -314,7 +314,12 @@ def add_downstream_args(parser: argparse.ArgumentParser):
         type=str,
         default="../data",
     )
-    parser.add_argument("--datasets", type=str, nargs="+", default=["TOX", "ADME", "HIV"])
+    parser.add_argument(
+        "--datasets",
+        type=str,
+        nargs="+",
+        default=["TOX", "ADME", "HIV", "ADME_REG", "TOX_REG"],
+    )
     parser.add_argument(
         "--embedders",
         type=str,
@@ -342,7 +347,6 @@ if __name__ == "__main__":
     parser = add_downstream_args(parser)
 
     args = parser.parse_args()
-
 
     if args.embedders is None:
         args.embedders = MODELS
