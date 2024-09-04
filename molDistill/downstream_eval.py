@@ -69,32 +69,32 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 MODELS = [
-    "ContextPred",
-    "GPT-GNN",
+    #"ContextPred",
+    #"GPT-GNN",
     "GraphMVP",
     "GROVER",
-    "AttributeMask",
+    #"AttributeMask",
     "GraphLog",
     "GraphCL",
     "InfoGraph",
-    "Not-trained",
-    "MolBert",
-    "ChemBertMLM-5M",
+    #"Not-trained",
+    #"MolBert",
+    #"ChemBertMLM-5M",
     "ChemBertMLM-10M",
-    "ChemBertMLM-77M",
-    "ChemBertMTR-5M",
-    "ChemBertMTR-10M",
+    #"ChemBertMLM-77M",
+    #"ChemBertMTR-5M",
+    #"ChemBertMTR-10M",
     "ChemBertMTR-77M",
     "ChemGPT-1.2B",
-    "ChemGPT-19M",
-    "ChemGPT-4.7M",
-    "DenoisingPretrainingPQCMv4",
+    #"ChemGPT-19M",
+    #"ChemGPT-4.7M",
+    #"DenoisingPretrainingPQCMv4",
     "FRAD_QM9",
     "MolR_gat",
-    "MolR_gcn",
-    "MolR_tag",
-    "MoleOOD_OGB_GIN",
-    "MoleOOD_OGB_GCN",
+    #"MolR_gcn",
+    #"MolR_tag",
+    #"MoleOOD_OGB_GIN",
+    #"MoleOOD_OGB_GCN",
     "ThreeDInfomax",
 ]
 
@@ -256,8 +256,6 @@ def main(args):
                     total=len(split_sampler.label_list),
                 )
             ):
-                if i_split == 10:
-                    break
                 for i, embedder_name in enumerate(args.embedders):
                     res = launch_evaluation(
                         dataset=dataset,
