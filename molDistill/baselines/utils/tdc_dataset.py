@@ -1,9 +1,15 @@
+from typing import Dict, List
+import numpy as np
+
+import datamol as dm
 import pandas as pd
 from tdc.generation import MolGen
 from tdc.multi_pred import DTI
 from tdc.single_pred import Tox, ADME, HTS, QM
 from tdc.utils import retrieve_label_name_list
 from tqdm import tqdm
+
+from line_profiler_pycharm import profile
 
 # Correspondancy between dataset name and the corresponding prediction/generation TDC problem
 correspondancy_dict = {
@@ -77,13 +83,74 @@ correspondancy_dict_DTI = {
 THRESHOLD_MIN_SAMPLES = 128
 
 
+def preprocess_smiles(s):
+    mol = dm.to_mol(s)
+    return dm.to_smiles(mol, True, False)
+
+
+class EvaluationDatasetIterable:
+    def __init__(
+        self,
+        dataset: str,
+        smiles: List[str],
+        random_seed: int = 42,
+        method: str = "random",
+    ):
+        self.dataset = dataset
+        try:
+            self.label_list = retrieve_label_name_list(dataset)
+        except Exception as e:
+            self.label_list = [None]
+        self.random_seed = random_seed
+        self.method = method
+        self.smiles = smiles
+        self.smiles_to_idx = {s: i for i, s in enumerate(self.smiles)}
+
+    def sample(self):
+        for label in self.label_list:
+            tdc_dataset = correspondancy_dict[self.dataset](
+                name=self.dataset, label_name=label
+            )
+            non_valid = True
+            i_rs = 0
+            while non_valid:
+                split = tdc_dataset.get_split(
+                    seed=self.random_seed + i_rs * 100, method=self.method
+                )
+                non_valid = False
+                for k in split:
+                    non_valid = non_valid or split[k].Y.nunique() < 2
+                i_rs += 1
+                if not non_valid:
+                    split_idx = self.get_split_idx(split)
+
+                    for k in split_idx.keys():
+                        non_valid = non_valid or len(np.unique(split_idx[k]["y"])) < 2
+            yield split_idx
+        raise StopIteration
+
+    def get_split_idx(self, split: Dict[str, pd.DataFrame]):
+        for key in split.keys():
+            split[key]["prepro_smiles"] = dm.parallelized(
+                reprocess_smiles, split[key]["Drug"].tolist()
+            )
+
+        split_idx = {}
+        for key in split.keys():
+            split_idx[key] = {"x": [], "y": []}
+            for smile, y in zip(split[key]["prepro_smiles"], split[key]["Y"]):
+                if smile in self.smiles:
+                    split_idx[key]["x"].append(self.smiles_to_idx[smile])
+                    split_idx[key]["y"].append(y)
+
+        return split_idx
+
+
 def get_dataset(dataset: str):
     try:
         data = correspondancy_dict[dataset](name=dataset)
         if dataset in correspondancy_dict_DTI.keys():
-            data.convert_to_log(
-                form="binding"
-            )
+            data.convert_to_log(form="binding")
             df = data.harmonize_affinities(mode="max_affinity")
         else:
             df = data.get_data()
@@ -101,50 +168,13 @@ def get_dataset(dataset: str):
             df = pd.concat(df).drop_duplicates("Drug")
 
     if hasattr(df, "Target_ID"):
-        allowed_targets = df["Target_ID"].value_counts()[df["Target_ID"].value_counts() > THRESHOLD_MIN_SAMPLES].index
+        allowed_targets = (
+            df["Target_ID"]
+            .value_counts()[df["Target_ID"].value_counts() > THRESHOLD_MIN_SAMPLES]
+            .index
+        )
         df = df[df["Target_ID"].isin(allowed_targets)]
     return df
-
-
-def get_dataset_split(dataset: str, random_seed: int = 42, method="random"):
-    if dataset in correspondancy_dict_DTI.keys():
-        return get_dataset_split_DTI(dataset, random_seed=random_seed)
-    try:
-        i_rs = 0
-        non_valid = True
-        while non_valid:
-            non_valid = False
-            split = correspondancy_dict[dataset](name=dataset).get_split(
-                seed=random_seed + i_rs * 100, method=method
-            )
-            for k in split:
-                if split[k].Y.nunique() < 2:
-                    non_valid = True
-                    i_rs += 1
-        return [split]
-    except Exception as e:
-        if e.args[0].startswith(
-            "Please select a label name. You can use tdc.utils.retrieve_label_name_list"
-        ):
-            label_list = retrieve_label_name_list(dataset)
-            split = []
-            for l in tqdm(label_list):
-                non_valid = True
-                i_rs = 0
-                while non_valid:
-                    non_valid = False
-                    subsplit = correspondancy_dict[dataset](
-                        name=dataset, label_name=l
-                    ).get_split(seed=random_seed + 100*i_rs, method=method)
-                    for k in subsplit:
-                        if subsplit[k].Y.nunique() < 2:
-                            non_valid = True
-                    i_rs += 1
-
-                split.append(subsplit)
-            return split
-        else:
-            raise e
 
 
 def get_dataset_split_DTI(dataset, random_seed=42):
@@ -154,7 +184,7 @@ def get_dataset_split_DTI(dataset, random_seed=42):
     split = []
     for id in data["Target_ID"].unique():
         subdata = data[data["Target_ID"] == id][["Drug", "Target_ID", "Y"]]
-        if subdata.shape[0]<THRESHOLD_MIN_SAMPLES:
+        if subdata.shape[0] < THRESHOLD_MIN_SAMPLES:
             continue
         print(subdata.shape)
         split.append(
