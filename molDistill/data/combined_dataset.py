@@ -226,7 +226,7 @@ if __name__ == "__main__":
 
     dataset = DistillDataset(data_dir, data, MODELS)
     print("Dataset created")
-    idx = np.random.choice(len(dataset), len(dataset))
+    idx = np.random.choice(len(dataset), 500)
     idx.sort()
 
     dataloader = DataLoader(
