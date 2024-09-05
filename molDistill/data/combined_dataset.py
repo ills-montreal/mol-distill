@@ -180,7 +180,7 @@ def get_embedding_loader(args):
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
-        prefetch_factor=100,
+        prefetch_factor=50,
         pin_memory=True,
     )
     valid_loader = DataLoader(
@@ -189,7 +189,7 @@ def get_embedding_loader(args):
         num_workers=8,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_valid),
-        prefetch_factor=100,
+        prefetch_factor=50,
         pin_memory=True,
     )
 
@@ -211,24 +211,13 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=str, default="../data")
-    parser.add_argument("--dataset", type=str, default="hERG")
+    parser.add_argument("--dataset", type=str, default="MOSES")
 
     args = parser.parse_args()
 
     MODELS = [
-        "GraphMVP",
-        "GROVER",
-        "GraphLog",
-        "GraphCL",
-        "InfoGraph",
-        "ChemBertMLM-10M",
-        "ChemGPT-4.7M",
-        "DenoisingPretrainingPQCMv4",
-        "FRAD_QM9",
-        "MolR_gat",
-        "MolR_gcn",
-        "MolR_tag",
-        "ThreeDInfomax",
+        "ChemBertMTR-10M",
+        "ChemBertMTR-77M",
     ]
 
     data_dir = args.data_dir
@@ -236,20 +225,8 @@ if __name__ == "__main__":
     data_path = f"{data_dir}/{data}"
 
     dataset = DistillDataset(data_dir, data, MODELS)
-
-    for graph, embs in tqdm(dataset.__iter__()):
-        pass
-
-    dataset = DistillDataset(data_dir, data, MODELS)
-    idx = np.random.choice(len(dataset), 500)
-    idx.sort()
-    dataset.update_idx(idx)
-
-    for graph, embs in tqdm(dataset.__iter__()):
-        pass
-
-    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
-    idx = np.random.choice(len(dataset), 500)
+    print("Dataset created")
+    idx = np.random.choice(len(dataset), len(dataset))
     idx.sort()
 
     dataloader = DataLoader(
@@ -262,22 +239,9 @@ if __name__ == "__main__":
     n_observed = 0
     for batch in tqdm(dataloader):
         n_observed += len(batch[0])
+        print(n_observed)
     assert n_observed == 500
 
-    dataset = DistillDataset(data_dir, data, ["GraphMVP"])
-    idx = np.random.choice(len(dataset), 500)
-    idx.sort()
 
-    dataloader = DataLoader(
-        dataset,
-        batch_size=8,
-        num_workers=2,
-        collate_fn=collate_fn,
-        worker_init_fn=worker_init_factory(idx),
-    )
-    n_observed = 0
-    for batch in tqdm(dataloader):
-        n_observed += len(batch[0])
-    assert n_observed == 500
 
     print("fully passed")

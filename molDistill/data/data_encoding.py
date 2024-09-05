@@ -142,8 +142,8 @@ class DistillGraphDataset(InMemoryDataset):
                 json.dump(smiles, f)
 
         with open(self.raw_paths[0], "r") as f:
-            self.smiles = json.load(f)
-
+            self.smiles = json.loads(f.read())
+        self.smiles = np.array(self.smiles)
         self.num_files = len(self.smiles) // self.max_len + 1
 
         super(DistillGraphDataset, self).__init__(root, transform, pre_transform)
@@ -176,7 +176,7 @@ class DistillGraphDataset(InMemoryDataset):
 
     def load_processed(self, data_cls: Type[BaseData] = Data) -> None:
         self.data = []
-        for p in self.processed_paths:
+        for p in tqdm(self.processed_paths):
             if not os.path.exists(p):
                 break
             out = fs.torch_load(p)
