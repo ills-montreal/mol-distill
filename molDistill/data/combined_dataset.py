@@ -180,7 +180,7 @@ def get_embedding_loader(args):
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
-        prefetch_factor=1000,
+        prefetch_factor=100,
         pin_memory=True,
     )
     valid_loader = DataLoader(
@@ -189,7 +189,7 @@ def get_embedding_loader(args):
         num_workers=8,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_valid),
-        prefetch_factor=1000,
+        prefetch_factor=100,
         pin_memory=True,
     )
 
