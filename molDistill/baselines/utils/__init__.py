@@ -84,7 +84,6 @@ class MolecularFeatureExtractor:
             embedding_path = os.path.join(self.data_dir, f"{name}.npy")
         else:
             embedding_path = os.path.join(self.data_dir, name, f"{name}_{i_file}.npy")
-        print(embedding_path)
         if os.path.exists(embedding_path):
             molecular_embedding = torch.tensor(np.load(embedding_path), device=device)
         else:

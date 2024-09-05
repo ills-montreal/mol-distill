@@ -33,6 +33,7 @@ DATASETS_GROUP = {
         "Skin__Reaction",
         "Tox21",
         "ClinTox",
+        "ToxCast",
     ],
     "ADME": [
         "PAMPA_NCATS",
@@ -69,33 +70,34 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 MODELS = [
-    #"ContextPred",
-    #"GPT-GNN",
+    # "ContextPred",
+    # "GPT-GNN",
     "GraphMVP",
     "GROVER",
-    #"AttributeMask",
+    # "AttributeMask",
     "GraphLog",
     "GraphCL",
     "InfoGraph",
-    #"Not-trained",
-    #"MolBert",
-    #"ChemBertMLM-5M",
+    # "Not-trained",
+    # "MolBert",
+    # "ChemBertMLM-5M",
     "ChemBertMLM-10M",
-    #"ChemBertMLM-77M",
-    #"ChemBertMTR-5M",
-    #"ChemBertMTR-10M",
+    # "ChemBertMLM-77M",
+    # "ChemBertMTR-5M",
+    # "ChemBertMTR-10M",
     "ChemBertMTR-77M",
     "ChemGPT-1.2B",
-    #"ChemGPT-19M",
-    #"ChemGPT-4.7M",
-    #"DenoisingPretrainingPQCMv4",
+    # "ChemGPT-19M",
+    # "ChemGPT-4.7M",
+    # "DenoisingPretrainingPQCMv4",
     "FRAD_QM9",
     "MolR_gat",
-    #"MolR_gcn",
-    #"MolR_tag",
-    #"MoleOOD_OGB_GIN",
-    #"MoleOOD_OGB_GCN",
+    # "MolR_gcn",
+    # "MolR_tag",
+    # "MoleOOD_OGB_GIN",
+    # "MoleOOD_OGB_GCN",
     "ThreeDInfomax",
+    "custom:MOSES_512_10_lr1e-4_gine/model_95.pth",
 ]
 
 
@@ -275,14 +277,23 @@ def main(args):
     df = pd.concat(final_res).reset_index(drop=True)
     if args.wandb:
         wandb.log({"results_df": wandb.Table(dataframe=df)})
-    df = df.groupby(["embedder", "dataset"]).mean().reset_index()
+    df_grouped = df.groupby(["embedder", "dataset"]).mean().reset_index()
 
     if args.wandb:
-        wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
+        wandb.log(
+            {"mean_metric": df_grouped.groupby("embedder")["metric"].mean().mean()}
+        )
 
     if len(args.embedders) == 1 and args.embedders[0].startswith("custom:"):
         path = args.embedders[0].split(":")[1]
-        df.to_csv(path.replace(".pth", ".csv"))
+        df_grouped.to_csv(path.replace(".pth", ".csv"))
+    else:
+        for dataset in args.datasets:
+            for embedder in args.embedders:
+                os.makedirs(f"downstream_results/{embedder}", exist_ok=True)
+                df[(df["dataset"] == dataset) & (df["embedder"] == embedder)].to_csv(
+                    f"downstream_results/{embedder}/results_{dataset}.csv"
+                )
 
 
 def add_downstream_args(parser: argparse.ArgumentParser):

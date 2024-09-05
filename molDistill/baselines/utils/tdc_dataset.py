@@ -9,8 +9,6 @@ from tdc.single_pred import Tox, ADME, HTS, QM
 from tdc.utils import retrieve_label_name_list
 from tqdm import tqdm
 
-from line_profiler_pycharm import profile
-
 # Correspondancy between dataset name and the corresponding prediction/generation TDC problem
 correspondancy_dict = {
     "Tox21": Tox,
@@ -127,12 +125,11 @@ class EvaluationDatasetIterable:
                     for k in split_idx.keys():
                         non_valid = non_valid or len(np.unique(split_idx[k]["y"])) < 2
             yield split_idx
-        raise StopIteration
 
     def get_split_idx(self, split: Dict[str, pd.DataFrame]):
         for key in split.keys():
             split[key]["prepro_smiles"] = dm.parallelized(
-                reprocess_smiles, split[key]["Drug"].tolist()
+                preprocess_smiles, split[key]["Drug"].tolist()
             )
 
         split_idx = {}

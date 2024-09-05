@@ -20,28 +20,28 @@ from molDistill.trainer.trainer_gm import TrainerGM
 
 GROUPED_MODELS = {
     "GNN": [
-        "ContextPred",
-        "GPT-GNN",
+        #"ContextPred",
+        #"GPT-GNN",
         "GraphMVP",
-        "GROVER",
-        "AttributeMask",
+        #"GROVER",
+        #"AttributeMask",
         "GraphLog",
         "GraphCL",
-        "InfoGraph",
+        #"InfoGraph",
     ],
     "BERT": [
-        "MolBert",
-        "ChemBertMLM-5M",
-        "ChemBertMLM-10M",
-        "ChemBertMLM-77M",
+        #"MolBert",
+        #"ChemBertMLM-5M",
+        #"ChemBertMLM-10M",
+        #"ChemBertMLM-77M",
         "ChemBertMTR-5M",
         "ChemBertMTR-10M",
         "ChemBertMTR-77M",
     ],
     "GPT": [
-        "ChemGPT-1.2B",
-        "ChemGPT-19M",
-        "ChemGPT-4.7M",
+        #"ChemGPT-1.2B",
+        #"ChemGPT-19M",
+        #"ChemGPT-4.7M",
     ],
     "Denoising": [
         "DenoisingPretrainingPQCMv4",
@@ -53,9 +53,9 @@ GROUPED_MODELS = {
         "MolR_tag",
     ],
     "MoleOOD": [
-        "MoleOOD_OGB_GIN",
-        "MoleOOD_OGB_GCN",
-        "MoleOOD_OGB_SAGE",
+        #"MoleOOD_OGB_GIN",
+        #"MoleOOD_OGB_GCN",
+        #"MoleOOD_OGB_SAGE",
     ],
     "ThreeD": [
         "ThreeDInfomax",
@@ -111,7 +111,7 @@ def get_parser():
 
     # other parameters
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--log-interval", type=int, default=1)
+    parser.add_argument("--log-interval", type=int, default=5)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--save-dir", type=str, default="../results")
     parser.add_argument("--save-name", type=str, default="tmp")
