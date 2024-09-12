@@ -138,6 +138,8 @@ class EvaluationDatasetIterable:
             for smile, y in zip(split[key]["prepro_smiles"], split[key]["Y"]):
                 if smile in self.smiles:
                     split_idx[key]["x"].append(self.smiles_to_idx[smile])
+                    if self.dataset in ["Half_Life_Obach", "Clearance_Hepatocyte_AZ", "Clearance_Microsome_AZ"]:
+                        y = np.log10(y)
                     split_idx[key]["y"].append(y)
 
         return split_idx

@@ -18,7 +18,6 @@ class Model(nn.Module):
                 nn.Linear(self.out_dim, self.out_dim),
                 nn.ReLU(),
                 nn.Linear(self.out_dim, size),
-                nn.BatchNorm1d(size),
             )
             self.heads.append(head)
 

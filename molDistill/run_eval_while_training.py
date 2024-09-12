@@ -57,13 +57,13 @@ COMMON_BENCHMARKS = [
     "BBB_Martins",
 ]
 
-def launch_model_eval(model, MODEL_PATH):
+def launch_model_eval(model, MODEL_PATH, data_path):
     logger.info(f"Launching eval for {model}")
     if args.sbatch:
         os.system(f"sbatch eval.sh custom:{os.path.join(MODEL_PATH, model)} 5")
     else:
         os.system(
-            f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets hERG --test"
+            f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets ADME TOX --test --data-path {data_path}"
         )
 
 
@@ -90,6 +90,7 @@ if __name__ == "__main__":
     parser.add_argument("MODEL_PATH", type=str)
     parser.add_argument("--sbatch", action="store_true")
     parser.add_argument("--timeout", type=int, default=24*3)
+    parser.add_argument("--data-path", type=str, default="../data")
     args = parser.parse_args()
 
 
@@ -120,7 +121,8 @@ if __name__ == "__main__":
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
         models = [model for model in models if model.endswith(".pth")]
-        # For every model
+        print("Models", models)
+                # For every model
         for model in models:
             if (
                 os.path.exists(os.path.join(MODEL_PATH, model.replace(".pth", ".csv")))
@@ -131,7 +133,7 @@ if __name__ == "__main__":
                 log_eval_results(model, MODEL_PATH)
                 logged_models.append(model)
             if not model in checked_models:
-                launch_model_eval(model, MODEL_PATH)
+                launch_model_eval(model, MODEL_PATH, args.data_path)
                 checked_models.append(model)
 
         if (

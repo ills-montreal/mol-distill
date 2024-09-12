@@ -1,0 +1,181 @@
+import os
+import pandas as pd
+import numpy as np
+
+import autorank
+
+
+def get_all_results(
+    MODELS_TO_EVAL,
+    path,
+    DATASETS,
+    renames=[("custom:MOSES_512_10_lr1e-4_gine", "student")],
+):
+    dfs = []
+    for model in MODELS_TO_EVAL:
+        model_path = os.path.join(path, model)
+        for file in os.listdir(model_path):
+            if file.endswith(".csv"):
+                df = get_result_model(
+                    file, model_path, DATASETS, model, renames=renames
+                )
+                if not df is None:
+                    dfs.append(df)
+            else:
+                model_path = os.path.join(model_path, file)
+                for file in os.listdir(model_path):
+                    if file.endswith(".csv"):
+                        df = get_result_model(
+                            file, model_path, DATASETS, model, renames=renames
+                        )
+                        if not df is None:
+                            dfs.append(df)
+                continue
+
+    return pd.concat(dfs)
+
+
+def get_result_model(
+    file,
+    model_path,
+    DATASETS,
+    model,
+    renames=[("custom:MOSES_512_10_lr1e-4_gine", "student")],
+):
+    dataset = file.replace(".csv", "").replace("results_", "")
+    if dataset in DATASETS:
+        df = pd.read_csv(os.path.join(model_path, file), index_col=0)
+        for r in renames:
+            model = model.replace(r[0], r[1])
+        df["embedder"] = model
+        df["dataset"] = dataset
+        return df
+
+
+def rename_cyp(x):
+    if "CYP" in x:
+        if "(s)" in x or "Substrate" in x:
+            return "CYP_(s)"
+        return "CYP"
+    return x
+
+
+def aggregate_results_with_ci(df_base, merge_cyp=False):
+    if merge_cyp:
+        df_base["dataset"] = df_base["dataset"].apply(rename_cyp)
+    df_m = df_base.groupby(["dataset", "embedder"]).metric_test.mean().reset_index()
+    df_m["dataset"] = df_m["dataset"] + " mean"
+    df_v = df_base.groupby(["dataset", "embedder"]).metric_test.std().reset_index()
+    df_v["dataset"] = df_v["dataset"] + " std"
+
+    df = df_m.pivot_table(
+        index="embedder", columns="dataset", values="metric_test"
+    ).join(df_v.pivot_table(index="embedder", columns="dataset", values="metric_test"))
+    df.dropna(axis=1, inplace=True)
+    # drop column and index names
+    df.index.name = None
+    order = df.mean(axis=1).sort_values(ascending=False).index.tolist()
+    order.remove("student")
+    order = ["student"] + order
+
+    df.columns = pd.MultiIndex.from_tuples(
+        [
+            (
+                df_metadata.loc[c.split(" ")[0], "category"],
+                df_metadata.loc[c.split(" ")[0], "short_name"]
+                + c.split(" ")[1].replace("mean", "").replace("std", " std"),
+            )
+            for c in df.columns
+        ]
+    )
+
+    df[(" ", "avg")] = df_m.pivot_table(
+        index="embedder", columns="dataset", values="metric_test"
+    ).mean(axis=1)
+    df[(" ", "avg std")] = df_m.pivot_table(
+        index="embedder", columns="dataset", values="metric_test"
+    ).std(axis=1)
+
+    df = df.loc[order[::-1], :]
+    df.index = df.index.str.replace("_", " ")
+
+    df = df[sorted(df.columns, key=lambda x: x[0])]
+
+    return df, order
+
+
+def style_df_ci(df, order):
+    for col in df.columns:
+        df[col] = df[col].apply(lambda x: np.round(x,3))
+    # Get max values
+    maxs_vals = df.max(axis=0)
+    maxs = (df == maxs_vals)
+    # Get second max values
+    df2 = df.where(~maxs)
+    maxs_vals = df2.max(axis=0)
+    maxs2 = (df2 == maxs_vals) & ~maxs
+
+    style = df.copy()
+    for col in style.columns:
+        if not col[1].endswith("std"):
+            style[col] = (
+                style[col].apply(lambda x: f"{x:.3f}")
+                + "$\pm$ \\tiny "
+                + style[(col[0], col[1] + " std")].apply(lambda x: f"{x:.3f}")
+            )
+
+    style.drop(
+        columns=[
+            (col[0], col[1] + " std")
+            for col in style.columns
+            if not col[1].endswith("std")
+        ],
+        inplace=True,
+    )
+
+    for col in style.columns:
+        for best in maxs[maxs[col]].index:
+            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+        for best in maxs2[maxs2[col]].index:
+            style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
+
+    style = style.style
+    col_format = "r|"
+
+    over_cols = "This is not a column name that will be used"
+    for ov_col, col in style.columns:
+        if over_cols != ov_col:
+            col_format += "|"
+            over_cols = ov_col
+        col_format += "c"
+    col_format += "|"
+
+    latex = style.to_latex(
+        column_format=col_format,
+        multicol_align="|c|",
+        siunitx=True,
+    )
+    return style, latex
+
+
+def get_ranked_df(df_base):
+    ranked_df = pd.DataFrame({"embedder": df_base.embedder.unique()})
+    for dataset in df_base.dataset.unique():
+        df_to_rank = df_base[df_base.dataset == dataset]
+        df_to_rank = df_to_rank.pivot_table(
+            index="id", columns="embedder", values="metric_test"
+        )
+        results = autorank.autorank(
+            df_to_rank,
+            alpha=0.05,
+            verbose=True,
+            force_mode="nonparametric",
+        ).rankdf.reset_index()
+        results[dataset] = results["meanrank"]
+        results = results[["embedder", dataset]]
+        ranked_df = ranked_df.merge(results, on="embedder", how="outer")
+    order = ranked_df.mean().sort_values().index.tolist()
+    return ranked_df
+
+
+df_metadata = pd.read_csv("molDistill/df_metadata.csv").set_index("dataset")

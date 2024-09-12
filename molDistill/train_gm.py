@@ -122,6 +122,8 @@ def get_parser():
     parser.add_argument("--use-teacher-bn", action="store_true")
     parser.set_defaults(use_teacher_bn=True)
 
+    parser.add_argument("--checkpoint", type=str, default=None)
+
     return parser
 
 
@@ -135,6 +137,8 @@ def main(args):
     # get model
     gnn = GNN(**args.__dict__)
     mol_model = GNN_graphpred(args, gnn)
+    if args.checkpoint is not None:
+        mol_model.from_pretrained(args.checkpoint)
     model = Model_GM(
         mol_model,
     )
@@ -174,7 +178,6 @@ def main(args):
     optimizer = torch.optim.Adam(
         model.parameters(), lr=args.lr, weight_decay=args.weight_decay
     )
-    criterion = torch.nn.L1Loss()
     scheduler = None  # torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
     # optimizer, T_0=(args.num_epochs * 4) // 10, eta_min=args.lr / 100, T_mult=1
     # )
@@ -183,7 +186,6 @@ def main(args):
         model,
         knifes,
         optimizer,
-        criterion,
         scheduler=scheduler,
         device=args.device,
         batch_size=args.batch_size,

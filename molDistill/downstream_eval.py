@@ -33,7 +33,7 @@ DATASETS_GROUP = {
         "Skin__Reaction",
         "Tox21",
         "ClinTox",
-        "ToxCast",
+        # "ToxCast",
     ],
     "ADME": [
         "PAMPA_NCATS",
@@ -287,12 +287,14 @@ def main(args):
     if len(args.embedders) == 1 and args.embedders[0].startswith("custom:"):
         path = args.embedders[0].split(":")[1]
         df_grouped.to_csv(path.replace(".pth", ".csv"))
-    else:
+    if args.save_results:
         for dataset in args.datasets:
             for embedder in args.embedders:
-                os.makedirs(f"downstream_results/{embedder}", exist_ok=True)
+                os.makedirs(
+                    f"downstream_results/{embedder.split('/')[-1].replace('.pth','')}", exist_ok=True
+                )
                 df[(df["dataset"] == dataset) & (df["embedder"] == embedder)].to_csv(
-                    f"downstream_results/{embedder}/results_{dataset}.csv"
+                    f"downstream_results/{embedder.split('/')[-1].replace('.pth','')}/results_{dataset}.csv"
                 )
 
 
@@ -305,6 +307,7 @@ def add_downstream_args(parser: argparse.ArgumentParser):
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--n-epochs", type=int, default=100)
     parser.add_argument("--test-batch-size", type=int, default=256)
+    parser.add_argument("--save-results", action="store_true")
 
     parser.add_argument(
         "--data-path",
