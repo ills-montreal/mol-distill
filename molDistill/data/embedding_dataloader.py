@@ -31,7 +31,7 @@ class EmbeddingDataset(data.Dataset):
         self.data_model = {}
 
         for model_name, model_file in zip(model_names, model_files):
-            embs = np.load(os.path.join(data_dir, dataset, model_file))#, mmap_mode="r")
+            embs = np.load(os.path.join(data_dir, dataset, model_file), mmap_mode="r")
 
             if not os.path.exists(
                 os.path.join(data_dir, dataset, model_file).replace(

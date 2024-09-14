@@ -42,7 +42,7 @@ class Trainer:
     def zero_grad(self):
         self.optimizer.zero_grad()
 
-    def train_epoch(self, train_loader, epoch):
+    def train_epoch(self, train_loader, epoch, prof=None):
         self.set_train()
         train_loss = 0
         train_loss_per_embedder = {name: 0 for name in self.embedder_name_list}
@@ -55,7 +55,7 @@ class Trainer:
         ):
             self.zero_grad()
 
-            graph = graph.to(self.device)
+            graph = graph.to(self.device, non_blocking=True)
 
             loss = self.get_loss(
                 graph,
@@ -64,10 +64,13 @@ class Trainer:
                 loss_per_embedder=train_loss_per_embedder,
             )
             train_loss += loss
+            if prof is not None:
+                prof.step()
         for name in self.embedder_name_list:
             train_loss_per_embedder[name] = (
                 train_loss_per_embedder[name].item() / self.sizes["train"]
             )
+
         return train_loss.item() / self.sizes["train"], train_loss_per_embedder
 
     def train(
@@ -82,7 +85,11 @@ class Trainer:
 
         for epoch in range(num_epochs):
             t0 = time.time()
-            train_loss, train_loss_per_embedder = self.train_epoch(train_loader, epoch)
+
+            train_loss, train_loss_per_embedder = self.train_epoch(
+                train_loader,
+                epoch,
+            )
 
             t1 = time.time()
 
@@ -128,10 +135,7 @@ class Trainer:
 
     @torch.no_grad()
     def eval(self, valid_loader, epoch):
-        self.model.eval()
-        self.knifes.eval()
-        if self.teacher_bn is not None:
-            self.teacher_bn.eval()
+        self.set_eval()
 
         eval_loss = 0
         embeddings = []

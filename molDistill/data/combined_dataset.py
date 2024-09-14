@@ -15,6 +15,7 @@ from torch_geometric.data import Batch
 
 from molDistill.data.data_encoding import DistillGraphDataset
 from molDistill.data.embedding_dataloader import EmbeddingDataset
+from molDistill.tracing_decorator import tracing_decorator
 
 
 class DistillDataset(IterableDataset):
@@ -64,6 +65,7 @@ class DistillDataset(IterableDataset):
         self.idx = idx
         self.graph_dataset = self.graph_dataset[idx]
 
+    @tracing_decorator("load_next_file")
     def load_next_file(self):
         self.current_file_id += 1
         if self.current_file_id < len(self.embedder_files):
@@ -103,6 +105,7 @@ class DistillDataset(IterableDataset):
             self.len_prev_files = 0
             self.graph_dataset_idx = 0
 
+    @tracing_decorator("iter")
     def __iter__(self):
         if self.embedder_dataset is None:
             self.load_next_file()
@@ -176,7 +179,7 @@ def get_embedding_loader(args):
     train_loader = DataLoader(
         dataset_train,
         batch_size=args.batch_size,
-        num_workers=12,
+        num_workers=6,
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
@@ -186,7 +189,7 @@ def get_embedding_loader(args):
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
-        num_workers=12,
+        num_workers=4,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_valid),
         prefetch_factor=10,

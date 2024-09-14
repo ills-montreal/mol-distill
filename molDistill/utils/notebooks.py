@@ -105,11 +105,12 @@ def aggregate_results_with_ci(df_base, merge_cyp=False):
 
 
 def style_df_ci(df, order):
+
     for col in df.columns:
-        df[col] = df[col].apply(lambda x: np.round(x,3))
+        df[col] = df[col].apply(lambda x: np.round(x, 3))
     # Get max values
     maxs_vals = df.max(axis=0)
-    maxs = (df == maxs_vals)
+    maxs = df == maxs_vals
     # Get second max values
     df2 = df.where(~maxs)
     maxs_vals = df2.max(axis=0)
@@ -176,6 +177,61 @@ def get_ranked_df(df_base):
         ranked_df = ranked_df.merge(results, on="embedder", how="outer")
     order = ranked_df.mean().sort_values().index.tolist()
     return ranked_df
+
+
+def style_df_ranked(df_ranked, order, avg_task=True):
+    df_ranked.set_index("embedder", inplace=True)
+    df_ranked = df_ranked.loc[order[::-1], :]
+    df_ranked.index = df_ranked.index.str.replace("_", " ")
+    for col in df_ranked.columns:
+        df_ranked[col] = df_ranked[col].apply(lambda x: np.round(x, 3))
+    # Get max values
+    df_ranked.columns = pd.MultiIndex.from_tuples(
+        [
+            (df_metadata.loc[c, "category"], df_metadata.loc[c, "short_name"])
+            for c in df_ranked.columns
+        ]
+    )
+    if avg_task:
+        df_ranked = df_ranked.mean(level=0, axis=1)
+    df_ranked["avg"] = df_ranked.mean(axis=1)
+
+    #sort by avg
+
+
+    min_vals = df_ranked.min(axis=0)
+    mins = df_ranked == min_vals
+
+    df2 = df_ranked.where(~mins)
+    mins_vals = df2.min(axis=0)
+    mins2 = (df2 == mins_vals) & ~mins
+
+
+    style = df_ranked.copy()
+    for col in style.columns:
+        style[col] = (
+            style[col].apply(lambda x: f"{x:.3f}")
+        )
+
+    for col in style.columns:
+        for best in mins[mins[col]].index:
+            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+        for best in mins2[mins2[col]].index:
+            style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
+
+    style = style.style
+    col_format = "r|"
+
+    for col in style.columns:
+        col_format += "|c"
+    col_format += "|"
+
+    latex = style.to_latex(
+        column_format=col_format,
+        multicol_align="|c|",
+        siunitx=True,
+    )
+    return style, latex
 
 
 df_metadata = pd.read_csv("molDistill/df_metadata.csv").set_index("dataset")

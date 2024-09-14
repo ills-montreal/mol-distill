@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 from molDistill.data.data_encoding import DistillGraphDataset
 from molDistill.model.model_gm import Model_GM
+from molDistill.model.model import Model
 from molDistill.model.std_gnn import GNN_graphpred, GNN
 
 
@@ -28,20 +29,35 @@ def get_embeddings_from_distill_model(
         args = yaml.safe_load(f)
     gnn = GNN(**args)
     model = GNN_graphpred(Namespace(**args), gnn)
-    model = Model_GM(model)
-    model.load_state_dict(torch.load(path, map_location=device))
+    if "knife_config" in args:
+        model = Model_GM(model)
+        model.load_state_dict(torch.load(path, map_location=device))
+    else:
+        model = Model(model, [])
+        model.load_state_dict(
+            torch.load(path, map_location=device), strict=False
+        )  # To ignore heads
 
     model.eval()
     model = model.to(device)
     embeddings = []
     for graph in tqdm(dataloader, desc="Extracting embeddings"):
         graph = graph.to(device)
-        e = model(
-            graph.x,
-            graph.edge_index,
-            graph.edge_attr,
-            graph.batch,
-            size=len(graph.smiles),
-        )
+        if hasattr(model, "encode"):
+            e = model.encode(
+                graph.x,
+                graph.edge_index,
+                graph.edge_attr,
+                graph.batch,
+                size=len(graph.smiles),
+            )
+        else:
+            e = model(
+                graph.x,
+                graph.edge_index,
+                graph.edge_attr,
+                graph.batch,
+                size=len(graph.smiles),
+            )
         embeddings.append(e.cpu())
     return torch.cat(embeddings)
