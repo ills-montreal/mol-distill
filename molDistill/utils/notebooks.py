@@ -4,12 +4,15 @@ import numpy as np
 
 import autorank
 
+STUDENT_MODEL = "model_275.pth"
+L2_MODEL = "model_40"
+ZINC_MODEL = "model_400"
 
 def get_all_results(
     MODELS_TO_EVAL,
     path,
     DATASETS,
-    renames=[("custom:MOSES_512_10_lr1e-4_gine", "student")],
+    renames=[],
 ):
     dfs = []
     for model in MODELS_TO_EVAL:
@@ -40,7 +43,7 @@ def get_result_model(
     model_path,
     DATASETS,
     model,
-    renames=[("custom:MOSES_512_10_lr1e-4_gine", "student")],
+    renames=[],
 ):
     dataset = file.replace(".csv", "").replace("results_", "")
     if dataset in DATASETS:
@@ -75,8 +78,6 @@ def aggregate_results_with_ci(df_base, merge_cyp=False):
     # drop column and index names
     df.index.name = None
     order = df.mean(axis=1).sort_values(ascending=False).index.tolist()
-    order.remove("student")
-    order = ["student"] + order
 
     df.columns = pd.MultiIndex.from_tuples(
         [
@@ -178,6 +179,22 @@ def get_ranked_df(df_base):
     order = ranked_df.mean().sort_values().index.tolist()
     return ranked_df
 
+def add_hline(latex, index, hline=r'\midrule'):
+    """
+    Adds a horizontal `index` lines before the last line of the table
+
+    Args:
+        latex: latex table
+        index: index of horizontal line insertion (in lines)
+    """
+    lines = latex.splitlines()
+    if index< 0:
+        index = len(lines) + index-1
+    else:
+        index = index+1
+    lines.insert(index, hline)
+    return '\n'.join(lines).replace('NaN', '')
+
 
 def style_df_ranked(df_ranked, order, avg_task=True):
     df_ranked.set_index("embedder", inplace=True)
@@ -194,7 +211,7 @@ def style_df_ranked(df_ranked, order, avg_task=True):
     )
     if avg_task:
         df_ranked = df_ranked.mean(level=0, axis=1)
-    df_ranked["avg"] = df_ranked.mean(axis=1)
+    df_ranked["Avg"] = df_ranked.mean(axis=1)
 
     #sort by avg
 
@@ -206,21 +223,27 @@ def style_df_ranked(df_ranked, order, avg_task=True):
     mins_vals = df2.min(axis=0)
     mins2 = (df2 == mins_vals) & ~mins
 
+    df3 = df2.where(~mins2)
+    mins_vals = df3.min(axis=0)
+    mins3 = (df3 == mins_vals) & ~mins2
 
+    df_ranked.index.name = None
     style = df_ranked.copy()
     for col in style.columns:
         style[col] = (
-            style[col].apply(lambda x: f"{x:.3f}")
+            style[col].apply(lambda x: f"{x:.2f}")
         )
 
     for col in style.columns:
         for best in mins[mins[col]].index:
-            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+            style.loc[best, col] = "\\textbf{\\underline{" + style.loc[best, col] + "}}"
         for best in mins2[mins2[col]].index:
+            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+        for best in mins3[mins3[col]].index:
             style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
 
     style = style.style
-    col_format = "r|"
+    col_format = "r"
 
     for col in style.columns:
         col_format += "|c"

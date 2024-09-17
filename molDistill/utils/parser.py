@@ -6,7 +6,7 @@ GROUPED_MODELS = {
         # "ContextPred",
         # "GPT-GNN",
         "GraphMVP",
-        # "GROVER",
+        "GROVER",
         # "AttributeMask",
         "GraphLog",
         "GraphCL",
@@ -27,7 +27,7 @@ GROUPED_MODELS = {
         # "ChemGPT-4.7M",
     ],
     "Denoising": [
-        "DenoisingPretrainingPQCMv4",
+        # "DenoisingPretrainingPQCMv4",
         "FRAD_QM9",
     ],
     "MolR": [
@@ -83,7 +83,7 @@ def get_pretraining_args():
         choices=["gin", "gine", "gcn", "gat", "graphsage", "tag", "arma", "gatv2"],
     )
     parser.add_argument(
-        "--node-embedding",
+        "--node-embedding-keys",
         nargs="+",
         type=str,
         default=["possible_atomic_num_list", "possible_chirality_list"],
