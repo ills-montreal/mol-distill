@@ -43,9 +43,7 @@ class MolecularFeatureExtractor:
         if self.i_file is None:
             with open(os.path.join(self.data_dir, "smiles.json"), "r") as f:
                 smiles = json.load(f)
-            mols = dm.read_sdf(
-                os.path.join(self.data_dir, "preprocessed.sdf")
-            )
+            mols = dm.read_sdf(os.path.join(self.data_dir, "preprocessed.sdf"))
         else:
             df = dm.read_sdf(
                 os.path.join(
@@ -61,7 +59,6 @@ class MolecularFeatureExtractor:
             print(df.head())
             smiles = df["smiles"].iloc[:, 1].tolist()
         return mols, smiles
-
 
     def get_features(
         self,
@@ -102,8 +99,10 @@ class MolecularFeatureExtractor:
             if not name.startswith("custom:"):
                 os.makedirs(os.path.dirname(embedding_path), exist_ok=True)
                 np.save(embedding_path, molecular_embedding.cpu().numpy())
-                np.save(embedding_path.replace(".npy", "_shape.npy"), np.array(molecular_embedding.cpu().numpy().shape))
-
+                np.save(
+                    embedding_path.replace(".npy", "_shape.npy"),
+                    np.array(molecular_embedding.cpu().numpy().shape),
+                )
 
         if normalize and i_file is None:
             molecular_embedding = (
@@ -181,9 +180,11 @@ if __name__ == "__main__":
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-
     if i_file is None or i_file >= 0:
-        compute_embeddings(args, i_file=i_file,)
+        compute_embeddings(
+            args,
+            i_file=i_file,
+        )
     else:
         data_files = os.listdir(
             os.path.join(args.data_dir, args.dataset, "preprocessed")

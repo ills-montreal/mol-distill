@@ -45,7 +45,7 @@ def main(args):
     scheduler = None  # torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
     # optimizer, T_0=(args.num_epochs * 4) // 10, eta_min=args.lr / 100, T_mult=1
     # )
-    criterion = torch.nn.MSELoss()
+    criterion = CosineLoss()
 
     trainer = Trainer_criterion(
         model,
@@ -66,6 +66,15 @@ def main(args):
         args.num_epochs,
         args.log_interval,
     )
+
+
+class CosineLoss(torch.nn.Module):
+    def __init__(self):
+        super(CosineLoss, self).__init__()
+        self.cos = torch.nn.CosineSimilarity()
+
+    def forward(self, embeddings, target):
+        return -torch.mean(self.cos(embeddings, target))
 
 
 if __name__ == "__main__":

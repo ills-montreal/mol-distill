@@ -4,11 +4,7 @@ import torch.nn as nn
 
 
 class Model(nn.Module):
-    def __init__(
-        self,
-        backbone: nn.Module,
-        tasks: List[int],
-    ):
+    def __init__(self, backbone: nn.Module, tasks: List[int]):
         super(Model, self).__init__()
         self.backbone = backbone
         self.out_dim = backbone.emb_dim

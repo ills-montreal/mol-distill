@@ -8,6 +8,10 @@ STUDENT_MODEL = "model_275.pth"
 L2_MODEL = "model_40"
 ZINC_MODEL = "model_400"
 
+SINGLE_TEACHER_BERT = "honestcapybara"
+SINGLE_TEACHER_TDINFO = "neatspaceship"
+
+
 def get_all_results(
     MODELS_TO_EVAL,
     path,
@@ -105,7 +109,7 @@ def aggregate_results_with_ci(df_base, merge_cyp=False):
     return df, order
 
 
-def style_df_ci(df, order):
+def style_df_ci(df, order, multicols=True):
 
     for col in df.columns:
         df[col] = df[col].apply(lambda x: np.round(x, 3))
@@ -137,9 +141,9 @@ def style_df_ci(df, order):
 
     for col in style.columns:
         for best in maxs[maxs[col]].index:
-            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+            style.loc[best, col] = "\\textbf{\\underline{" + style.loc[best, col] + "}}"
         for best in maxs2[maxs2[col]].index:
-            style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
+            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
 
     style = style.style
     col_format = "r|"
@@ -196,7 +200,7 @@ def add_hline(latex, index, hline=r'\midrule'):
     return '\n'.join(lines).replace('NaN', '')
 
 
-def style_df_ranked(df_ranked, order, avg_task=True):
+def style_df_ranked(df_ranked, order, avg_task=True, highlight2 = True, highlight3 = True):
     df_ranked.set_index("embedder", inplace=True)
     df_ranked = df_ranked.loc[order[::-1], :]
     df_ranked.index = df_ranked.index.str.replace("_", " ")
@@ -237,10 +241,12 @@ def style_df_ranked(df_ranked, order, avg_task=True):
     for col in style.columns:
         for best in mins[mins[col]].index:
             style.loc[best, col] = "\\textbf{\\underline{" + style.loc[best, col] + "}}"
-        for best in mins2[mins2[col]].index:
-            style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
-        for best in mins3[mins3[col]].index:
-            style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
+        if highlight2:
+            for best in mins2[mins2[col]].index:
+                style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
+        if highlight3:
+            for best in mins3[mins3[col]].index:
+                style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
 
     style = style.style
     col_format = "r"

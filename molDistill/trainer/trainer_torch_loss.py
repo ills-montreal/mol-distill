@@ -6,7 +6,7 @@ from tqdm import tqdm
 from molDistill.trainer import Trainer
 
 
-class Trainer_L2(Trainer):
+class Trainer_criterion(Trainer):
     def __init__(
         self,
         model,
@@ -18,6 +18,7 @@ class Trainer_L2(Trainer):
         wandb=False,
         embedder_name_list=None,
         out_dir=None,
+        criterion=torch.nn.MSELoss(),
     ):
         super().__init__(
             model,
@@ -30,7 +31,7 @@ class Trainer_L2(Trainer):
             embedder_name_list=embedder_name_list,
             out_dir=out_dir,
         )
-        self.criterion = torch.nn.MSELoss()
+        self.criterion = criterion
 
     def get_loss(self, graph, embs, backward=True, loss_per_embedder=None):
         embeddings = self.model(
