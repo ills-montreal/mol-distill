@@ -6,7 +6,7 @@ GROUPED_MODELS = {
         # "ContextPred",
         # "GPT-GNN",
         "GraphMVP",
-        "GROVER",
+        # "GROVER",
         # "AttributeMask",
         "GraphLog",
         "GraphCL",
@@ -27,7 +27,7 @@ GROUPED_MODELS = {
         # "ChemGPT-4.7M",
     ],
     "Denoising": [
-        # "DenoisingPretrainingPQCMv4",
+        "DenoisingPretrainingPQCMv4",
         "FRAD_QM9",
     ],
     "MolR": [

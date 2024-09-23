@@ -6,17 +6,45 @@ import autorank
 
 STUDENT_MODEL = "model_275.pth"
 L2_MODEL = "model_40"
+COS_MODEL = "swiftdream"
+
 ZINC_MODEL = "model_400"
 
 SINGLE_TEACHER_BERT = "honestcapybara"
 SINGLE_TEACHER_TDINFO = "neatspaceship"
+TWO_TEACHER = "twoteach"
+
+SMALL_KERNEL = "small_kern"
+LARGE_KERNEL = "largekern"
+
+TEACHER_LIST = [
+    "GraphMVP",
+    "GraphLog",
+    "GraphCL",
+    "ChemBertMTR-5M",
+    "ChemBertMTR-10M",
+    "ChemBertMTR-77M",
+    "DenoisingPretrainingPQCMv4",
+    "FRAD_QM9",
+    "ThreeDInfomax",
+]
 
 
 def get_all_results(
     MODELS_TO_EVAL,
     path,
     DATASETS,
-    renames=[],
+    renames=[
+        (STUDENT_MODEL, "student-2M"),
+        (ZINC_MODEL, "student-250k"),
+        (L2_MODEL, "L2"),
+        (COS_MODEL, "Cosine"),
+        (SMALL_KERNEL, "2-layers-kernel"),
+        (LARGE_KERNEL, "5-layers-kernel"),
+        (SINGLE_TEACHER_BERT, "sgl-bert"),
+        (SINGLE_TEACHER_TDINFO, "sgl-tdinfomax"),
+        (TWO_TEACHER, "2-teachers"),
+    ],
 ):
     dfs = []
     for model in MODELS_TO_EVAL:
@@ -48,12 +76,16 @@ def get_result_model(
     DATASETS,
     model,
     renames=[],
+    rename_teacher=True,
 ):
     dataset = file.replace(".csv", "").replace("results_", "")
     if dataset in DATASETS:
         df = pd.read_csv(os.path.join(model_path, file), index_col=0)
         for r in renames:
             model = model.replace(r[0], r[1])
+        if rename_teacher:
+            if model in TEACHER_LIST:
+                model = model + "${}^{(t)}$"
         df["embedder"] = model
         df["dataset"] = dataset
         return df
@@ -109,7 +141,8 @@ def aggregate_results_with_ci(df_base, merge_cyp=False):
     return df, order
 
 
-def style_df_ci(df, order, multicols=True):
+def style_df_ci(df, order, multicols=True, rotate="+"):
+    order = [n.replace("_", " ") for n in order]
 
     for col in df.columns:
         df[col] = df[col].apply(lambda x: np.round(x, 3))
@@ -129,6 +162,7 @@ def style_df_ci(df, order, multicols=True):
                 + "$\pm$ \\tiny "
                 + style[(col[0], col[1] + " std")].apply(lambda x: f"{x:.3f}")
             )
+    style = style.loc[order]
 
     style.drop(
         columns=[
@@ -145,20 +179,28 @@ def style_df_ci(df, order, multicols=True):
         for best in maxs2[maxs2[col]].index:
             style.loc[best, col] = "\\textbf{" + style.loc[best, col] + "}"
 
+    if rotate == "+":
+        col_prefix = "\\rotatebox{90}{\\shortstack{"
+    else:
+        col_prefix = "\\rotatebox{-90}{\\shortstack{"
+    style.columns = [
+        col_prefix + col[0] + " \\\\ " + col[1] + "}}" for col in style.columns
+    ]
+
     style = style.style
     col_format = "r|"
 
-    over_cols = "This is not a column name that will be used"
-    for ov_col, col in style.columns:
-        if over_cols != ov_col:
+    prev_cols = "This is not a column name that will be used"
+    for col in style.columns:
+        ov_col = col[len(col_prefix) :].split(" \\\\")[0]
+        if prev_cols != ov_col:
             col_format += "|"
-            over_cols = ov_col
+            prev_cols = ov_col
         col_format += "c"
     col_format += "|"
 
     latex = style.to_latex(
         column_format=col_format,
-        multicol_align="|c|",
         siunitx=True,
     )
     return style, latex
@@ -183,7 +225,8 @@ def get_ranked_df(df_base):
     order = ranked_df.mean().sort_values().index.tolist()
     return ranked_df
 
-def add_hline(latex, index, hline=r'\midrule'):
+
+def add_hline(latex, index, hline=r"\midrule"):
     """
     Adds a horizontal `index` lines before the last line of the table
 
@@ -192,17 +235,17 @@ def add_hline(latex, index, hline=r'\midrule'):
         index: index of horizontal line insertion (in lines)
     """
     lines = latex.splitlines()
-    if index< 0:
-        index = len(lines) + index-1
+    if index < 0:
+        index = len(lines) + index - 1
     else:
-        index = index+1
+        index = index + 1
     lines.insert(index, hline)
-    return '\n'.join(lines).replace('NaN', '')
+    return "\n".join(lines).replace("NaN", "")
 
 
-def style_df_ranked(df_ranked, order, avg_task=True, highlight2 = True, highlight3 = True):
+def style_df_ranked(df_ranked, order, avg_task=True, highlight2=True, highlight3=True):
     df_ranked.set_index("embedder", inplace=True)
-    df_ranked = df_ranked.loc[order[::-1], :]
+    df_ranked = df_ranked.loc[order, :]
     df_ranked.index = df_ranked.index.str.replace("_", " ")
     for col in df_ranked.columns:
         df_ranked[col] = df_ranked[col].apply(lambda x: np.round(x, 3))
@@ -217,8 +260,7 @@ def style_df_ranked(df_ranked, order, avg_task=True, highlight2 = True, highligh
         df_ranked = df_ranked.mean(level=0, axis=1)
     df_ranked["Avg"] = df_ranked.mean(axis=1)
 
-    #sort by avg
-
+    # sort by avg
 
     min_vals = df_ranked.min(axis=0)
     mins = df_ranked == min_vals
@@ -234,9 +276,7 @@ def style_df_ranked(df_ranked, order, avg_task=True, highlight2 = True, highligh
     df_ranked.index.name = None
     style = df_ranked.copy()
     for col in style.columns:
-        style[col] = (
-            style[col].apply(lambda x: f"{x:.2f}")
-        )
+        style[col] = style[col].apply(lambda x: f"{x:.2f}")
 
     for col in style.columns:
         for best in mins[mins[col]].index:
@@ -247,6 +287,25 @@ def style_df_ranked(df_ranked, order, avg_task=True, highlight2 = True, highligh
         if highlight3:
             for best in mins3[mins3[col]].index:
                 style.loc[best, col] = "\\underline{" + style.loc[best, col] + "}"
+
+    cols = style.columns
+    col_order = []
+
+    for col in cols:
+        sorted_cols = sorted(cols)
+    if "Excretion" in cols:
+        sorted_cols.remove("Excretion")
+        sorted_cols.insert(-1, "Excretion")
+    if "HTS" in cols:
+        sorted_cols.remove("HTS")
+        sorted_cols = sorted_cols + ["HTS"]
+    col_order = sorted_cols
+
+    if "Avg" in cols:
+        col_order.remove("Avg")
+        col_order = col_order + ["Avg"]
+
+    style = style[col_order]
 
     style = style.style
     col_format = "r"
