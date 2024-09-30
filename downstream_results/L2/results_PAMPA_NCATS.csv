@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/still-waterfall-449/model_40.pth,PAMPA_NCATS,0.7091684434968017,0.7696252465483235
+96,custom:../bool-run/still-waterfall-449/model_40.pth,PAMPA_NCATS,0.7492371071101618,0.7981770833333334
+97,custom:../bool-run/still-waterfall-449/model_40.pth,PAMPA_NCATS,0.7078300708038318,0.7645125958378971
+98,custom:../bool-run/still-waterfall-449/model_40.pth,PAMPA_NCATS,0.7695889531149647,0.8436793164111586
+99,custom:../bool-run/still-waterfall-449/model_40.pth,PAMPA_NCATS,0.7391880580357143,0.7228915662650603

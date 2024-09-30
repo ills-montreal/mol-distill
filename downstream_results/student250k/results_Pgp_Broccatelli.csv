@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/dry-elevator-456/model_400.pth,Pgp_Broccatelli,0.9314796425024825,0.9580592105263158
+11,custom:../bool-run/dry-elevator-456/model_400.pth,Pgp_Broccatelli,0.9535714285714285,0.9155882352941176
+12,custom:../bool-run/dry-elevator-456/model_400.pth,Pgp_Broccatelli,0.9335143414090782,0.9279761904761904
+13,custom:../bool-run/dry-elevator-456/model_400.pth,Pgp_Broccatelli,0.9283653846153846,0.9520851818988465
+14,custom:../bool-run/dry-elevator-456/model_400.pth,Pgp_Broccatelli,0.8819483436271759,0.9616477272727273

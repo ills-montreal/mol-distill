@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+195,custom:../bool-run/neat-spaceship-459/model_200.pth,Half_Life_Obach,-0.11128389812060169,0.11148574212953033
+196,custom:../bool-run/neat-spaceship-459/model_200.pth,Half_Life_Obach,-0.37879208117731267,0.33842981487551327
+197,custom:../bool-run/neat-spaceship-459/model_200.pth,Half_Life_Obach,-0.1130598980566766,0.17821450949645867
+198,custom:../bool-run/neat-spaceship-459/model_200.pth,Half_Life_Obach,0.2762272194285029,0.021114466095437545
+199,custom:../bool-run/neat-spaceship-459/model_200.pth,Half_Life_Obach,0.14415041639001946,0.39082601716540255

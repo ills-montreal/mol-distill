@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+110,custom:../bool-run/resilient-universe-468/model_190.pth,Pgp_Broccatelli,0.9414101290963257,0.9649122807017544
+111,custom:../bool-run/resilient-universe-468/model_190.pth,Pgp_Broccatelli,0.9492857142857143,0.9170588235294118
+112,custom:../bool-run/resilient-universe-468/model_190.pth,Pgp_Broccatelli,0.9397451963241437,0.9202380952380952
+113,custom:../bool-run/resilient-universe-468/model_190.pth,Pgp_Broccatelli,0.9195741758241758,0.9364093463472345
+114,custom:../bool-run/resilient-universe-468/model_190.pth,Pgp_Broccatelli,0.884334643458731,0.9653409090909091

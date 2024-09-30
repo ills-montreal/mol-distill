@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/glorious-plant-430/model_275.pth,Skin__Reaction,0.78156146179402,0.8708333333333333
+26,custom:../bool-run/glorious-plant-430/model_275.pth,Skin__Reaction,0.8307123034227567,0.7916666666666667
+27,custom:../bool-run/glorious-plant-430/model_275.pth,Skin__Reaction,0.7826530612244899,0.8712121212121212
+28,custom:../bool-run/glorious-plant-430/model_275.pth,Skin__Reaction,0.7816666666666667,0.9043478260869565
+29,custom:../bool-run/glorious-plant-430/model_275.pth,Skin__Reaction,0.8277591973244147,0.7777777777777777

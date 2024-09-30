@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/resilient-universe-468/model_190.pth,Carcinogens_Lagunin,0.7386363636363636,0.8181818181818181
+26,custom:../bool-run/resilient-universe-468/model_190.pth,Carcinogens_Lagunin,0.7976744186046512,0.8863636363636362
+27,custom:../bool-run/resilient-universe-468/model_190.pth,Carcinogens_Lagunin,0.8294573643410852,0.8947368421052632
+28,custom:../bool-run/resilient-universe-468/model_190.pth,Carcinogens_Lagunin,0.8836772983114447,0.0
+29,custom:../bool-run/resilient-universe-468/model_190.pth,Carcinogens_Lagunin,0.8846153846153846,0.7727272727272728

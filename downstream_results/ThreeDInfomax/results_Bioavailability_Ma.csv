@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,ThreeDInfomax,Bioavailability_Ma,0.6958415841584159,0.726241134751773
+202,ThreeDInfomax,Bioavailability_Ma,0.7109375,0.58
+214,ThreeDInfomax,Bioavailability_Ma,0.6422413793103448,0.7461538461538461
+226,ThreeDInfomax,Bioavailability_Ma,0.6355298913043478,0.0
+238,ThreeDInfomax,Bioavailability_Ma,0.6669172932330827,0.6656534954407294

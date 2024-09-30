@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+200,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Hepatocyte_AZ,0.026170957595225475,0.24924410667047725
+201,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Hepatocyte_AZ,0.23173662702656073,0.02631670776168893
+202,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Hepatocyte_AZ,-0.041692568303915545,0.22904755330444537
+203,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Hepatocyte_AZ,0.10647888429128338,0.15281902423265847
+204,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Hepatocyte_AZ,0.07075885280240579,0.0

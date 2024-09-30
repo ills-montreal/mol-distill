@@ -2,6 +2,7 @@ import os
 import logging
 import time
 
+import numpy as np
 import argparse
 
 import pandas as pd
@@ -48,14 +49,23 @@ ALL_DATASETS = [
     "HIV",
 ]
 
+COMMON_BENCHMARKS = [
+    "Tox21",
+    "ClinTox",
+    "HIV",
+    "HydrationFreeEnergy_FreeSolv",
+    "Lipophilicity_AstraZeneca",
+    "BBB_Martins",
+]
 
-def launch_model_eval(model, MODEL_PATH):
+
+def launch_model_eval(model, MODEL_PATH, data_path):
     logger.info(f"Launching eval for {model}")
     if args.sbatch:
         os.system(f"sbatch eval.sh custom:{os.path.join(MODEL_PATH, model)} 5")
     else:
         os.system(
-            f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets hERG --test"
+            f"python molDistill/downstream_eval.py --embedders custom:{os.path.join(MODEL_PATH, model)} --datasets ADME TOX --test --data-path {data_path}"
         )
 
 
@@ -70,19 +80,20 @@ def log_eval_results(model, MODEL_PATH):
         for dataset in df.dataset.unique()
     }
     all_logs["eval_perfs"] = df.metric_test.mean()
+    all_logs["eval-perfs-common-benchmarks"] = df[
+        df.dataset.isin(COMMON_BENCHMARKS)
+    ].metric_test.mean()
     all_logs["epoch"] = epoch
     wandb.log(all_logs)
 
 
 if __name__ == "__main__":
-
-
     parser = argparse.ArgumentParser()
     parser.add_argument("MODEL_PATH", type=str)
     parser.add_argument("--sbatch", action="store_true")
-    parser.add_argument("--timeout", type=int, default=24*3)
+    parser.add_argument("--timeout", type=int, default=24 * 3)
+    parser.add_argument("--data-path", type=str, default="../data")
     args = parser.parse_args()
-
 
     while not os.path.exists(args.MODEL_PATH):
         logger.info(f"Waiting for {args.MODEL_PATH} to be created")
@@ -96,31 +107,50 @@ if __name__ == "__main__":
     for dataset in ALL_DATASETS:
         wandb.define_metric(f"eval_perfs_{dataset}", step_metric="epoch")
     wandb.define_metric("eval_perfs", step_metric="epoch")
-
+    wandb.define_metric("eval-perfs-common-benchmarks", step_metric="epoch")
 
     MODEL_PATH = args.MODEL_PATH
     checked_models = ["best_model.pth"]
     logged_models = ["best_model.pth"]
+
     last_round = False
     continue_training = True
+
+    models = os.listdir(MODEL_PATH)
+    models = [model for model in models if model.endswith(".pth")]
+
+    for model in models:
+        if (
+            os.path.exists(os.path.join(MODEL_PATH, model.replace(".pth", ".csv")))
+            and not model in logged_models
+        ):
+            if not model in checked_models:
+                checked_models.append(model)
+                log_eval_results(model, MODEL_PATH)
+                logged_models.append(model)
+
     while continue_training:
-        if time.time() - t0 > args.timeout*60*60:
+        if time.time() - t0 > args.timeout * 60 * 60:
             break
         # Get all the models in the folder
         models = os.listdir(MODEL_PATH)
         models = [model for model in models if model.endswith(".pth")]
+        # shuffle the models list
+        np.random.shuffle(models)
+        print("Models", models)
         # For every model
         for model in models:
-            # If the model has not been checked
-            if not model in checked_models:
-                launch_model_eval(model, MODEL_PATH)
-                checked_models.append(model)
             if (
                 os.path.exists(os.path.join(MODEL_PATH, model.replace(".pth", ".csv")))
                 and not model in logged_models
             ):
+                if not model in checked_models:
+                    checked_models.append(model)
                 log_eval_results(model, MODEL_PATH)
                 logged_models.append(model)
+            if not model in checked_models:
+                launch_model_eval(model, MODEL_PATH, args.data_path)
+                checked_models.append(model)
 
         if (
             os.path.exists(os.path.join(MODEL_PATH, "stop.txt"))
@@ -146,6 +176,6 @@ if __name__ == "__main__":
     df["epoch"] = df.embedder.apply(lambda x: int(x.replace(".pth", "").split("_")[-1]))
     df = df.drop(axis=1, columns=["Unnamed: 0", "embedder"])
     df = df.groupby(["epoch", "dataset"]).mean().reset_index()
-    wandb.log({"table": wandb.Table(dataframe=df)})
-
+    table = wandb.Table(dataframe=df)
+    wandb.log({"table": table})
     wandb.finish()

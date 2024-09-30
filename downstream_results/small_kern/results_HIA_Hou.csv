@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+105,custom:../bool-run/graceful-resonance-476/model_390.pth,HIA_Hou,0.9828282828282828,0.9592391304347826
+106,custom:../bool-run/graceful-resonance-476/model_390.pth,HIA_Hou,0.9510403916768666,0.9877551020408164
+107,custom:../bool-run/graceful-resonance-476/model_390.pth,HIA_Hou,0.8978444236176195,1.0
+108,custom:../bool-run/graceful-resonance-476/model_390.pth,HIA_Hou,0.9754213483146068,0.9854227405247813
+109,custom:../bool-run/graceful-resonance-476/model_390.pth,HIA_Hou,0.9471925133689839,0.9361702127659575

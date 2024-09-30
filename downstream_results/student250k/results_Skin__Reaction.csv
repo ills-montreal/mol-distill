@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/dry-elevator-456/model_400.pth,Skin__Reaction,0.834717607973422,0.9166666666666666
+26,custom:../bool-run/dry-elevator-456/model_400.pth,Skin__Reaction,0.8353376503237743,0.0
+27,custom:../bool-run/dry-elevator-456/model_400.pth,Skin__Reaction,0.7459183673469388,0.8674242424242424
+28,custom:../bool-run/dry-elevator-456/model_400.pth,Skin__Reaction,0.8508333333333332,0.9565217391304348
+29,custom:../bool-run/dry-elevator-456/model_400.pth,Skin__Reaction,0.794314381270903,0.7993827160493827

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/glorious-plant-430/model_275.pth,HIA_Hou,1.0,0.9538043478260869
+6,custom:../bool-run/glorious-plant-430/model_275.pth,HIA_Hou,0.9669522643818851,0.9183673469387755
+7,custom:../bool-run/glorious-plant-430/model_275.pth,HIA_Hou,0.9372071227741331,0.9791666666666667
+8,custom:../bool-run/glorious-plant-430/model_275.pth,HIA_Hou,0.940308988764045,0.956268221574344
+9,custom:../bool-run/glorious-plant-430/model_275.pth,HIA_Hou,0.9525401069518717,0.946808510638298

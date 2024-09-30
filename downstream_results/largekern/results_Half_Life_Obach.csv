@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+195,custom:../bool-run/clear-shape-496/model_390.pth,Half_Life_Obach,0.23514226480144707,0.3040403215397539
+196,custom:../bool-run/clear-shape-496/model_390.pth,Half_Life_Obach,0.05165895619616023,0.3782572359639659
+197,custom:../bool-run/clear-shape-496/model_390.pth,Half_Life_Obach,0.017182701525885857,0.15021343235361362
+198,custom:../bool-run/clear-shape-496/model_390.pth,Half_Life_Obach,0.39695593408298857,0.1982102814755572
+199,custom:../bool-run/clear-shape-496/model_390.pth,Half_Life_Obach,0.20271993236959784,0.4981281401368398

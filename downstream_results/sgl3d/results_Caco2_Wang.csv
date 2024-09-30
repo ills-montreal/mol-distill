@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+165,custom:../bool-run/neat-spaceship-459/model_200.pth,Caco2_Wang,0.6822549042798507,0.7119941162688163
+166,custom:../bool-run/neat-spaceship-459/model_200.pth,Caco2_Wang,0.6002086693543883,0.6734856332649332
+167,custom:../bool-run/neat-spaceship-459/model_200.pth,Caco2_Wang,0.652530293070521,0.6993063010620799
+168,custom:../bool-run/neat-spaceship-459/model_200.pth,Caco2_Wang,0.6308753571360515,0.7808162615149545
+169,custom:../bool-run/neat-spaceship-459/model_200.pth,Caco2_Wang,0.703806395077593,0.6532130432071539

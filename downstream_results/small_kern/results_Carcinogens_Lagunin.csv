@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/graceful-resonance-476/model_390.pth,Carcinogens_Lagunin,0.759090909090909,0.0
+26,custom:../bool-run/graceful-resonance-476/model_390.pth,Carcinogens_Lagunin,0.8302325581395349,0.8295454545454546
+27,custom:../bool-run/graceful-resonance-476/model_390.pth,Carcinogens_Lagunin,0.7467700258397933,0.8947368421052633
+28,custom:../bool-run/graceful-resonance-476/model_390.pth,Carcinogens_Lagunin,0.8161350844277674,0.0
+29,custom:../bool-run/graceful-resonance-476/model_390.pth,Carcinogens_Lagunin,0.9304029304029304,0.0

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,custom:../bool-run/neat-spaceship-459/model_200.pth,VDss_Lombardo,0.11259037722179799,0.016380486028255814
+191,custom:../bool-run/neat-spaceship-459/model_200.pth,VDss_Lombardo,0.054757165306920985,0.3262259715063244
+192,custom:../bool-run/neat-spaceship-459/model_200.pth,VDss_Lombardo,0.24875510061366934,0.3374651809718574
+193,custom:../bool-run/neat-spaceship-459/model_200.pth,VDss_Lombardo,0.16694294251758068,0.2803922558170018
+194,custom:../bool-run/neat-spaceship-459/model_200.pth,VDss_Lombardo,0.1402585956697685,0.40368714780859716

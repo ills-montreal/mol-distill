@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/dry-elevator-456/model_400.pth,HIV,0.8027807440548627,0.7849857926918935
+1,custom:../bool-run/dry-elevator-456/model_400.pth,HIV,0.7762169680111265,0.8556930891057429
+2,custom:../bool-run/dry-elevator-456/model_400.pth,HIV,0.7899749536833298,0.8314118221787984
+3,custom:../bool-run/dry-elevator-456/model_400.pth,HIV,0.8035626590759012,0.8041239668676599
+4,custom:../bool-run/dry-elevator-456/model_400.pth,HIV,0.8095207715474629,0.753552415642637

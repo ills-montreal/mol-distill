@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/dry-elevator-456/model_400.pth,Solubility_AqSolDB,0.8256450514500862,0.8339636671692257
+11,custom:../bool-run/dry-elevator-456/model_400.pth,Solubility_AqSolDB,0.8289500224180965,0.8497061141621733
+12,custom:../bool-run/dry-elevator-456/model_400.pth,Solubility_AqSolDB,0.8183606283154126,0.8464609043633116
+13,custom:../bool-run/dry-elevator-456/model_400.pth,Solubility_AqSolDB,0.8115667182708385,0.8560827503633879
+14,custom:../bool-run/dry-elevator-456/model_400.pth,Solubility_AqSolDB,0.8295246148359695,0.8138602807294357

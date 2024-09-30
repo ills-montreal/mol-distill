@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/clear-shape-496/model_390.pth,Bioavailability_Ma,0.6356435643564357,0.7134751773049645
+116,custom:../bool-run/clear-shape-496/model_390.pth,Bioavailability_Ma,0.7109375,0.635
+117,custom:../bool-run/clear-shape-496/model_390.pth,Bioavailability_Ma,0.5804597701149424,0.6399999999999999
+118,custom:../bool-run/clear-shape-496/model_390.pth,Bioavailability_Ma,0.6243206521739131,0.7613814756671899
+119,custom:../bool-run/clear-shape-496/model_390.pth,Bioavailability_Ma,0.6723684210526315,0.6808510638297873

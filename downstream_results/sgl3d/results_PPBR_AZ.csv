@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+185,custom:../bool-run/neat-spaceship-459/model_200.pth,PPBR_AZ,0.3133334377611172,0.383930047242951
+186,custom:../bool-run/neat-spaceship-459/model_200.pth,PPBR_AZ,0.3457149596637089,0.3328478442172329
+187,custom:../bool-run/neat-spaceship-459/model_200.pth,PPBR_AZ,0.4028728820889269,0.38306676390023986
+188,custom:../bool-run/neat-spaceship-459/model_200.pth,PPBR_AZ,0.2513536462335586,0.3483151967867838
+189,custom:../bool-run/neat-spaceship-459/model_200.pth,PPBR_AZ,0.26460166133568186,0.522009055359861

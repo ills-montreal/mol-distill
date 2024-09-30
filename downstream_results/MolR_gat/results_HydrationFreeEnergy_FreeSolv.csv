@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+189,MolR_gat,HydrationFreeEnergy_FreeSolv,0.8387457926255404,0.8721666040452682
+201,MolR_gat,HydrationFreeEnergy_FreeSolv,0.7825695433758704,0.9233303554480868
+213,MolR_gat,HydrationFreeEnergy_FreeSolv,0.6820953579867519,0.8608816980126376
+225,MolR_gat,HydrationFreeEnergy_FreeSolv,0.8525051500948462,0.8691111214384455
+237,MolR_gat,HydrationFreeEnergy_FreeSolv,0.8638259512627576,0.829040140538105

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/clear-shape-496/model_390.pth,Carcinogens_Lagunin,0.7772727272727272,0.8272727272727272
+26,custom:../bool-run/clear-shape-496/model_390.pth,Carcinogens_Lagunin,0.8418604651162791,0.8068181818181818
+27,custom:../bool-run/clear-shape-496/model_390.pth,Carcinogens_Lagunin,0.751937984496124,0.9078947368421052
+28,custom:../bool-run/clear-shape-496/model_390.pth,Carcinogens_Lagunin,0.8236397748592871,0.0
+29,custom:../bool-run/clear-shape-496/model_390.pth,Carcinogens_Lagunin,0.9377289377289377,0.7159090909090908

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+35,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Hepatocyte_AZ,0.054866867700429256,0.20105793141586636
+36,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Hepatocyte_AZ,0.168228499648315,0.11724477974555692
+37,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Hepatocyte_AZ,0.007143449760259046,0.30195203226508094
+38,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Hepatocyte_AZ,0.07098906935144023,0.26537854115903137
+39,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Hepatocyte_AZ,0.04315709253037503,0.24072427642243877

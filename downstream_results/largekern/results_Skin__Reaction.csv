@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/clear-shape-496/model_390.pth,Skin__Reaction,0.8529900332225913,0.9375
+31,custom:../bool-run/clear-shape-496/model_390.pth,Skin__Reaction,0.8140610545790935,0.7462121212121212
+32,custom:../bool-run/clear-shape-496/model_390.pth,Skin__Reaction,0.7142857142857143,0.9015151515151516
+33,custom:../bool-run/clear-shape-496/model_390.pth,Skin__Reaction,0.7933333333333333,0.9739130434782609
+34,custom:../bool-run/clear-shape-496/model_390.pth,Skin__Reaction,0.8177257525083612,0.7561728395061729

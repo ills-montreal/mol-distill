@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+165,custom:../bool-run/clear-shape-496/model_390.pth,Caco2_Wang,0.7256225193486908,0.6818022952449885
+166,custom:../bool-run/clear-shape-496/model_390.pth,Caco2_Wang,0.6059318949550061,0.6529184913024797
+167,custom:../bool-run/clear-shape-496/model_390.pth,Caco2_Wang,0.7167710407511696,0.6916237647230995
+168,custom:../bool-run/clear-shape-496/model_390.pth,Caco2_Wang,0.703618394184554,0.7594582471799733
+169,custom:../bool-run/clear-shape-496/model_390.pth,Caco2_Wang,0.7099120425984019,0.6574649751586231

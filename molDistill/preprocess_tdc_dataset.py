@@ -21,7 +21,7 @@ parser.add_argument(
     type=str,
     nargs="+",
     default=[
-        "MOSES",
+        "ToxCast",
     ],
 )
 

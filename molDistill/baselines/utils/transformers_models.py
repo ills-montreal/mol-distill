@@ -36,7 +36,7 @@ def get_embeddings_from_transformers_batch(
         if isinstance(model_out, MaskedLMOutput):
             embeddings = model_out.logits[:, 0, :]
         elif isinstance(model_out, BaseModelOutputWithPoolingAndCrossAttentions):
-            embeddings = model_out.pooler_output
+            embeddings = model_out.last_hidden_state[:,0]
         else:
             embeddings = model_out
 

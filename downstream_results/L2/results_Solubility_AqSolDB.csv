@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/still-waterfall-449/model_40.pth,Solubility_AqSolDB,0.7776105434457681,0.8244106843750798
+11,custom:../bool-run/still-waterfall-449/model_40.pth,Solubility_AqSolDB,0.7973659441374226,0.8216870863964029
+12,custom:../bool-run/still-waterfall-449/model_40.pth,Solubility_AqSolDB,0.7793122460208235,0.8267057628171711
+13,custom:../bool-run/still-waterfall-449/model_40.pth,Solubility_AqSolDB,0.7856376276625545,0.8224453735402205
+14,custom:../bool-run/still-waterfall-449/model_40.pth,Solubility_AqSolDB,0.8219917634791916,0.7915600814695811

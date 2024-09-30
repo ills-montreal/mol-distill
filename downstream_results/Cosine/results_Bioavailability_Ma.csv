@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/swift-dream-464/model_120.pth,Bioavailability_Ma,0.5671287128712872,0.7531914893617021
+116,custom:../bool-run/swift-dream-464/model_120.pth,Bioavailability_Ma,0.6424851190476191,0.6883333333333334
+117,custom:../bool-run/swift-dream-464/model_120.pth,Bioavailability_Ma,0.608117816091954,0.6476923076923077
+118,custom:../bool-run/swift-dream-464/model_120.pth,Bioavailability_Ma,0.6457201086956522,0.7472527472527473
+119,custom:../bool-run/swift-dream-464/model_120.pth,Bioavailability_Ma,0.6796992481203008,0.6686930091185409

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+155,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP2D6_Substrate_CarbonMangels,0.7001689189189189,0.8788235294117647
+156,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP2D6_Substrate_CarbonMangels,0.7040816326530613,0.8519736842105263
+157,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP2D6_Substrate_CarbonMangels,0.7930747922437673,0.7648936170212766
+158,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP2D6_Substrate_CarbonMangels,0.7802226935312832,0.7659574468085106
+159,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP2D6_Substrate_CarbonMangels,0.7282945736434109,0.816205533596838

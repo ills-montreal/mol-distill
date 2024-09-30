@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+182,GraphLog,HydrationFreeEnergy_FreeSolv,0.8203308251403973,0.7781483918406895
+194,GraphLog,HydrationFreeEnergy_FreeSolv,0.802788480029301,0.8314936613528306
+206,GraphLog,HydrationFreeEnergy_FreeSolv,0.7991806836356056,0.8136196940222439
+218,GraphLog,HydrationFreeEnergy_FreeSolv,0.7954498874573527,0.6977269676380059
+230,GraphLog,HydrationFreeEnergy_FreeSolv,0.8358384665117213,0.7757005525904264

@@ -1,0 +1,37 @@
+dataset,task_type,category,n_samples,balanced,short_name,n_tasks
+LD50_Zhu,reg,Tox,7385.0,0.9586673133506076,LD50,1
+Caco2_Wang,reg,Absorption,910.0,0.777236234121794,Caco2,1
+Lipophilicity_AstraZeneca,reg,Absorption,4200.0,1.203003713387104,Lipophilicity,1
+Solubility_AqSolDB,reg,Absorption,9982.0,2.368154448407012,Solubility,1
+HydrationFreeEnergy_FreeSolv,reg,Absorption,642.0,3.847820117108812,FreeSolv,1
+PPBR_AZ,reg,Distribution,1614.0,16.738219911447835,PPBR,1
+VDss_Lombardo,reg,Distribution,1130.0,22.35257743108947,VDss,1
+Half_Life_Obach,reg,Excretion,667.0,81.86918479133858,Half Life,1
+Clearance_Hepatocyte_AZ,reg,Excretion,1213.0,49.84732238500549,Clearance (H),1
+Clearance_Microsome_AZ,reg,Excretion,1102.0,44.80547704432737,Clearance (M),1
+hERG,cls,Tox,655.0,0.1885496183206106,hERG,1
+hERG_Karim,cls,Tox,13445.0,0.0003346969133506,hERG (k),1
+AMES,cls,Tox,7278.0,0.0460291288815608,AMES,1
+DILI,cls,Tox,475.0,0.003157894736842,DILI,1
+Carcinogens_Lagunin,cls,Tox,280.0,0.2857142857142857,Carcinogens,1
+Skin__Reaction,cls,Tox,404.0,0.1782178217821782,Skin R,1
+Tox21,cls,Tox,6495.5,0.4224631714539559,Tox21,12
+ClinTox,cls,Tox,1478.0,0.4242219215155616,ClinTox,1
+ToxCast,cls,Tox,2485.6726094003243,0.3336466027270366,ToxCast,617
+PAMPA_NCATS,cls,Absorption,2034.0,0.3549655850540806,PAMPA,1
+HIA_Hou,cls,Absorption,578.0,0.3650519031141869,HIA,1
+Pgp_Broccatelli,cls,Absorption,1218.0,0.0336617405582923,Pgp,1
+Bioavailability_Ma,cls,Absorption,640.0,0.26875,Bioavailability,1
+BBB_Martins,cls,Distribution,2030.0,0.264039408866995,BBB,1
+CYP2C19_Veith,cls,Metabolism,12665.0,0.0405448085274378,CYP2C19,1
+CYP2D6_Veith,cls,Metabolism,13130.0,0.3085300837776085,CYP2D6,1
+CYP3A4_Veith,cls,Metabolism,12328.0,0.085496430889033,CYP3A4,1
+CYP1A2_Veith,cls,Metabolism,12579.0,0.0366086334366801,CYP1A2,1
+CYP2C9_Veith,cls,Metabolism,12092.0,0.1654813099569963,CYP2C9,1
+CYP2C9_Substrate_CarbonMangels,cls,Metabolism,669.0,0.289237668161435,CYP2C9 (s),1
+CYP2D6_Substrate_CarbonMangels,cls,Metabolism,667.0,0.2136431784107946,CYP2D6 (s),1
+CYP3A4_Substrate_CarbonMangels,cls,Metabolism,670.0,0.0298507462686566,CYP3A4 (s),1
+HIV,cls,HTS,41127.0,0.4649135604347509,HIV,1
+CYP,cls,Metabolism,0.0,0.0,CYP,0
+CYP (s),cls,Metabolism,0.0,0.0,CYP (s),0
+CYP_(s),cls,Metabolism,0.0,0.0,CYP_(s),0

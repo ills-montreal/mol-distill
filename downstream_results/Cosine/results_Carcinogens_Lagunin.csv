@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/swift-dream-464/model_120.pth,Carcinogens_Lagunin,0.8068181818181818,0.8818181818181818
+26,custom:../bool-run/swift-dream-464/model_120.pth,Carcinogens_Lagunin,0.8069767441860466,0.8522727272727273
+27,custom:../bool-run/swift-dream-464/model_120.pth,Carcinogens_Lagunin,0.7002583979328164,0.9342105263157894
+28,custom:../bool-run/swift-dream-464/model_120.pth,Carcinogens_Lagunin,0.8724202626641651,0.0
+29,custom:../bool-run/swift-dream-464/model_120.pth,Carcinogens_Lagunin,0.9230769230769231,0.8636363636363636

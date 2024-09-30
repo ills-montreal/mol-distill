@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+195,custom:../bool-run/graceful-resonance-476/model_390.pth,Half_Life_Obach,0.23757596751611343,0.23907322527283614
+196,custom:../bool-run/graceful-resonance-476/model_390.pth,Half_Life_Obach,-0.09238679307893749,0.44524954720206533
+197,custom:../bool-run/graceful-resonance-476/model_390.pth,Half_Life_Obach,0.06791341277992047,0.2752232893747729
+198,custom:../bool-run/graceful-resonance-476/model_390.pth,Half_Life_Obach,0.2918940473861076,0.13505414478815947
+199,custom:../bool-run/graceful-resonance-476/model_390.pth,Half_Life_Obach,0.12679149889443153,0.49336695223325244

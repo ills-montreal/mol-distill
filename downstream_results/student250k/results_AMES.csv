@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/dry-elevator-456/model_400.pth,AMES,0.8978242311575646,0.9084759491925615
+11,custom:../bool-run/dry-elevator-456/model_400.pth,AMES,0.8969635499207607,0.9046829392106266
+12,custom:../bool-run/dry-elevator-456/model_400.pth,AMES,0.8861632917747468,0.9134247230958566
+13,custom:../bool-run/dry-elevator-456/model_400.pth,AMES,0.8839620081411126,0.9050626854244427
+14,custom:../bool-run/dry-elevator-456/model_400.pth,AMES,0.8743705802164097,0.9052087061751121

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+170,custom:../bool-run/graceful-resonance-476/model_390.pth,Lipophilicity_AstraZeneca,0.7096782365768959,0.7719208179849781
+171,custom:../bool-run/graceful-resonance-476/model_390.pth,Lipophilicity_AstraZeneca,0.7421686250480353,0.7814943300207198
+172,custom:../bool-run/graceful-resonance-476/model_390.pth,Lipophilicity_AstraZeneca,0.7453867973378951,0.7563898865541097
+173,custom:../bool-run/graceful-resonance-476/model_390.pth,Lipophilicity_AstraZeneca,0.7557493535043878,0.732710616483226
+174,custom:../bool-run/graceful-resonance-476/model_390.pth,Lipophilicity_AstraZeneca,0.774045061916768,0.7858773615193748

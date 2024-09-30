@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/still-waterfall-449/model_40.pth,Half_Life_Obach,0.058772344769236096,0.12469384221442359
+31,custom:../bool-run/still-waterfall-449/model_40.pth,Half_Life_Obach,-0.047430362387664404,0.3835104601828756
+32,custom:../bool-run/still-waterfall-449/model_40.pth,Half_Life_Obach,-0.059021943997883186,0.10911549499473616
+33,custom:../bool-run/still-waterfall-449/model_40.pth,Half_Life_Obach,0.14126129981136737,0.31302247137037575
+34,custom:../bool-run/still-waterfall-449/model_40.pth,Half_Life_Obach,0.20775687817810606,0.5511130035233247

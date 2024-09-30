@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/glorious-plant-430/model_275.pth,PAMPA_NCATS,0.6946458185264156,0.7504930966469429
+1,custom:../bool-run/glorious-plant-430/model_275.pth,PAMPA_NCATS,0.7266809073339437,0.7743675595238095
+2,custom:../bool-run/glorious-plant-430/model_275.pth,PAMPA_NCATS,0.7363338192419825,0.7661555312157722
+3,custom:../bool-run/glorious-plant-430/model_275.pth,PAMPA_NCATS,0.7312941554271034,0.0
+4,custom:../bool-run/glorious-plant-430/model_275.pth,PAMPA_NCATS,0.7624860491071429,0.7989457831325302

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+120,custom:../bool-run/resilient-universe-468/model_190.pth,BBB_Martins,0.8473892133287529,0.923154701718908
+121,custom:../bool-run/resilient-universe-468/model_190.pth,BBB_Martins,0.8595394736842105,0.9393298059964726
+122,custom:../bool-run/resilient-universe-468/model_190.pth,BBB_Martins,0.8934231200897867,0.9038583677357891
+123,custom:../bool-run/resilient-universe-468/model_190.pth,BBB_Martins,0.8992691787766138,0.930756843800322
+124,custom:../bool-run/resilient-universe-468/model_190.pth,BBB_Martins,0.9042342114150625,0.9408446163765313

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+200,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Hepatocyte_AZ,0.0040367482071936855,0.2978634650049541
+201,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Hepatocyte_AZ,0.1840266832547831,0.1270712499210176
+202,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Hepatocyte_AZ,-2.6991184031377458e-05,0.3553595852689301
+203,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Hepatocyte_AZ,0.07855269111553431,0.2406322517730607
+204,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Hepatocyte_AZ,0.061853743588102694,0.29297543501308876

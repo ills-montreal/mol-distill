@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+110,custom:../bool-run/graceful-resonance-476/model_390.pth,Pgp_Broccatelli,0.9476521492410271,0.9610745614035088
+111,custom:../bool-run/graceful-resonance-476/model_390.pth,Pgp_Broccatelli,0.9519285714285715,0.9229411764705883
+112,custom:../bool-run/graceful-resonance-476/model_390.pth,Pgp_Broccatelli,0.9364383180172653,0.9291666666666667
+113,custom:../bool-run/graceful-resonance-476/model_390.pth,Pgp_Broccatelli,0.925,0.9541555752735876
+114,custom:../bool-run/graceful-resonance-476/model_390.pth,Pgp_Broccatelli,0.884334643458731,0.9428977272727272

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/clear-shape-496/model_390.pth,ClinTox,0.6608213429256595,0.6441176470588236
+96,custom:../bool-run/clear-shape-496/model_390.pth,ClinTox,0.7479455017301038,0.5869565217391305
+97,custom:../bool-run/clear-shape-496/model_390.pth,ClinTox,0.5237505163155721,0.6862745098039216
+98,custom:../bool-run/clear-shape-496/model_390.pth,ClinTox,0.6660079051383399,0.7914285714285714
+99,custom:../bool-run/clear-shape-496/model_390.pth,ClinTox,0.5740559577382117,0.7826797385620914

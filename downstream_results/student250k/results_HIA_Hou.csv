@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/dry-elevator-456/model_400.pth,HIA_Hou,0.996969696969697,0.9510869565217392
+6,custom:../bool-run/dry-elevator-456/model_400.pth,HIA_Hou,0.9614443084455324,0.9183673469387755
+7,custom:../bool-run/dry-elevator-456/model_400.pth,HIA_Hou,0.9456419868791003,0.984375
+8,custom:../bool-run/dry-elevator-456/model_400.pth,HIA_Hou,0.9719101123595506,0.9679300291545189
+9,custom:../bool-run/dry-elevator-456/model_400.pth,HIA_Hou,0.9665775401069518,0.9148936170212766

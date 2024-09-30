@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+45,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Veith,0.898060150563455,0.9008921186340543
+46,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Veith,0.8960776621611858,0.9022287964054541
+47,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Veith,0.8843484483414554,0.9120594994892747
+48,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Veith,0.8927235935909875,0.9054298642533936
+49,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Veith,0.894298725692896,0.9000260096125665

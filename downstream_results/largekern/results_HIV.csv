@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/clear-shape-496/model_390.pth,HIV,0.8059499701302043,0.7728514707765872
+1,custom:../bool-run/clear-shape-496/model_390.pth,HIV,0.7999893235764286,0.8616346384578468
+2,custom:../bool-run/clear-shape-496/model_390.pth,HIV,0.8012485127051652,0.8322300928187591
+3,custom:../bool-run/clear-shape-496/model_390.pth,HIV,0.8048577052039056,0.8158681015601762
+4,custom:../bool-run/clear-shape-496/model_390.pth,HIV,0.8105610731774605,0.7770483929071769

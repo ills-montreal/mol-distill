@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+35,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Veith,0.8979627638319923,0.8893888405742302
+36,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Veith,0.8925176581487866,0.9023448604879898
+37,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Veith,0.89114203746324,0.9152991846228563
+38,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Veith,0.8898342571218385,0.9070364040221325
+39,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Veith,0.88669645416873,0.9041763498813291

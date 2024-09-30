@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+50,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Substrate_CarbonMangels,0.7161680911680912,0.811965811965812
+51,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Substrate_CarbonMangels,0.8067806780678067,0.8234649122807018
+52,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Substrate_CarbonMangels,0.736111111111111,0.7621212121212121
+53,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Substrate_CarbonMangels,0.5859772816294555,0.7666666666666666
+54,custom:../bool-run/dry-elevator-456/model_400.pth,CYP2C9_Substrate_CarbonMangels,0.6485042735042735,0.7573696145124716

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+180,custom:../bool-run/swift-dream-464/model_120.pth,HydrationFreeEnergy_FreeSolv,0.9209416896964545,0.9348436213994672
+181,custom:../bool-run/swift-dream-464/model_120.pth,HydrationFreeEnergy_FreeSolv,0.905310992689192,0.9442541491071055
+182,custom:../bool-run/swift-dream-464/model_120.pth,HydrationFreeEnergy_FreeSolv,0.8430417129792425,0.9259358152520311
+183,custom:../bool-run/swift-dream-464/model_120.pth,HydrationFreeEnergy_FreeSolv,0.9208386736866392,0.9329813056381266
+184,custom:../bool-run/swift-dream-464/model_120.pth,HydrationFreeEnergy_FreeSolv,0.8758151357876742,0.9228886107934103

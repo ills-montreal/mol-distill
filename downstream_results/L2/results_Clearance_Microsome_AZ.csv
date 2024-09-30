@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+40,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Microsome_AZ,0.24552249705848528,0.4514432432073888
+41,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Microsome_AZ,0.15020264286228946,0.27660706123502
+42,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Microsome_AZ,0.32467278386418486,0.3889729325871044
+43,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Microsome_AZ,0.25004229113560317,0.20667850098276386
+44,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Microsome_AZ,0.24968794311279574,0.42648846443950506

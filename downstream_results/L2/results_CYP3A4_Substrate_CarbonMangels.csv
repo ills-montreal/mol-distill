@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+155,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Substrate_CarbonMangels,0.6434684684684685,0.0
+156,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Substrate_CarbonMangels,0.5537670467247933,0.0
+157,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Substrate_CarbonMangels,0.6762541806020066,0.0
+158,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Substrate_CarbonMangels,0.60958751393534,0.7803571428571429
+159,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Substrate_CarbonMangels,0.7201380897583428,0.0

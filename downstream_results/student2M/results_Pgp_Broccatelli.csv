@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/glorious-plant-430/model_275.pth,Pgp_Broccatelli,0.9516952759256632,0.965734649122807
+11,custom:../bool-run/glorious-plant-430/model_275.pth,Pgp_Broccatelli,0.9521428571428572,0.9238235294117646
+12,custom:../bool-run/glorious-plant-430/model_275.pth,Pgp_Broccatelli,0.9463241436925648,0.9321428571428572
+13,custom:../bool-run/glorious-plant-430/model_275.pth,Pgp_Broccatelli,0.9321428571428572,0.9381839692398699
+14,custom:../bool-run/glorious-plant-430/model_275.pth,Pgp_Broccatelli,0.8953537338573836,0.9318181818181819

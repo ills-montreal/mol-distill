@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/glorious-plant-430/model_275.pth,DILI,0.8681765389082462,0.9534313725490196
+16,custom:../bool-run/glorious-plant-430/model_275.pth,DILI,0.855952380952381,0.9625668449197861
+17,custom:../bool-run/glorious-plant-430/model_275.pth,DILI,0.8979328165374676,0.8587962962962963
+18,custom:../bool-run/glorious-plant-430/model_275.pth,DILI,0.8783783783783783,0.926470588235294
+19,custom:../bool-run/glorious-plant-430/model_275.pth,DILI,0.7799479166666667,0.906832298136646

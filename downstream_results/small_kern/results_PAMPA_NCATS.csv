@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/graceful-resonance-476/model_390.pth,PAMPA_NCATS,0.7120113717128643,0.7698224852071005
+101,custom:../bool-run/graceful-resonance-476/model_390.pth,PAMPA_NCATS,0.7490845285321941,0.8309151785714286
+102,custom:../bool-run/graceful-resonance-476/model_390.pth,PAMPA_NCATS,0.7539046230737193,0.0
+103,custom:../bool-run/graceful-resonance-476/model_390.pth,PAMPA_NCATS,0.7891779062299293,0.0
+104,custom:../bool-run/graceful-resonance-476/model_390.pth,PAMPA_NCATS,0.776064918154762,0.8303840361445783

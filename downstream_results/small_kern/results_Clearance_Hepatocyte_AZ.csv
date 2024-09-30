@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+200,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Hepatocyte_AZ,0.04299421543582205,0.2937363791747404
+201,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Hepatocyte_AZ,0.2241752926759487,0.09507936270397577
+202,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Hepatocyte_AZ,0.035661498658817514,0.3283848667576361
+203,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Hepatocyte_AZ,0.0739454150935338,0.29732027536276984
+204,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Hepatocyte_AZ,0.14457673744070398,0.3881682559190154

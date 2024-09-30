@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/glorious-plant-430/model_275.pth,Bioavailability_Ma,0.6118811881188119,0.7134751773049646
+16,custom:../bool-run/glorious-plant-430/model_275.pth,Bioavailability_Ma,0.6964285714285714,0.5833333333333334
+17,custom:../bool-run/glorious-plant-430/model_275.pth,Bioavailability_Ma,0.6411637931034482,0.5538461538461539
+18,custom:../bool-run/glorious-plant-430/model_275.pth,Bioavailability_Ma,0.5940896739130435,0.7111459968602826
+19,custom:../bool-run/glorious-plant-430/model_275.pth,Bioavailability_Ma,0.7225563909774435,0.635258358662614

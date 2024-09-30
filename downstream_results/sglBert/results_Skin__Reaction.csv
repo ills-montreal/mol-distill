@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/neat-spaceship-459/model_200.pth,Skin__Reaction,0.8729235880398671,0.8541666666666667
+31,custom:../bool-run/neat-spaceship-459/model_200.pth,Skin__Reaction,0.7622571692876966,0.7651515151515151
+32,custom:../bool-run/neat-spaceship-459/model_200.pth,Skin__Reaction,0.746938775510204,0.7765151515151515
+33,custom:../bool-run/neat-spaceship-459/model_200.pth,Skin__Reaction,0.8383333333333333,0.9043478260869565
+34,custom:../bool-run/neat-spaceship-459/model_200.pth,Skin__Reaction,0.8561872909698997,0.7993827160493827

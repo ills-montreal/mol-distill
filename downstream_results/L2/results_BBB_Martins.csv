@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/still-waterfall-449/model_40.pth,BBB_Martins,0.846444520783236,0.9437141894169194
+116,custom:../bool-run/still-waterfall-449/model_40.pth,BBB_Martins,0.8787938596491227,0.9285714285714285
+117,custom:../bool-run/still-waterfall-449/model_40.pth,BBB_Martins,0.867003367003367,0.8983010479517306
+118,custom:../bool-run/still-waterfall-449/model_40.pth,BBB_Martins,0.8921299425481581,0.9132045088566827
+119,custom:../bool-run/still-waterfall-449/model_40.pth,BBB_Martins,0.9031366092536305,0.9395551257253385

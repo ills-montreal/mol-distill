@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/clear-shape-496/model_390.pth,hERG_Karim,0.9099668739151929,0.9143428824748691
+11,custom:../bool-run/clear-shape-496/model_390.pth,hERG_Karim,0.9153656953610249,0.9309011602673534
+12,custom:../bool-run/clear-shape-496/model_390.pth,hERG_Karim,0.9058602500224491,0.9333113938862073
+13,custom:../bool-run/clear-shape-496/model_390.pth,hERG_Karim,0.9091728052167612,0.922239990234375
+14,custom:../bool-run/clear-shape-496/model_390.pth,hERG_Karim,0.9205537289348847,0.9228751542937754

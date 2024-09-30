@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+165,custom:../bool-run/graceful-resonance-476/model_390.pth,Caco2_Wang,0.7110264190726732,0.7011481242310573
+166,custom:../bool-run/graceful-resonance-476/model_390.pth,Caco2_Wang,0.6407005909957115,0.7393611960727081
+167,custom:../bool-run/graceful-resonance-476/model_390.pth,Caco2_Wang,0.7190966202460003,0.6842985230943062
+168,custom:../bool-run/graceful-resonance-476/model_390.pth,Caco2_Wang,0.730917721302146,0.7554506969445541
+169,custom:../bool-run/graceful-resonance-476/model_390.pth,Caco2_Wang,0.7483732378972365,0.6467906219836714

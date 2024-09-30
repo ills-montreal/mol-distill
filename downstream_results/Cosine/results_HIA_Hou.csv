@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+105,custom:../bool-run/swift-dream-464/model_120.pth,HIA_Hou,0.9767676767676767,0.8342391304347827
+106,custom:../bool-run/swift-dream-464/model_120.pth,HIA_Hou,0.9357405140758874,0.9959183673469388
+107,custom:../bool-run/swift-dream-464/model_120.pth,HIA_Hou,0.8106841611996252,0.9505208333333333
+108,custom:../bool-run/swift-dream-464/model_120.pth,HIA_Hou,0.8953651685393258,0.9533527696793003
+109,custom:../bool-run/swift-dream-464/model_120.pth,HIA_Hou,0.9217914438502673,0.9202127659574468

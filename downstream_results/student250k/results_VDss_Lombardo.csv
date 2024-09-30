@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/dry-elevator-456/model_400.pth,VDss_Lombardo,0.13750329746171963,0.036529655290898244
+26,custom:../bool-run/dry-elevator-456/model_400.pth,VDss_Lombardo,0.07566396980017309,0.30454200703655787
+27,custom:../bool-run/dry-elevator-456/model_400.pth,VDss_Lombardo,0.31060397745426616,0.2927949997810002
+28,custom:../bool-run/dry-elevator-456/model_400.pth,VDss_Lombardo,0.10728140529971564,0.34881290198706405
+29,custom:../bool-run/dry-elevator-456/model_400.pth,VDss_Lombardo,-0.00822515688214076,0.32050285219135677

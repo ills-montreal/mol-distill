@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+160,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP3A4_Substrate_CarbonMangels,0.6601351351351352,0.6990990990990991
+161,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP3A4_Substrate_CarbonMangels,0.613682092555332,0.0
+162,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP3A4_Substrate_CarbonMangels,0.6419175027870679,0.7383928571428572
+163,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP3A4_Substrate_CarbonMangels,0.6365663322185062,0.7241071428571428
+164,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP3A4_Substrate_CarbonMangels,0.6395857307249712,0.0

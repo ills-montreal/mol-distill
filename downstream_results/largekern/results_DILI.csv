@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/clear-shape-496/model_390.pth,DILI,0.872822299651568,0.9656862745098039
+21,custom:../bool-run/clear-shape-496/model_390.pth,DILI,0.869047619047619,0.0
+22,custom:../bool-run/clear-shape-496/model_390.pth,DILI,0.8746770025839794,0.8703703703703703
+23,custom:../bool-run/clear-shape-496/model_390.pth,DILI,0.9047619047619048,0.9352941176470588
+24,custom:../bool-run/clear-shape-496/model_390.pth,DILI,0.7975260416666666,0.937888198757764

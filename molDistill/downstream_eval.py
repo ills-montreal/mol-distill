@@ -20,7 +20,7 @@ from molDistill.baselines.utils.evaluation import (
     FFConfig,
     FF_trainer,
 )
-from molDistill.baselines.utils.tdc_dataset import get_dataset_split
+from molDistill.baselines.utils.tdc_dataset import EvaluationDatasetIterable
 from tqdm import tqdm
 
 DATASETS_GROUP = {
@@ -33,6 +33,7 @@ DATASETS_GROUP = {
         "Skin__Reaction",
         "Tox21",
         "ClinTox",
+        # "ToxCast",
     ],
     "ADME": [
         "PAMPA_NCATS",
@@ -69,45 +70,38 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 MODELS = [
-    "ContextPred",
-    "GPT-GNN",
+    # "ContextPred",
+    # "GPT-GNN",
     "GraphMVP",
     "GROVER",
-    "AttributeMask",
+    # "AttributeMask",
     "GraphLog",
     "GraphCL",
     "InfoGraph",
-    "Not-trained",
-    "MolBert",
-    "ChemBertMLM-5M",
+    # "Not-trained",
+    # "MolBert",
+    # "ChemBertMLM-5M",
     "ChemBertMLM-10M",
-    "ChemBertMLM-77M",
-    "ChemBertMTR-5M",
-    "ChemBertMTR-10M",
+    # "ChemBertMLM-77M",
+    # "ChemBertMTR-5M",
+    # "ChemBertMTR-10M",
     "ChemBertMTR-77M",
     "ChemGPT-1.2B",
-    "ChemGPT-19M",
-    "ChemGPT-4.7M",
-    "DenoisingPretrainingPQCMv4",
+    # "ChemGPT-19M",
+    # "ChemGPT-4.7M",
+    # "DenoisingPretrainingPQCMv4",
     "FRAD_QM9",
     "MolR_gat",
-    "MolR_gcn",
-    "MolR_tag",
-    "MoleOOD_OGB_GIN",
-    "MoleOOD_OGB_GCN",
+    # "MolR_gcn",
+    # "MolR_tag",
+    # "MoleOOD_OGB_GIN",
+    # "MoleOOD_OGB_GCN",
     "ThreeDInfomax",
+    "custom:MOSES_512_10_lr1e-4_gine/model_95.pth",
 ]
 
 
-def preprocess_smiles(s):
-    mol = dm.to_mol(s)
-    return dm.to_smiles(mol, True, False)
-
-
-def get_split_idx(
-    data_path: str,
-    split: Dict[str, pd.DataFrame],
-):
+def get_all_embs(dataset: str, args: argparse.Namespace, data_path: str = "../data"):
     with open(os.path.join(data_path, "smiles.json"), "r") as f:
         smiles = json.load(f)
     mol_path = os.path.join(data_path, "preprocessed.sdf")
@@ -115,33 +109,30 @@ def get_split_idx(
         mols = dm.read_sdf(mol_path)
     else:
         mols = dm.to_mol(smiles)
-
-    smiles_to_idx = {s: i for i, s in enumerate(smiles)}
-
-    for key in split.keys():
-        split[key]["prepro_smiles"] = split[key]["Drug"].apply(preprocess_smiles)
-
-    split_idx = {}
-    for key in split.keys():
-        split_idx[key] = {"x": [], "y": []}
-        for i in range(len(split[key])):
-            smile = split[key].iloc[i]["prepro_smiles"]
-            y = split[key].iloc[i]["Y"]
-            if smile in smiles:
-                split_idx[key]["x"].append(smiles_to_idx[smile])
-                split_idx[key]["y"].append(y)
-
-    return split_idx, smiles, mols
+    feature_extractor = MolecularFeatureExtractor(
+        dataset=dataset,
+        device=args.device,
+        data_dir=args.data_path,
+    )
+    embeddings = {
+        model_name: feature_extractor.get_features(
+            smiles=smiles,
+            mols=mols,
+            name=model_name,
+        )
+        for model_name in args.embedders
+    }
+    return smiles, mols, embeddings
 
 
 def get_split_emb(
     split_idx: Dict[str, List[int]],
-    embedders: Dict[str, Callable],
+    embeddings: Dict[str, torch.Tensor],
     smiles: List[str],
     mols: List[dm.Mol],
     embedder_name: str = "ecfp",
 ):
-    X = embedders[embedder_name](smiles, mols=mols)
+    X = embeddings[embedder_name]
     split_emb = {}
     for key in split_idx.keys():
         split_emb[key] = {
@@ -159,12 +150,12 @@ def launch_evaluation(
     model_config: Dict,
     smiles: List[str],
     mols: List[dm.Mol],
-    embedders: Dict[str, Callable],
+    embeddings: Dict[str, torch.Tensor],
     plot_loss: bool = False,
     run_num: Optional[Tuple[int, int]] = None,
     test: bool = False,
 ):
-    split_emb = get_split_emb(split_idx, embedders, smiles, mols, embedder_name)
+    split_emb = get_split_emb(split_idx, embeddings, smiles, mols, embedder_name)
 
     dataloader_train, dataloader_val, dataloader_test, input_dim = get_dataloaders(
         split_emb,
@@ -243,34 +234,31 @@ def main(args):
             test_batch_size=args.test_batch_size,
         )
 
-        for random_seed in tqdm(
-            range(args.n_runs), desc=f"Dataset {dataset}", position=1, leave=False
-        ):
+        smiles, mols, embeddings = get_all_embs(dataset, args, data_path)
+
+        for random_seed in range(args.n_runs):
+            print(f"Dataset {dataset} - Seed {random_seed}")
             try:
-                splits = get_dataset_split(
-                    dataset, random_seed=random_seed, method=args.split_method
+                split_sampler = EvaluationDatasetIterable(
+                    dataset=dataset,
+                    random_seed=random_seed,
+                    method=args.split_method,
+                    smiles=smiles,
                 )
             except Exception as e:
                 logger.error(f"Error in dataset {dataset} with seed {random_seed}")
                 logger.error(e)
+                raise e
                 continue
 
-            for i, embedder_name in enumerate(args.embedders):
-                for split in splits:
-                    split_idx, smiles, mols = get_split_idx(data_path, split)
-                    # Get all enmbedders
-                    feature_extractor = MolecularFeatureExtractor(
-                        dataset=dataset,
-                        device=args.device,
-                        data_dir=args.data_path,
-                    )
-                    embedders = {
-                        model_name: partial(
-                            feature_extractor.get_features,
-                            name=model_name,
-                        )
-                        for model_name in args.embedders
-                    }
+            for i_split, split_idx in enumerate(
+                tqdm(
+                    split_sampler.sample(),
+                    desc=f"Dataset {dataset} - Seed {random_seed}",
+                    total=len(split_sampler.label_list),
+                )
+            ):
+                for i, embedder_name in enumerate(args.embedders):
                     res = launch_evaluation(
                         dataset=dataset,
                         embedder_name=embedder_name,
@@ -279,7 +267,7 @@ def main(args):
                         model_config=model_config,
                         smiles=smiles,
                         mols=mols,
-                        embedders=embedders,
+                        embeddings=embeddings,
                         plot_loss=args.plot_loss,
                         run_num=(i, len(args.embedders)),
                         test=args.test,
@@ -289,14 +277,25 @@ def main(args):
     df = pd.concat(final_res).reset_index(drop=True)
     if args.wandb:
         wandb.log({"results_df": wandb.Table(dataframe=df)})
-    df = df.groupby(["embedder", "dataset"]).mean().reset_index()
+    df_grouped = df.groupby(["embedder", "dataset"]).mean().reset_index()
 
     if args.wandb:
-        wandb.log({"mean_metric": df.groupby("embedder")["metric"].mean().mean()})
+        wandb.log(
+            {"mean_metric": df_grouped.groupby("embedder")["metric"].mean().mean()}
+        )
 
     if len(args.embedders) == 1 and args.embedders[0].startswith("custom:"):
         path = args.embedders[0].split(":")[1]
-        df.to_csv(path.replace(".pth", ".csv"))
+        df_grouped.to_csv(path.replace(".pth", ".csv"))
+    if args.save_results:
+        for dataset in args.datasets:
+            for embedder in args.embedders:
+                os.makedirs(
+                    f"downstream_results/{embedder.split('/')[-1].replace('.pth','')}", exist_ok=True
+                )
+                df[(df["dataset"] == dataset) & (df["embedder"] == embedder)].to_csv(
+                    f"downstream_results/{embedder.split('/')[-1].replace('.pth','')}/results_{dataset}.csv"
+                )
 
 
 def add_downstream_args(parser: argparse.ArgumentParser):
@@ -308,13 +307,19 @@ def add_downstream_args(parser: argparse.ArgumentParser):
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--n-epochs", type=int, default=100)
     parser.add_argument("--test-batch-size", type=int, default=256)
+    parser.add_argument("--save-results", action="store_true")
 
     parser.add_argument(
         "--data-path",
         type=str,
         default="../data",
     )
-    parser.add_argument("--datasets", type=str, nargs="+", default=["TOX", "ADME", "HIV"])
+    parser.add_argument(
+        "--datasets",
+        type=str,
+        nargs="+",
+        default=["TOX", "ADME", "HIV", "ADME_REG", "TOX_REG"],
+    )
     parser.add_argument(
         "--embedders",
         type=str,
@@ -326,7 +331,7 @@ def add_downstream_args(parser: argparse.ArgumentParser):
     parser.add_argument("--n-runs", type=int, default=5)
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--plot-loss", action="store_true")
-    parser.add_argument("--split-method", type=str, default="scaffold")
+    parser.add_argument("--split-method", type=str, default="random")
 
     parser.add_argument("--test", action="store_true")
     parser.add_argument("--wandb", action="store_true")
@@ -342,7 +347,6 @@ if __name__ == "__main__":
     parser = add_downstream_args(parser)
 
     args = parser.parse_args()
-
 
     if args.embedders is None:
         args.embedders = MODELS

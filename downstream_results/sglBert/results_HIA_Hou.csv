@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+105,custom:../bool-run/neat-spaceship-459/model_200.pth,HIA_Hou,0.9828282828282828,0.9184782608695652
+106,custom:../bool-run/neat-spaceship-459/model_200.pth,HIA_Hou,0.9308445532435741,0.8040816326530613
+107,custom:../bool-run/neat-spaceship-459/model_200.pth,HIA_Hou,0.9231490159325211,0.984375
+108,custom:../bool-run/neat-spaceship-459/model_200.pth,HIA_Hou,0.8637640449438202,0.9650145772594753
+109,custom:../bool-run/neat-spaceship-459/model_200.pth,HIA_Hou,0.8509358288770054,0.9202127659574468

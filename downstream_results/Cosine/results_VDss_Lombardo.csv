@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,custom:../bool-run/swift-dream-464/model_120.pth,VDss_Lombardo,0.06335743613981848,0.05059005635729952
+191,custom:../bool-run/swift-dream-464/model_120.pth,VDss_Lombardo,0.06787341962204774,0.3533203532793483
+192,custom:../bool-run/swift-dream-464/model_120.pth,VDss_Lombardo,0.2581826216061742,0.362844629989893
+193,custom:../bool-run/swift-dream-464/model_120.pth,VDss_Lombardo,0.06743864267276911,0.3771673506789912
+194,custom:../bool-run/swift-dream-464/model_120.pth,VDss_Lombardo,0.08422407254523656,0.41528943029747356

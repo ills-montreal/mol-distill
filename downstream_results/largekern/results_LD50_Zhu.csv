@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+210,custom:../bool-run/clear-shape-496/model_390.pth,LD50_Zhu,0.5292327564762411,0.5508303250126863
+211,custom:../bool-run/clear-shape-496/model_390.pth,LD50_Zhu,0.48486334482583915,0.5910265897717171
+212,custom:../bool-run/clear-shape-496/model_390.pth,LD50_Zhu,0.5952261806794551,0.5152909977831298
+213,custom:../bool-run/clear-shape-496/model_390.pth,LD50_Zhu,0.49990123959199273,0.5566549024884938
+214,custom:../bool-run/clear-shape-496/model_390.pth,LD50_Zhu,0.5241644908638539,0.553880946110691

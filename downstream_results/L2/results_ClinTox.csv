@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+90,custom:../bool-run/still-waterfall-449/model_40.pth,ClinTox,0.6302458033573142,0.7330882352941177
+91,custom:../bool-run/still-waterfall-449/model_40.pth,ClinTox,0.7941176470588235,0.6766304347826088
+92,custom:../bool-run/still-waterfall-449/model_40.pth,ClinTox,0.5353159851301116,0.7455540355677155
+93,custom:../bool-run/still-waterfall-449/model_40.pth,ClinTox,0.6301054018445323,0.7985714285714286
+94,custom:../bool-run/still-waterfall-449/model_40.pth,ClinTox,0.678536489923694,0.6666666666666666

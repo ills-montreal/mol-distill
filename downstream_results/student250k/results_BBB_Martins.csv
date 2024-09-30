@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/dry-elevator-456/model_400.pth,BBB_Martins,0.8641789762968052,0.9320862824401752
+21,custom:../bool-run/dry-elevator-456/model_400.pth,BBB_Martins,0.8439912280701756,0.9356261022927689
+22,custom:../bool-run/dry-elevator-456/model_400.pth,BBB_Martins,0.8913804713804715,0.89306128929819
+23,custom:../bool-run/dry-elevator-456/model_400.pth,BBB_Martins,0.8943899966204798,0.9167471819645733
+24,custom:../bool-run/dry-elevator-456/model_400.pth,BBB_Martins,0.8819444444444445,0.9277885235332044

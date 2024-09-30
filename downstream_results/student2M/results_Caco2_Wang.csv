@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/glorious-plant-430/model_275.pth,Caco2_Wang,0.6729425096759174,0.6723239567743149
+1,custom:../bool-run/glorious-plant-430/model_275.pth,Caco2_Wang,0.6266559969632086,0.6327443637552014
+2,custom:../bool-run/glorious-plant-430/model_275.pth,Caco2_Wang,0.7055694379037535,0.645648687533593
+3,custom:../bool-run/glorious-plant-430/model_275.pth,Caco2_Wang,0.6836826006348764,0.7229331851260744
+4,custom:../bool-run/glorious-plant-430/model_275.pth,Caco2_Wang,0.7481257773406088,0.6627087358713295

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+110,custom:../bool-run/still-waterfall-449/model_40.pth,Bioavailability_Ma,0.5461386138613862,0.6794326241134752
+111,custom:../bool-run/still-waterfall-449/model_40.pth,Bioavailability_Ma,0.6945684523809524,0.5633333333333332
+112,custom:../bool-run/still-waterfall-449/model_40.pth,Bioavailability_Ma,0.563757183908046,0.6861538461538461
+113,custom:../bool-run/still-waterfall-449/model_40.pth,Bioavailability_Ma,0.609375,0.6295133437990581
+114,custom:../bool-run/still-waterfall-449/model_40.pth,Bioavailability_Ma,0.7157894736842105,0.5729483282674772

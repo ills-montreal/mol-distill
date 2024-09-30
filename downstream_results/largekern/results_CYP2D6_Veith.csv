@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+130,custom:../bool-run/clear-shape-496/model_390.pth,CYP2D6_Veith,0.8603602990854226,0.8823709506764819
+131,custom:../bool-run/clear-shape-496/model_390.pth,CYP2D6_Veith,0.8977178576083691,0.8810224961987286
+132,custom:../bool-run/clear-shape-496/model_390.pth,CYP2D6_Veith,0.8538007972044221,0.8983812786629688
+133,custom:../bool-run/clear-shape-496/model_390.pth,CYP2D6_Veith,0.8626948787299074,0.8721656171454826
+134,custom:../bool-run/clear-shape-496/model_390.pth,CYP2D6_Veith,0.8538355269884648,0.876717595069655

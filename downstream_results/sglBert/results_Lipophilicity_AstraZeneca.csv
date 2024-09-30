@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+170,custom:../bool-run/neat-spaceship-459/model_200.pth,Lipophilicity_AstraZeneca,0.521948346385491,0.6442584440307231
+171,custom:../bool-run/neat-spaceship-459/model_200.pth,Lipophilicity_AstraZeneca,0.5709990503533405,0.6613897707671001
+172,custom:../bool-run/neat-spaceship-459/model_200.pth,Lipophilicity_AstraZeneca,0.611228494358123,0.5964682830345583
+173,custom:../bool-run/neat-spaceship-459/model_200.pth,Lipophilicity_AstraZeneca,0.5703261019427608,0.5842961290478658
+174,custom:../bool-run/neat-spaceship-459/model_200.pth,Lipophilicity_AstraZeneca,0.63735514326272,0.6205889348709579

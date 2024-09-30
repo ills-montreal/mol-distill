@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+187,ChemGPT-1.2B,Bioavailability_Ma,0.6807920792079208,0.7432624113475177
+199,ChemGPT-1.2B,Bioavailability_Ma,0.6499255952380952,0.715
+211,ChemGPT-1.2B,Bioavailability_Ma,0.7135416666666666,0.7
+223,ChemGPT-1.2B,Bioavailability_Ma,0.5981657608695652,0.6609105180533752
+235,ChemGPT-1.2B,Bioavailability_Ma,0.7,0.6519756838905775

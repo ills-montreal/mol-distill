@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+140,custom:../bool-run/resilient-universe-468/model_190.pth,CYP1A2_Veith,0.9202342189932136,0.9364106362491667
+141,custom:../bool-run/resilient-universe-468/model_190.pth,CYP1A2_Veith,0.9280851769096667,0.9291357655502391
+142,custom:../bool-run/resilient-universe-468/model_190.pth,CYP1A2_Veith,0.9202370868286107,0.9292605308912419
+143,custom:../bool-run/resilient-universe-468/model_190.pth,CYP1A2_Veith,0.9191901485604101,0.9300934933556266
+144,custom:../bool-run/resilient-universe-468/model_190.pth,CYP1A2_Veith,0.9323201826754444,0.9354716957973289

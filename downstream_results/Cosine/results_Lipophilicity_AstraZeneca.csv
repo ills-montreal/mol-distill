@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+170,custom:../bool-run/swift-dream-464/model_120.pth,Lipophilicity_AstraZeneca,0.6775941110104226,0.7414303192989192
+171,custom:../bool-run/swift-dream-464/model_120.pth,Lipophilicity_AstraZeneca,0.7303502551486918,0.7505232725417003
+172,custom:../bool-run/swift-dream-464/model_120.pth,Lipophilicity_AstraZeneca,0.7125150070658712,0.7266029721179326
+173,custom:../bool-run/swift-dream-464/model_120.pth,Lipophilicity_AstraZeneca,0.732259714855421,0.7025214850666167
+174,custom:../bool-run/swift-dream-464/model_120.pth,Lipophilicity_AstraZeneca,0.7526192669376686,0.7435119993037309

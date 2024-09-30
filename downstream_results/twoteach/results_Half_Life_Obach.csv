@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+195,custom:../bool-run/resilient-universe-468/model_190.pth,Half_Life_Obach,0.05412055757933054,0.028415504264681313
+196,custom:../bool-run/resilient-universe-468/model_190.pth,Half_Life_Obach,-0.06392549216283472,0.3207144742108189
+197,custom:../bool-run/resilient-universe-468/model_190.pth,Half_Life_Obach,-0.022453242024848663,0.12111670402460972
+198,custom:../bool-run/resilient-universe-468/model_190.pth,Half_Life_Obach,0.28518488570650613,0.2589670460953456
+199,custom:../bool-run/resilient-universe-468/model_190.pth,Half_Life_Obach,0.051504515223606884,0.5049493419346462

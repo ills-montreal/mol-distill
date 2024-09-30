@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/still-waterfall-449/model_40.pth,VDss_Lombardo,0.14289074811579316,0.06090376675489162
+26,custom:../bool-run/still-waterfall-449/model_40.pth,VDss_Lombardo,0.12274039516948354,0.21698649320628816
+27,custom:../bool-run/still-waterfall-449/model_40.pth,VDss_Lombardo,0.29255846790121665,0.38559171098607903
+28,custom:../bool-run/still-waterfall-449/model_40.pth,VDss_Lombardo,0.03685437460927965,0.33065370837684227
+29,custom:../bool-run/still-waterfall-449/model_40.pth,VDss_Lombardo,0.07821313886434589,0.3455585494280815

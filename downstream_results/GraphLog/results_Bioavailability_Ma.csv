@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+182,GraphLog,Bioavailability_Ma,0.594059405940594,0.6638297872340426
+194,GraphLog,Bioavailability_Ma,0.640625,0.49999999999999994
+206,GraphLog,Bioavailability_Ma,0.6526580459770115,0.7153846153846154
+218,GraphLog,Bioavailability_Ma,0.515625,0.7017268445839874
+230,GraphLog,Bioavailability_Ma,0.706015037593985,0.6869300911854104

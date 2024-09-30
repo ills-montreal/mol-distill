@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/dry-elevator-456/model_400.pth,Half_Life_Obach,0.2568720245854862,0.30345079002307296
+31,custom:../bool-run/dry-elevator-456/model_400.pth,Half_Life_Obach,0.0839725371082507,0.49501541684469164
+32,custom:../bool-run/dry-elevator-456/model_400.pth,Half_Life_Obach,0.10047572242743363,0.244455101086832
+33,custom:../bool-run/dry-elevator-456/model_400.pth,Half_Life_Obach,0.3009682417482631,0.2592048937640401
+34,custom:../bool-run/dry-elevator-456/model_400.pth,Half_Life_Obach,0.2947695706895763,0.4973906269173829

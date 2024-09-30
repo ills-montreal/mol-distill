@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/neat-spaceship-459/model_200.pth,hERG,0.8269441401971522,0.8551797040169132
+6,custom:../bool-run/neat-spaceship-459/model_200.pth,hERG,0.8097724230254351,0.8636363636363636
+7,custom:../bool-run/neat-spaceship-459/model_200.pth,hERG,0.8256366723259763,0.8795986622073579
+8,custom:../bool-run/neat-spaceship-459/model_200.pth,hERG,0.8341176470588235,0.812638580931264
+9,custom:../bool-run/neat-spaceship-459/model_200.pth,hERG,0.8604651162790699,0.8549039433771487

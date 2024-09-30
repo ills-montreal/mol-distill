@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/neat-spaceship-459/model_200.pth,Bioavailability_Ma,0.6205940594059406,0.7205673758865248
+116,custom:../bool-run/neat-spaceship-459/model_200.pth,Bioavailability_Ma,0.6361607142857143,0.6166666666666667
+117,custom:../bool-run/neat-spaceship-459/model_200.pth,Bioavailability_Ma,0.5689655172413792,0.7276923076923076
+118,custom:../bool-run/neat-spaceship-459/model_200.pth,Bioavailability_Ma,0.6239809782608696,0.6546310832025117
+119,custom:../bool-run/neat-spaceship-459/model_200.pth,Bioavailability_Ma,0.7075187969924812,0.5805471124620061

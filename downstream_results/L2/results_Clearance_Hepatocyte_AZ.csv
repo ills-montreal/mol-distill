@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+35,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Hepatocyte_AZ,-0.03586938517618399,0.24070921992765704
+36,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Hepatocyte_AZ,0.19441863021495887,0.1952079062777895
+37,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Hepatocyte_AZ,-0.04713395514612029,0.27479709868838365
+38,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Hepatocyte_AZ,0.04902643573697085,0.1721309836373922
+39,custom:../bool-run/still-waterfall-449/model_40.pth,Clearance_Hepatocyte_AZ,0.009837081842680284,0.27764945504427274

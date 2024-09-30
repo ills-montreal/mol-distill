@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+40,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Microsome_AZ,0.38473642310348144,0.48770814997962086
+41,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Microsome_AZ,0.3277039416695473,0.4925941245828067
+42,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Microsome_AZ,0.4065851186618996,0.4010495268834807
+43,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Microsome_AZ,0.2503051531310745,0.35786884687173814
+44,custom:../bool-run/glorious-plant-430/model_275.pth,Clearance_Microsome_AZ,0.36988075730404457,0.44477642391032557

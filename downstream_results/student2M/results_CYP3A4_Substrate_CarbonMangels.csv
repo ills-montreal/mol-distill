@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+60,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Substrate_CarbonMangels,0.6612612612612613,0.7261261261261263
+61,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Substrate_CarbonMangels,0.549072211044042,0.0
+62,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Substrate_CarbonMangels,0.692530657748049,0.7491071428571429
+63,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Substrate_CarbonMangels,0.6379041248606467,0.7580357142857143
+64,custom:../bool-run/glorious-plant-430/model_275.pth,CYP3A4_Substrate_CarbonMangels,0.6529344073647871,0.7185185185185186

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+155,custom:../bool-run/resilient-universe-468/model_190.pth,CYP2D6_Substrate_CarbonMangels,0.6756756756756757,0.871764705882353
+156,custom:../bool-run/resilient-universe-468/model_190.pth,CYP2D6_Substrate_CarbonMangels,0.7198250728862974,0.8114035087719298
+157,custom:../bool-run/resilient-universe-468/model_190.pth,CYP2D6_Substrate_CarbonMangels,0.7016620498614958,0.7574468085106383
+158,custom:../bool-run/resilient-universe-468/model_190.pth,CYP2D6_Substrate_CarbonMangels,0.7889713679745494,0.0
+159,custom:../bool-run/resilient-universe-468/model_190.pth,CYP2D6_Substrate_CarbonMangels,0.7375968992248062,0.8300395256916996

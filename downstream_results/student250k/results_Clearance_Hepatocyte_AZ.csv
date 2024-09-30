@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+35,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Hepatocyte_AZ,0.05643760858861224,0.20660291833490385
+36,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Hepatocyte_AZ,0.22796012050551306,0.008505123213085386
+37,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Hepatocyte_AZ,0.03943175550607281,0.3256279597491323
+38,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Hepatocyte_AZ,0.11551483249305461,0.24298835407707886
+39,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Hepatocyte_AZ,0.1268923794684147,0.3451879607286378

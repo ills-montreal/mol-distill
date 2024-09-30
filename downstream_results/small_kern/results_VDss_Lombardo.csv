@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,custom:../bool-run/graceful-resonance-476/model_390.pth,VDss_Lombardo,0.22993947584797503,0.05430287289680191
+191,custom:../bool-run/graceful-resonance-476/model_390.pth,VDss_Lombardo,0.0406764801107925,0.29629574309427764
+192,custom:../bool-run/graceful-resonance-476/model_390.pth,VDss_Lombardo,0.2148921878838712,0.40584167954672146
+193,custom:../bool-run/graceful-resonance-476/model_390.pth,VDss_Lombardo,0.17774351778732855,0.36799673735189675
+194,custom:../bool-run/graceful-resonance-476/model_390.pth,VDss_Lombardo,0.1046342430865056,0.320260474316709

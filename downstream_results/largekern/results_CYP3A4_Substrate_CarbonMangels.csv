@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+160,custom:../bool-run/clear-shape-496/model_390.pth,CYP3A4_Substrate_CarbonMangels,0.6198198198198198,0.6891891891891893
+161,custom:../bool-run/clear-shape-496/model_390.pth,CYP3A4_Substrate_CarbonMangels,0.5598032640286161,0.8209523809523809
+162,custom:../bool-run/clear-shape-496/model_390.pth,CYP3A4_Substrate_CarbonMangels,0.6461538461538462,0.7598214285714286
+163,custom:../bool-run/clear-shape-496/model_390.pth,CYP3A4_Substrate_CarbonMangels,0.6040133779264214,0.7455357142857143
+164,custom:../bool-run/clear-shape-496/model_390.pth,CYP3A4_Substrate_CarbonMangels,0.6939010356731876,0.0

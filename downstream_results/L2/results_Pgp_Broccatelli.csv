@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+105,custom:../bool-run/still-waterfall-449/model_40.pth,Pgp_Broccatelli,0.9577244999290679,0.9520285087719298
+106,custom:../bool-run/still-waterfall-449/model_40.pth,Pgp_Broccatelli,0.9163571428571429,0.9247058823529413
+107,custom:../bool-run/still-waterfall-449/model_40.pth,Pgp_Broccatelli,0.9185811751601225,0.9422619047619047
+108,custom:../bool-run/still-waterfall-449/model_40.pth,Pgp_Broccatelli,0.901510989010989,0.9411416740609287
+109,custom:../bool-run/still-waterfall-449/model_40.pth,Pgp_Broccatelli,0.8739472206625493,0.9471590909090909

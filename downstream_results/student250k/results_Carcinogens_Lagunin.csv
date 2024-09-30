@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/dry-elevator-456/model_400.pth,Carcinogens_Lagunin,0.740909090909091,0.8272727272727272
+21,custom:../bool-run/dry-elevator-456/model_400.pth,Carcinogens_Lagunin,0.8186046511627907,0.8863636363636364
+22,custom:../bool-run/dry-elevator-456/model_400.pth,Carcinogens_Lagunin,0.7312661498708011,0.8815789473684211
+23,custom:../bool-run/dry-elevator-456/model_400.pth,Carcinogens_Lagunin,0.8180112570356474,0.0
+24,custom:../bool-run/dry-elevator-456/model_400.pth,Carcinogens_Lagunin,0.9395604395604396,0.7386363636363636

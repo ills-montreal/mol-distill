@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+70,ThreeDInfomax,Lipophilicity_AstraZeneca,0.5846963035027981,0.6783565931378439
+82,ThreeDInfomax,Lipophilicity_AstraZeneca,0.5994954306731803,0.6750544284885134
+94,ThreeDInfomax,Lipophilicity_AstraZeneca,0.6582131462886218,0.6499866262361522
+106,ThreeDInfomax,Lipophilicity_AstraZeneca,0.63875798728198,0.6509148411519622
+118,ThreeDInfomax,Lipophilicity_AstraZeneca,0.6393089339646894,0.6597798016411465

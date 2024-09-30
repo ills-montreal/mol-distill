@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/neat-spaceship-459/model_200.pth,PAMPA_NCATS,0.726226012793177,0.744181459566075
+101,custom:../bool-run/neat-spaceship-459/model_200.pth,PAMPA_NCATS,0.7414301698708168,0.7687872023809524
+102,custom:../bool-run/neat-spaceship-459/model_200.pth,PAMPA_NCATS,0.6862765514369012,0.8391748813435561
+103,custom:../bool-run/neat-spaceship-459/model_200.pth,PAMPA_NCATS,0.719920787839863,0.834883136466449
+104,custom:../bool-run/neat-spaceship-459/model_200.pth,PAMPA_NCATS,0.7230515252976191,0.7735316265060239

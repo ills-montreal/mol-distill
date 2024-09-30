@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/still-waterfall-449/model_40.pth,hERG_Karim,0.8972129102720935,0.8977127589470782
+6,custom:../bool-run/still-waterfall-449/model_40.pth,hERG_Karim,0.8973032317546583,0.9155780118245036
+7,custom:../bool-run/still-waterfall-449/model_40.pth,hERG_Karim,0.8856560480338217,0.9134464433718492
+8,custom:../bool-run/still-waterfall-449/model_40.pth,hERG_Karim,0.8901892887332448,0.903052978515625
+9,custom:../bool-run/still-waterfall-449/model_40.pth,hERG_Karim,0.9023464324278418,0.9001058014459532

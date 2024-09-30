@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+130,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Veith,0.8761946955840934,0.8619282590337908
+131,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Veith,0.882024943886144,0.8745993052991363
+132,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Veith,0.8680339790308145,0.8952853820003579
+133,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Veith,0.8653362896679435,0.8864053522025964
+134,custom:../bool-run/still-waterfall-449/model_40.pth,CYP3A4_Veith,0.8647378091688603,0.8875222507911392

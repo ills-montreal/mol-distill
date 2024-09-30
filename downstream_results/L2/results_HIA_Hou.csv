@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/still-waterfall-449/model_40.pth,HIA_Hou,0.9727272727272727,0.9592391304347826
+101,custom:../bool-run/still-waterfall-449/model_40.pth,HIA_Hou,0.9167686658506733,0.8367346938775511
+102,custom:../bool-run/still-waterfall-449/model_40.pth,HIA_Hou,0.9259606373008435,0.9765625
+103,custom:../bool-run/still-waterfall-449/model_40.pth,HIA_Hou,0.8707865168539326,0.9737609329446064
+104,custom:../bool-run/still-waterfall-449/model_40.pth,HIA_Hou,0.8843582887700535,0.8776595744680851

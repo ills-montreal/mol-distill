@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/graceful-resonance-476/model_390.pth,ClinTox,0.5921762589928058,0.5838235294117646
+96,custom:../bool-run/graceful-resonance-476/model_390.pth,ClinTox,0.7791955017301038,0.6603260869565217
+97,custom:../bool-run/graceful-resonance-476/model_390.pth,ClinTox,0.6092523750516315,0.6493388052895577
+98,custom:../bool-run/graceful-resonance-476/model_390.pth,ClinTox,0.6191534914361001,0.7985714285714286
+99,custom:../bool-run/graceful-resonance-476/model_390.pth,ClinTox,0.5910780669144982,0.7483660130718954

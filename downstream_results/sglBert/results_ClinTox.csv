@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/neat-spaceship-459/model_200.pth,ClinTox,0.5873800959232613,0.6816176470588236
+96,custom:../bool-run/neat-spaceship-459/model_200.pth,ClinTox,0.7212370242214532,0.5688405797101449
+97,custom:../bool-run/neat-spaceship-459/model_200.pth,ClinTox,0.5739363899215201,0.6985864113087095
+98,custom:../bool-run/neat-spaceship-459/model_200.pth,ClinTox,0.5806159420289855,0.7471428571428571
+99,custom:../bool-run/neat-spaceship-459/model_200.pth,ClinTox,0.5425552729407161,0.718954248366013

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+205,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Microsome_AZ,0.11402006374216545,0.26134732399127425
+206,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Microsome_AZ,0.0718816743643147,0.3191717456486812
+207,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Microsome_AZ,0.32984392447066635,0.2377391968370518
+208,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Microsome_AZ,0.09438957821372651,0.37742126477229443
+209,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Microsome_AZ,0.07221593396355053,0.3495669245831593

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/graceful-resonance-476/model_390.pth,DILI,0.872822299651568,0.9779411764705882
+21,custom:../bool-run/graceful-resonance-476/model_390.pth,DILI,0.855952380952381,0.9598930481283423
+22,custom:../bool-run/graceful-resonance-476/model_390.pth,DILI,0.9140826873385013,0.8842592592592593
+23,custom:../bool-run/graceful-resonance-476/model_390.pth,DILI,0.9073359073359073,0.9323529411764705
+24,custom:../bool-run/graceful-resonance-476/model_390.pth,DILI,0.8053385416666666,0.9544513457556936

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+243,GraphCL,Carcinogens_Lagunin,0.7568181818181818,0.0
+255,GraphCL,Carcinogens_Lagunin,0.8232558139534885,0.7613636363636364
+267,GraphCL,Carcinogens_Lagunin,0.8604651162790696,0.8157894736842104
+279,GraphCL,Carcinogens_Lagunin,0.8630393996247655,0.0
+291,GraphCL,Carcinogens_Lagunin,0.9322344322344323,0.7159090909090908

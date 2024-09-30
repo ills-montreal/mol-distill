@@ -41,26 +41,24 @@ class MolecularFeatureExtractor:
     @property
     def mols_smiles(self):
         if self.i_file is None:
-            mols = dm.read_sdf(
-                os.path.join(self.data_dir, self.dataset, "preprocessed.sdf")
-            )
-            with open(os.path.join(self.data_dir, self.dataset, "smiles.json"), "r") as f:
+            with open(os.path.join(self.data_dir, "smiles.json"), "r") as f:
                 smiles = json.load(f)
+            mols = dm.read_sdf(os.path.join(self.data_dir, "preprocessed.sdf"))
         else:
             df = dm.read_sdf(
                 os.path.join(
                     self.data_dir,
-                    self.dataset,
                     "preprocessed",
                     f"preprocessed_{self.i_file}.sdf",
                 ),
                 as_df=True,
                 mol_column="mols",
             )
-            smiles = df["smiles"].iloc[:, 0].tolist()
-            mols = df["mols"].tolist()
-        return mols, smiles
 
+            mols = df["mols"].tolist()
+            print(df.head())
+            smiles = df["smiles"].iloc[:, 1].tolist()
+        return mols, smiles
 
     def get_features(
         self,
@@ -83,7 +81,6 @@ class MolecularFeatureExtractor:
             embedding_path = os.path.join(self.data_dir, f"{name}.npy")
         else:
             embedding_path = os.path.join(self.data_dir, name, f"{name}_{i_file}.npy")
-        print(embedding_path)
         if os.path.exists(embedding_path):
             molecular_embedding = torch.tensor(np.load(embedding_path), device=device)
         else:
@@ -102,8 +99,12 @@ class MolecularFeatureExtractor:
             if not name.startswith("custom:"):
                 os.makedirs(os.path.dirname(embedding_path), exist_ok=True)
                 np.save(embedding_path, molecular_embedding.cpu().numpy())
+                np.save(
+                    embedding_path.replace(".npy", "_shape.npy"),
+                    np.array(molecular_embedding.cpu().numpy().shape),
+                )
 
-        if normalize:
+        if normalize and i_file is None:
             molecular_embedding = (
                 molecular_embedding - molecular_embedding.mean(dim=0)
             ) / (molecular_embedding.std(dim=0) + 1e-8)
@@ -120,6 +121,7 @@ def compute_embeddings(args, i_file=None):
     )
 
     embs = {}
+    np.random.shuffle(args.model_names)
     for name in tqdm(args.model_names, desc="Computing embeddings :"):
         print(f"Computing embeddings for {name}")
         embs[name] = mfe.get_features(None, name, mols=None, i_file=i_file)
@@ -139,28 +141,28 @@ if __name__ == "__main__":
         nargs="+",
         type=str,
         default=[
-            # "ContextPred",
-            # "GPT-GNN",
+            "ContextPred",
+            "GPT-GNN",
             "GraphMVP",
             "GROVER",
-            # "AttributeMask",
+            "AttributeMask",
             "GraphLog",
             "GraphCL",
             "InfoGraph",
-            # "MolBert",
-            # "ChemBertMLM-5M",
+            "MolBert",
+            "ChemBertMLM-5M",
             "ChemBertMLM-10M",
-            # "ChemBertMLM-77M",
-            # "ChemBertMTR-5M",
+            "ChemBertMLM-77M",
+            "ChemBertMTR-5M",
             "ChemBertMTR-10M",
             "ChemBertMTR-77M",
-            # "ChemGPT-1.2B",
-            # "ChemGPT-19M",
+            "ChemGPT-1.2B",
+            "ChemGPT-19M",
             "ChemGPT-4.7M",
             "DenoisingPretrainingPQCMv4",
             "FRAD_QM9",
             "MolR_gat",
-            # "MolR_gcn",
+            "MolR_gcn",
             "MolR_tag",
             # "MoleOOD_OGB_GIN",
             # "MoleOOD_OGB_GCN",
@@ -178,9 +180,11 @@ if __name__ == "__main__":
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-
     if i_file is None or i_file >= 0:
-        compute_embeddings(args, i_file=i_file,)
+        compute_embeddings(
+            args,
+            i_file=i_file,
+        )
     else:
         data_files = os.listdir(
             os.path.join(args.data_dir, args.dataset, "preprocessed")

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/resilient-universe-468/model_190.pth,ClinTox,0.6821043165467626,0.7485294117647059
+96,custom:../bool-run/resilient-universe-468/model_190.pth,ClinTox,0.8101211072664359,0.6286231884057971
+97,custom:../bool-run/resilient-universe-468/model_190.pth,ClinTox,0.5439900867410161,0.6488828089375285
+98,custom:../bool-run/resilient-universe-468/model_190.pth,ClinTox,0.6562088274044795,0.8114285714285714
+99,custom:../bool-run/resilient-universe-468/model_190.pth,ClinTox,0.5902954412052437,0.8194444444444444

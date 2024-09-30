@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/resilient-universe-468/model_190.pth,PAMPA_NCATS,0.7467424780857616,0.7463510848126232
+101,custom:../bool-run/resilient-universe-468/model_190.pth,PAMPA_NCATS,0.7376411351846202,0.802641369047619
+102,custom:../bool-run/resilient-universe-468/model_190.pth,PAMPA_NCATS,0.753331945022907,0.8198247535596933
+103,custom:../bool-run/resilient-universe-468/model_190.pth,PAMPA_NCATS,0.7482070220509527,0.8243277205327971
+104,custom:../bool-run/resilient-universe-468/model_190.pth,PAMPA_NCATS,0.7608816964285714,0.8667168674698795

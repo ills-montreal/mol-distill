@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/graceful-resonance-476/model_390.pth,Bioavailability_Ma,0.6799999999999999,0.7730496453900709
+116,custom:../bool-run/graceful-resonance-476/model_390.pth,Bioavailability_Ma,0.7150297619047619,0.645
+117,custom:../bool-run/graceful-resonance-476/model_390.pth,Bioavailability_Ma,0.5912356321839081,0.6492307692307692
+118,custom:../bool-run/graceful-resonance-476/model_390.pth,Bioavailability_Ma,0.6358695652173914,0.7755102040816326
+119,custom:../bool-run/graceful-resonance-476/model_390.pth,Bioavailability_Ma,0.6729323308270676,0.7188449848024316

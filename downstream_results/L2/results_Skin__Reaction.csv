@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/still-waterfall-449/model_40.pth,Skin__Reaction,0.8081395348837209,0.9333333333333333
+26,custom:../bool-run/still-waterfall-449/model_40.pth,Skin__Reaction,0.790009250693802,0.712121212121212
+27,custom:../bool-run/still-waterfall-449/model_40.pth,Skin__Reaction,0.7091836734693877,0.9015151515151515
+28,custom:../bool-run/still-waterfall-449/model_40.pth,Skin__Reaction,0.7583333333333334,0.9478260869565218
+29,custom:../bool-run/still-waterfall-449/model_40.pth,Skin__Reaction,0.785953177257525,0.7777777777777779

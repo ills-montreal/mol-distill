@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/still-waterfall-449/model_40.pth,PPBR_AZ,0.42415312593604004,0.432053877269166
+21,custom:../bool-run/still-waterfall-449/model_40.pth,PPBR_AZ,0.3725678529690303,0.5468236375098274
+22,custom:../bool-run/still-waterfall-449/model_40.pth,PPBR_AZ,0.44270601122724873,0.428757048097106
+23,custom:../bool-run/still-waterfall-449/model_40.pth,PPBR_AZ,0.2608292831237512,0.38371468579956547
+24,custom:../bool-run/still-waterfall-449/model_40.pth,PPBR_AZ,0.30749786457974493,0.5513158335665214
