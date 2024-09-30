@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+210,custom:../bool-run/graceful-resonance-476/model_390.pth,LD50_Zhu,0.5441008879401215,0.5633070510999245
+211,custom:../bool-run/graceful-resonance-476/model_390.pth,LD50_Zhu,0.47396385748883596,0.6225476159142767
+212,custom:../bool-run/graceful-resonance-476/model_390.pth,LD50_Zhu,0.5747684536548512,0.5339519744371399
+213,custom:../bool-run/graceful-resonance-476/model_390.pth,LD50_Zhu,0.4871278001884888,0.5583638512365369
+214,custom:../bool-run/graceful-resonance-476/model_390.pth,LD50_Zhu,0.49453195961128704,0.5453834697417883

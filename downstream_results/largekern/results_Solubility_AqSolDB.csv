@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+175,custom:../bool-run/clear-shape-496/model_390.pth,Solubility_AqSolDB,0.8258212471152144,0.8414645518298522
+176,custom:../bool-run/clear-shape-496/model_390.pth,Solubility_AqSolDB,0.8313132223361961,0.8481015586756833
+177,custom:../bool-run/clear-shape-496/model_390.pth,Solubility_AqSolDB,0.820485856700119,0.8490107387559082
+178,custom:../bool-run/clear-shape-496/model_390.pth,Solubility_AqSolDB,0.8173028817526766,0.8548044412193668
+179,custom:../bool-run/clear-shape-496/model_390.pth,Solubility_AqSolDB,0.8332627066921272,0.8110846958728504

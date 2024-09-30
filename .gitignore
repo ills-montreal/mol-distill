@@ -3,6 +3,10 @@ backbone_pretrained_models
 best_model.pth
 results/**
 data/**.tab
+**vision**
+global_table.csv
+molDistill/notebooks/fig_global_ranking_classif_cluster**
+molDistill/notebooks/Impact of distillation on performances.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

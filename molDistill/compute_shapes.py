@@ -1,7 +1,14 @@
 import numpy as np
 import os
 
-DIR = "/export/gauss/vision/Pformont/emir/molecule/data_new/ZINC"
+
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--data", type=str, default="ClinTox")
+args = parser.parse_args()
+
+DIR = "/export/gauss/vision//emir/molecule/data_new/" + args.data
 
 def compute_shapes(path):
     if path.endswith(".npy") and not path.endswith("_shape.npy"):

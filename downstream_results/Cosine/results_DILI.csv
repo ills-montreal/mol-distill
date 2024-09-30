@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/swift-dream-464/model_120.pth,DILI,0.8931475029036006,0.9730392156862744
+21,custom:../bool-run/swift-dream-464/model_120.pth,DILI,0.8773809523809524,0.9438502673796793
+22,custom:../bool-run/swift-dream-464/model_120.pth,DILI,0.8921188630490955,0.837962962962963
+23,custom:../bool-run/swift-dream-464/model_120.pth,DILI,0.9054054054054054,0.9235294117647059
+24,custom:../bool-run/swift-dream-464/model_120.pth,DILI,0.8294270833333333,0.8923395445134576

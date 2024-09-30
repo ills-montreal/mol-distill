@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+175,custom:../bool-run/graceful-resonance-476/model_390.pth,Solubility_AqSolDB,0.8127042651701374,0.8397118368360094
+176,custom:../bool-run/graceful-resonance-476/model_390.pth,Solubility_AqSolDB,0.8211230303943121,0.8479139978215193
+177,custom:../bool-run/graceful-resonance-476/model_390.pth,Solubility_AqSolDB,0.8142183239944968,0.8418989813684744
+178,custom:../bool-run/graceful-resonance-476/model_390.pth,Solubility_AqSolDB,0.813464323445617,0.8434182859868664
+179,custom:../bool-run/graceful-resonance-476/model_390.pth,Solubility_AqSolDB,0.8192444538175296,0.8138328449738409

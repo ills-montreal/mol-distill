@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+200,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Hepatocyte_AZ,-0.18585810709739192,0.19594103997800694
+201,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Hepatocyte_AZ,0.22337121059532217,0.12427341611879927
+202,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Hepatocyte_AZ,0.045616211355042235,0.24414450064751148
+203,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Hepatocyte_AZ,0.08155844977075333,0.2561774933654676
+204,custom:../bool-run/neat-spaceship-459/model_200.pth,Clearance_Hepatocyte_AZ,0.08851453844647805,0.1949232593004676

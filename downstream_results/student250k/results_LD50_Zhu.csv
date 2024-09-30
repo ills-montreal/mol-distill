@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/dry-elevator-456/model_400.pth,LD50_Zhu,0.533792158058214,0.5700408416094211
+1,custom:../bool-run/dry-elevator-456/model_400.pth,LD50_Zhu,0.4971425369656195,0.6047026111584504
+2,custom:../bool-run/dry-elevator-456/model_400.pth,LD50_Zhu,0.5890478663405285,0.52692845430738
+3,custom:../bool-run/dry-elevator-456/model_400.pth,LD50_Zhu,0.4841244677092629,0.5247696963540547
+4,custom:../bool-run/dry-elevator-456/model_400.pth,LD50_Zhu,0.5391695002618913,0.5642573885399707

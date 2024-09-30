@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+180,custom:../bool-run/graceful-resonance-476/model_390.pth,HydrationFreeEnergy_FreeSolv,0.9081959941672758,0.9175478948616275
+181,custom:../bool-run/graceful-resonance-476/model_390.pth,HydrationFreeEnergy_FreeSolv,0.8949993625399806,0.9248645775585128
+182,custom:../bool-run/graceful-resonance-476/model_390.pth,HydrationFreeEnergy_FreeSolv,0.8366494935535427,0.8859666405370369
+183,custom:../bool-run/graceful-resonance-476/model_390.pth,HydrationFreeEnergy_FreeSolv,0.8929213421946287,0.9444424757092288
+184,custom:../bool-run/graceful-resonance-476/model_390.pth,HydrationFreeEnergy_FreeSolv,0.9037276924451032,0.9003652450332141

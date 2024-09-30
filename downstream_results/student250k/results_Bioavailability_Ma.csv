@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/dry-elevator-456/model_400.pth,Bioavailability_Ma,0.6122772277227723,0.7801418439716312
+16,custom:../bool-run/dry-elevator-456/model_400.pth,Bioavailability_Ma,0.7139136904761905,0.7133333333333334
+17,custom:../bool-run/dry-elevator-456/model_400.pth,Bioavailability_Ma,0.6505028735632183,0.6861538461538461
+18,custom:../bool-run/dry-elevator-456/model_400.pth,Bioavailability_Ma,0.6610054347826086,0.7660910518053374
+19,custom:../bool-run/dry-elevator-456/model_400.pth,Bioavailability_Ma,0.7195488721804512,0.721884498480243

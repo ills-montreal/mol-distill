@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+180,custom:../bool-run/resilient-universe-468/model_190.pth,HydrationFreeEnergy_FreeSolv,0.9177167765618967,0.9068970137216972
+181,custom:../bool-run/resilient-universe-468/model_190.pth,HydrationFreeEnergy_FreeSolv,0.8786948831981626,0.9402892161211541
+182,custom:../bool-run/resilient-universe-468/model_190.pth,HydrationFreeEnergy_FreeSolv,0.8353889788651023,0.9149819193874517
+183,custom:../bool-run/resilient-universe-468/model_190.pth,HydrationFreeEnergy_FreeSolv,0.9109178791474067,0.9210443282978321
+184,custom:../bool-run/resilient-universe-468/model_190.pth,HydrationFreeEnergy_FreeSolv,0.8651564275530621,0.9306878387190985

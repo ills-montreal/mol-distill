@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/swift-dream-464/model_120.pth,PAMPA_NCATS,0.7418384269130538,0.7457593688362919
+101,custom:../bool-run/swift-dream-464/model_120.pth,PAMPA_NCATS,0.7606296409317466,0.7944568452380953
+102,custom:../bool-run/swift-dream-464/model_120.pth,PAMPA_NCATS,0.7315962099125365,0.7699890470974808
+103,custom:../bool-run/swift-dream-464/model_120.pth,PAMPA_NCATS,0.7491168914579319,0.0
+104,custom:../bool-run/swift-dream-464/model_120.pth,PAMPA_NCATS,0.7936895461309523,0.8138177710843373

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+175,custom:../bool-run/neat-spaceship-459/model_200.pth,Solubility_AqSolDB,0.8044124283804964,0.8097981486138975
+176,custom:../bool-run/neat-spaceship-459/model_200.pth,Solubility_AqSolDB,0.8089074150083502,0.8385577485819815
+177,custom:../bool-run/neat-spaceship-459/model_200.pth,Solubility_AqSolDB,0.7977447943926664,0.8313771033367964
+178,custom:../bool-run/neat-spaceship-459/model_200.pth,Solubility_AqSolDB,0.7888642895536789,0.8121770959604195
+179,custom:../bool-run/neat-spaceship-459/model_200.pth,Solubility_AqSolDB,0.8139557918036674,0.8021545012439929

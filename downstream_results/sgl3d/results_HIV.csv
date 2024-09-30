@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/neat-spaceship-459/model_200.pth,HIV,0.7686412561850274,0.7181094555683635
+1,custom:../bool-run/neat-spaceship-459/model_200.pth,HIV,0.7499489262980511,0.81638437849944
+2,custom:../bool-run/neat-spaceship-459/model_200.pth,HIV,0.7546221591989525,0.7793820224719101
+3,custom:../bool-run/neat-spaceship-459/model_200.pth,HIV,0.7701152078164368,0.7924722169645513
+4,custom:../bool-run/neat-spaceship-459/model_200.pth,HIV,0.7706301584017289,0.7327969686053184

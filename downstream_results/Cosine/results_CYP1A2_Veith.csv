@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+140,custom:../bool-run/swift-dream-464/model_120.pth,CYP1A2_Veith,0.9225393294013587,0.9420102214650766
+141,custom:../bool-run/swift-dream-464/model_120.pth,CYP1A2_Veith,0.9249319401134382,0.9349626196172248
+142,custom:../bool-run/swift-dream-464/model_120.pth,CYP1A2_Veith,0.9272075276358415,0.9308391445985049
+143,custom:../bool-run/swift-dream-464/model_120.pth,CYP1A2_Veith,0.9229955829307399,0.9335758126163404
+144,custom:../bool-run/swift-dream-464/model_120.pth,CYP1A2_Veith,0.9294788529667206,0.9356772879025923

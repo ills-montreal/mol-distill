@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+205,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Microsome_AZ,0.27178534025185064,0.4012495574654159
+206,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Microsome_AZ,0.1703576678905313,0.5040094257721064
+207,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Microsome_AZ,0.35628871691702246,0.36162078349377047
+208,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Microsome_AZ,0.1892783737685585,0.4267351804411166
+209,custom:../bool-run/graceful-resonance-476/model_390.pth,Clearance_Microsome_AZ,0.319199292916877,0.5195205560803948

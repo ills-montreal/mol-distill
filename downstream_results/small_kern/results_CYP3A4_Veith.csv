@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+135,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP3A4_Veith,0.8936988944801978,0.886184318322179
+136,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP3A4_Veith,0.8958750135958682,0.9001653427267172
+137,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP3A4_Veith,0.8857207358394068,0.9016658998543057
+138,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP3A4_Veith,0.8834773978336419,0.9099874973398595
+139,custom:../bool-run/graceful-resonance-476/model_390.pth,CYP3A4_Veith,0.8887843213271129,0.9065559483781646

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+184,InfoGraph,HydrationFreeEnergy_FreeSolv,0.7115095086306682,0.660854567980483
+196,InfoGraph,HydrationFreeEnergy_FreeSolv,0.5946477070625862,0.8075386010697326
+208,InfoGraph,HydrationFreeEnergy_FreeSolv,0.5667934275083293,0.6530435335939893
+220,InfoGraph,HydrationFreeEnergy_FreeSolv,0.6676860790568258,0.5557925758491191
+232,InfoGraph,HydrationFreeEnergy_FreeSolv,0.6550962456071949,0.6336369749719473

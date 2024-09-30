@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/glorious-plant-430/model_275.pth,AMES,0.9066230732897399,0.9073126174103373
+11,custom:../bool-run/glorious-plant-430/model_275.pth,AMES,0.899582673005811,0.9155294217183467
+12,custom:../bool-run/glorious-plant-430/model_275.pth,AMES,0.8690684879926367,0.9100574319704636
+13,custom:../bool-run/glorious-plant-430/model_275.pth,AMES,0.8932188706815573,0.9078119698274738
+14,custom:../bool-run/glorious-plant-430/model_275.pth,AMES,0.8867182840589589,0.9105776277888565

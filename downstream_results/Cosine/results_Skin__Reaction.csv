@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/swift-dream-464/model_120.pth,Skin__Reaction,0.8073089700996677,0.8666666666666667
+31,custom:../bool-run/swift-dream-464/model_120.pth,Skin__Reaction,0.7918593894542091,0.7196969696969696
+32,custom:../bool-run/swift-dream-464/model_120.pth,Skin__Reaction,0.7255102040816327,0.8712121212121212
+33,custom:../bool-run/swift-dream-464/model_120.pth,Skin__Reaction,0.7766666666666667,0.9739130434782609
+34,custom:../bool-run/swift-dream-464/model_120.pth,Skin__Reaction,0.7993311036789298,0.7561728395061729

@@ -40,11 +40,12 @@ def main(args):
     # get model
     gnn = GNN(**args.__dict__)
     mol_model = GNN_graphpred(args, gnn)
-    if args.checkpoint is not None:
-        mol_model.from_pretrained(args.checkpoint)
     model = Model_GM(
         mol_model,
     )
+    if args.checkpoint is not None:
+        model.load_state_dict(torch.load(args.checkpoint, map_location=args.device), strict=False)
+        model.train()
     if os.path.exists(args.knifes_config):
         with open(args.knifes_config, "r") as f:
             knifes_config = yaml.safe_load(f)

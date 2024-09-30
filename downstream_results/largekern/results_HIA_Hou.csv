@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+105,custom:../bool-run/clear-shape-496/model_390.pth,HIA_Hou,0.9919191919191919,0.9320652173913043
+106,custom:../bool-run/clear-shape-496/model_390.pth,HIA_Hou,0.9553243574051408,0.9469387755102041
+107,custom:../bool-run/clear-shape-496/model_390.pth,HIA_Hou,0.9597000937207123,0.9947916666666666
+108,custom:../bool-run/clear-shape-496/model_390.pth,HIA_Hou,0.9873595505617978,0.9679300291545189
+109,custom:../bool-run/clear-shape-496/model_390.pth,HIA_Hou,0.9779411764705882,0.9680851063829787

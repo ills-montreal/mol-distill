@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+95,custom:../bool-run/swift-dream-464/model_120.pth,ClinTox,0.6455335731414868,0.6816176470588236
+96,custom:../bool-run/swift-dream-464/model_120.pth,ClinTox,0.7999567474048443,0.6603260869565217
+97,custom:../bool-run/swift-dream-464/model_120.pth,ClinTox,0.5675340768277571,0.6534427724578202
+98,custom:../bool-run/swift-dream-464/model_120.pth,ClinTox,0.6540678524374176,0.8171428571428572
+99,custom:../bool-run/swift-dream-464/model_120.pth,ClinTox,0.5826648405400118,0.619281045751634

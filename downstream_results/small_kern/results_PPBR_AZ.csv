@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+185,custom:../bool-run/graceful-resonance-476/model_390.pth,PPBR_AZ,0.4305351263864946,0.5418307529134496
+186,custom:../bool-run/graceful-resonance-476/model_390.pth,PPBR_AZ,0.46434288180712147,0.5455951082908539
+187,custom:../bool-run/graceful-resonance-476/model_390.pth,PPBR_AZ,0.453560794539249,0.48545782060064335
+188,custom:../bool-run/graceful-resonance-476/model_390.pth,PPBR_AZ,0.4184478905478253,0.3840400536582672
+189,custom:../bool-run/graceful-resonance-476/model_390.pth,PPBR_AZ,0.316203616886654,0.5736672694382241

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,ThreeDInfomax,HydrationFreeEnergy_FreeSolv,0.8891902576579255,0.9287036431953205
+202,ThreeDInfomax,HydrationFreeEnergy_FreeSolv,0.8584459864537151,0.8880078470515007
+214,ThreeDInfomax,HydrationFreeEnergy_FreeSolv,0.7637030872698909,0.8368647109182514
+226,ThreeDInfomax,HydrationFreeEnergy_FreeSolv,0.843263298880182,0.9137156131062193
+238,ThreeDInfomax,HydrationFreeEnergy_FreeSolv,0.9051114900268505,0.9338221184494957

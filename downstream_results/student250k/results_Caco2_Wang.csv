@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/dry-elevator-456/model_400.pth,Caco2_Wang,0.7420220638772337,0.6802325519584973
+1,custom:../bool-run/dry-elevator-456/model_400.pth,Caco2_Wang,0.6533627929450964,0.7104850789184841
+2,custom:../bool-run/dry-elevator-456/model_400.pth,Caco2_Wang,0.686572358396202,0.7067410673066934
+3,custom:../bool-run/dry-elevator-456/model_400.pth,Caco2_Wang,0.7235557444201399,0.7571108055342001
+4,custom:../bool-run/dry-elevator-456/model_400.pth,Caco2_Wang,0.7562648119048797,0.6969296683701349

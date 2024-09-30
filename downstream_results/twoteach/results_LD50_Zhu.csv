@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+210,custom:../bool-run/resilient-universe-468/model_190.pth,LD50_Zhu,0.5151559648167244,0.5394302662009769
+211,custom:../bool-run/resilient-universe-468/model_190.pth,LD50_Zhu,0.4464670990175921,0.5872851032960826
+212,custom:../bool-run/resilient-universe-468/model_190.pth,LD50_Zhu,0.5265012380275085,0.4767643431684274
+213,custom:../bool-run/resilient-universe-468/model_190.pth,LD50_Zhu,0.48056945412470264,0.5408023634055183
+214,custom:../bool-run/resilient-universe-468/model_190.pth,LD50_Zhu,0.5166354138076565,0.5013823863619264

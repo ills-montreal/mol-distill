@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+205,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Microsome_AZ,0.22339941317735024,0.4243139265178165
+206,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Microsome_AZ,0.07085871437264046,0.5042820353140796
+207,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Microsome_AZ,0.2707302446430334,0.4037365895472296
+208,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Microsome_AZ,0.21399703484516364,0.31115937580372555
+209,custom:../bool-run/resilient-universe-468/model_190.pth,Clearance_Microsome_AZ,0.21583296810600516,0.43572956682892894

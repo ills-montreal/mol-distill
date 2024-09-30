@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/neat-spaceship-459/model_200.pth,Carcinogens_Lagunin,0.7954545454545454,0.8272727272727274
+26,custom:../bool-run/neat-spaceship-459/model_200.pth,Carcinogens_Lagunin,0.8302325581395349,0.9318181818181818
+27,custom:../bool-run/neat-spaceship-459/model_200.pth,Carcinogens_Lagunin,0.7390180878552971,0.868421052631579
+28,custom:../bool-run/neat-spaceship-459/model_200.pth,Carcinogens_Lagunin,0.8480300187617261,0.8508771929824561
+29,custom:../bool-run/neat-spaceship-459/model_200.pth,Carcinogens_Lagunin,0.9413919413919415,0.0

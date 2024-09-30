@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+150,custom:../bool-run/swift-dream-464/model_120.pth,CYP2C9_Substrate_CarbonMangels,0.7122507122507122,0.8319088319088319
+151,custom:../bool-run/swift-dream-464/model_120.pth,CYP2C9_Substrate_CarbonMangels,0.7275727572757276,0.7258771929824561
+152,custom:../bool-run/swift-dream-464/model_120.pth,CYP2C9_Substrate_CarbonMangels,0.7275641025641026,0.7
+153,custom:../bool-run/swift-dream-464/model_120.pth,CYP2C9_Substrate_CarbonMangels,0.6169212690951821,0.7692307692307693
+154,custom:../bool-run/swift-dream-464/model_120.pth,CYP2C9_Substrate_CarbonMangels,0.5783475783475783,0.735827664399093

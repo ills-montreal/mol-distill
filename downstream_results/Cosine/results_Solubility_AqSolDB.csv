@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+175,custom:../bool-run/swift-dream-464/model_120.pth,Solubility_AqSolDB,0.8256356999349865,0.8294556314201544
+176,custom:../bool-run/swift-dream-464/model_120.pth,Solubility_AqSolDB,0.8129801644757015,0.8442547525563776
+177,custom:../bool-run/swift-dream-464/model_120.pth,Solubility_AqSolDB,0.8125375635540043,0.8366689783165657
+178,custom:../bool-run/swift-dream-464/model_120.pth,Solubility_AqSolDB,0.8035207476186608,0.8467947416335819
+179,custom:../bool-run/swift-dream-464/model_120.pth,Solubility_AqSolDB,0.8220200981168166,0.8069711335811067

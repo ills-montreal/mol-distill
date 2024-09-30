@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/dry-elevator-456/model_400.pth,HydrationFreeEnergy_FreeSolv,0.9142843317656603,0.914176324129127
+16,custom:../bool-run/dry-elevator-456/model_400.pth,HydrationFreeEnergy_FreeSolv,0.9178278024678734,0.9417528993216483
+17,custom:../bool-run/dry-elevator-456/model_400.pth,HydrationFreeEnergy_FreeSolv,0.8395062136920759,0.8926055370525685
+18,custom:../bool-run/dry-elevator-456/model_400.pth,HydrationFreeEnergy_FreeSolv,0.8941060082538479,0.940767669528306
+19,custom:../bool-run/dry-elevator-456/model_400.pth,HydrationFreeEnergy_FreeSolv,0.9340576717520485,0.9340385731788117

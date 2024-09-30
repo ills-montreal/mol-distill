@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/resilient-universe-468/model_190.pth,HIV,0.7969919427245212,0.7615401765596019
+1,custom:../bool-run/resilient-universe-468/model_190.pth,HIV,0.7648203186768161,0.8451822708366662
+2,custom:../bool-run/resilient-universe-468/model_190.pth,HIV,0.7879036069955829,0.8231265266243283
+3,custom:../bool-run/resilient-universe-468/model_190.pth,HIV,0.7898563268132248,0.7997390693021117
+4,custom:../bool-run/resilient-universe-468/model_190.pth,HIV,0.7902044968618526,0.7631055784600194

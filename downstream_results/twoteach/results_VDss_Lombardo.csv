@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,custom:../bool-run/resilient-universe-468/model_190.pth,VDss_Lombardo,0.09258898519107506,0.038226110121978185
+191,custom:../bool-run/resilient-universe-468/model_190.pth,VDss_Lombardo,0.16297924314500434,0.32296229211151795
+192,custom:../bool-run/resilient-universe-468/model_190.pth,VDss_Lombardo,0.3416706853714715,0.44715228218328884
+193,custom:../bool-run/resilient-universe-468/model_190.pth,VDss_Lombardo,0.12929691191610349,0.281575857865099
+194,custom:../bool-run/resilient-universe-468/model_190.pth,VDss_Lombardo,0.13098702475921797,0.4481342564184866

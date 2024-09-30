@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+210,custom:../bool-run/swift-dream-464/model_120.pth,LD50_Zhu,0.524835399135839,0.5308962899534756
+211,custom:../bool-run/swift-dream-464/model_120.pth,LD50_Zhu,0.46985619598800854,0.6002126180748926
+212,custom:../bool-run/swift-dream-464/model_120.pth,LD50_Zhu,0.5746122625804151,0.5104341119380686
+213,custom:../bool-run/swift-dream-464/model_120.pth,LD50_Zhu,0.502334103222762,0.5322165195517375
+214,custom:../bool-run/swift-dream-464/model_120.pth,LD50_Zhu,0.5027589365831313,0.5147067746580918

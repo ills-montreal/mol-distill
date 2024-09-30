@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+150,custom:../bool-run/still-waterfall-449/model_40.pth,CYP2D6_Substrate_CarbonMangels,0.7117117117117118,0.8752941176470588
+151,custom:../bool-run/still-waterfall-449/model_40.pth,CYP2D6_Substrate_CarbonMangels,0.7227405247813411,0.8355263157894736
+152,custom:../bool-run/still-waterfall-449/model_40.pth,CYP2D6_Substrate_CarbonMangels,0.7880886426592798,0.7414893617021276
+153,custom:../bool-run/still-waterfall-449/model_40.pth,CYP2D6_Substrate_CarbonMangels,0.7205726405090138,0.0
+154,custom:../bool-run/still-waterfall-449/model_40.pth,CYP2D6_Substrate_CarbonMangels,0.7683462532299741,0.7984189723320159

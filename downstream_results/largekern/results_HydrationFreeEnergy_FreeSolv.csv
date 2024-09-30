@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+180,custom:../bool-run/clear-shape-496/model_390.pth,HydrationFreeEnergy_FreeSolv,0.9156363457206443,0.9306842475878339
+181,custom:../bool-run/clear-shape-496/model_390.pth,HydrationFreeEnergy_FreeSolv,0.9206739822846673,0.9562283642044351
+182,custom:../bool-run/clear-shape-496/model_390.pth,HydrationFreeEnergy_FreeSolv,0.8519589503891611,0.9302278956821879
+183,custom:../bool-run/clear-shape-496/model_390.pth,HydrationFreeEnergy_FreeSolv,0.9102334831805591,0.9391425262634385
+184,custom:../bool-run/clear-shape-496/model_390.pth,HydrationFreeEnergy_FreeSolv,0.911513160134951,0.9289373431684899

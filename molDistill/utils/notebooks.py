@@ -4,14 +4,13 @@ import numpy as np
 
 import autorank
 
-STUDENT_MODEL = "model_275.pth"
-L2_MODEL = "model_40"
-COS_MODEL = "swiftdream"
+STUDENT_MODEL = "student2M"
+L2_MODEL = "L2"
+COS_MODEL = "Cosine"
+ZINC_MODEL = "student250k"
 
-ZINC_MODEL = "model_400"
-
-SINGLE_TEACHER_BERT = "honestcapybara"
-SINGLE_TEACHER_TDINFO = "neatspaceship"
+SINGLE_TEACHER_BERT = "sglBert"
+SINGLE_TEACHER_TDINFO = "sgl3d"
 TWO_TEACHER = "twoteach"
 
 SMALL_KERNEL = "small_kern"
@@ -41,9 +40,9 @@ def get_all_results(
         (COS_MODEL, "Cosine"),
         (SMALL_KERNEL, "2-layers-kernel"),
         (LARGE_KERNEL, "5-layers-kernel"),
-        (SINGLE_TEACHER_BERT, "sgl-bert"),
-        (SINGLE_TEACHER_TDINFO, "sgl-tdinfomax"),
-        (TWO_TEACHER, "2-teachers"),
+        (SINGLE_TEACHER_BERT, "1-BertMTR"),
+        (SINGLE_TEACHER_TDINFO, "1-3dinfo"),
+        (TWO_TEACHER, "2-Teachers"),
     ],
 ):
     dfs = []

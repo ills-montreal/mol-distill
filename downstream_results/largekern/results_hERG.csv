@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/clear-shape-496/model_390.pth,hERG,0.8162650602409639,0.9312896405919662
+6,custom:../bool-run/clear-shape-496/model_390.pth,hERG,0.8287817938420348,0.8758314855875832
+7,custom:../bool-run/clear-shape-496/model_390.pth,hERG,0.7020373514431238,0.0
+8,custom:../bool-run/clear-shape-496/model_390.pth,hERG,0.8294117647058823,0.8658536585365854
+9,custom:../bool-run/clear-shape-496/model_390.pth,hERG,0.8789505068574837,0.852881698685541

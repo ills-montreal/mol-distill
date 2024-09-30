@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+249,MolR_gat,Carcinogens_Lagunin,0.765909090909091,0.6636363636363636
+261,MolR_gat,Carcinogens_Lagunin,0.6790697674418604,0.8977272727272727
+273,MolR_gat,Carcinogens_Lagunin,0.7312661498708011,0.8289473684210527
+285,MolR_gat,Carcinogens_Lagunin,0.8180112570356473,0.0
+297,MolR_gat,Carcinogens_Lagunin,0.8058608058608059,0.8636363636363635

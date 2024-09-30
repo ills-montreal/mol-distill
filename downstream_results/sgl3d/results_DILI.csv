@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/neat-spaceship-459/model_200.pth,DILI,0.8356562137049942,0.9240196078431373
+21,custom:../bool-run/neat-spaceship-459/model_200.pth,DILI,0.8077380952380951,0.9251336898395721
+22,custom:../bool-run/neat-spaceship-459/model_200.pth,DILI,0.9198966408268734,0.8541666666666667
+23,custom:../bool-run/neat-spaceship-459/model_200.pth,DILI,0.8449163449163449,0.9294117647058824
+24,custom:../bool-run/neat-spaceship-459/model_200.pth,DILI,0.7955729166666666,0.8757763975155279

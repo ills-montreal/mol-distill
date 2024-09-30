@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/graceful-resonance-476/model_390.pth,HIV,0.7951042648012698,0.7842434074769813
+1,custom:../bool-run/graceful-resonance-476/model_390.pth,HIV,0.7918893807097225,0.8574128139497681
+2,custom:../bool-run/graceful-resonance-476/model_390.pth,HIV,0.7929991198474403,0.8165608207132389
+3,custom:../bool-run/graceful-resonance-476/model_390.pth,HIV,0.8057809064040672,0.7998855329926363
+4,custom:../bool-run/graceful-resonance-476/model_390.pth,HIV,0.8013840034944939,0.7761170929565436

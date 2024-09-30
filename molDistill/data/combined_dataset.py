@@ -179,7 +179,7 @@ def get_embedding_loader(args):
     train_loader = DataLoader(
         dataset_train,
         batch_size=args.batch_size,
-        num_workers=6,
+        num_workers=args.n_workers,
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
@@ -189,10 +189,9 @@ def get_embedding_loader(args):
     valid_loader = DataLoader(
         dataset_valid,
         batch_size=args.batch_size,
-        num_workers=4,
+        num_workers=1,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_valid),
-        prefetch_factor=10,
         pin_memory=True,
     )
 

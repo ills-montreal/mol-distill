@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/resilient-universe-468/model_190.pth,AMES,0.8694278694278695,0.8987211967667993
+16,custom:../bool-run/resilient-universe-468/model_190.pth,AMES,0.8819661912308504,0.8949532552138415
+17,custom:../bool-run/resilient-universe-468/model_190.pth,AMES,0.8713800100410007,0.8991778339942568
+18,custom:../bool-run/resilient-universe-468/model_190.pth,AMES,0.8837240371568729,0.8792272422763379
+19,custom:../bool-run/resilient-universe-468/model_190.pth,AMES,0.8706611570247934,0.9089243408157353

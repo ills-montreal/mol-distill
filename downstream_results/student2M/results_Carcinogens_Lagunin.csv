@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/glorious-plant-430/model_275.pth,Carcinogens_Lagunin,0.8136363636363636,0.8
+1,custom:../bool-run/glorious-plant-430/model_275.pth,Carcinogens_Lagunin,0.8883720930232558,0.875
+2,custom:../bool-run/glorious-plant-430/model_275.pth,Carcinogens_Lagunin,0.7002583979328166,0.9078947368421053
+3,custom:../bool-run/glorious-plant-430/model_275.pth,Carcinogens_Lagunin,0.8367729831144466,0.8771929824561404
+4,custom:../bool-run/glorious-plant-430/model_275.pth,Carcinogens_Lagunin,0.9578754578754579,0.0

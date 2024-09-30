@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+205,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Microsome_AZ,0.23881160576251992,0.4348132886560624
+206,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Microsome_AZ,0.2904376266105333,0.46582212141412294
+207,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Microsome_AZ,0.3044716340408846,0.37046571128867256
+208,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Microsome_AZ,0.20175182384933177,0.3194050560183225
+209,custom:../bool-run/swift-dream-464/model_120.pth,Clearance_Microsome_AZ,0.33714515513133547,0.41350354173399007

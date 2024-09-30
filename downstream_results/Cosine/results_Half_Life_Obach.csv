@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+195,custom:../bool-run/swift-dream-464/model_120.pth,Half_Life_Obach,0.12489200827011393,0.25103171696347015
+196,custom:../bool-run/swift-dream-464/model_120.pth,Half_Life_Obach,-0.09793440163281186,0.28751202133576303
+197,custom:../bool-run/swift-dream-464/model_120.pth,Half_Life_Obach,0.008997267765171624,0.1458933284764503
+198,custom:../bool-run/swift-dream-464/model_120.pth,Half_Life_Obach,0.23243372010717056,0.22036434234790014
+199,custom:../bool-run/swift-dream-464/model_120.pth,Half_Life_Obach,0.2883907614216419,0.3259005122088401

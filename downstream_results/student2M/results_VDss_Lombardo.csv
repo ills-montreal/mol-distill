@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+25,custom:../bool-run/glorious-plant-430/model_275.pth,VDss_Lombardo,0.1778805099757249,0.05244226321524137
+26,custom:../bool-run/glorious-plant-430/model_275.pth,VDss_Lombardo,0.02144628014960248,0.33738957114402757
+27,custom:../bool-run/glorious-plant-430/model_275.pth,VDss_Lombardo,0.31909698831846955,0.39172781591278905
+28,custom:../bool-run/glorious-plant-430/model_275.pth,VDss_Lombardo,0.08522356568830258,0.345943203198981
+29,custom:../bool-run/glorious-plant-430/model_275.pth,VDss_Lombardo,0.08785358057662951,0.3788192333823659

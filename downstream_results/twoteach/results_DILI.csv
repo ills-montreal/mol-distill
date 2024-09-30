@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/resilient-universe-468/model_190.pth,DILI,0.843205574912892,0.9215686274509804
+21,custom:../bool-run/resilient-universe-468/model_190.pth,DILI,0.868452380952381,0.9117647058823529
+22,custom:../bool-run/resilient-universe-468/model_190.pth,DILI,0.9011627906976745,0.8587962962962963
+23,custom:../bool-run/resilient-universe-468/model_190.pth,DILI,0.8712998712998714,0.9411764705882353
+24,custom:../bool-run/resilient-universe-468/model_190.pth,DILI,0.841796875,0.0

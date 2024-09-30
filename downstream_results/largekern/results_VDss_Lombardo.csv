@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+190,custom:../bool-run/clear-shape-496/model_390.pth,VDss_Lombardo,0.23373708909676483,0.03636070256125212
+191,custom:../bool-run/clear-shape-496/model_390.pth,VDss_Lombardo,-0.01877393635132618,0.3361835928606963
+192,custom:../bool-run/clear-shape-496/model_390.pth,VDss_Lombardo,0.24490299040453978,0.40102031033330243
+193,custom:../bool-run/clear-shape-496/model_390.pth,VDss_Lombardo,0.0381160189587707,0.35870872822881716
+194,custom:../bool-run/clear-shape-496/model_390.pth,VDss_Lombardo,0.1672163763205563,0.4528670036352631

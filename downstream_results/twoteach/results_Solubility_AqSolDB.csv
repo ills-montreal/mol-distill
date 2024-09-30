@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+175,custom:../bool-run/resilient-universe-468/model_190.pth,Solubility_AqSolDB,0.8138952116977244,0.830888676142429
+176,custom:../bool-run/resilient-universe-468/model_190.pth,Solubility_AqSolDB,0.8206865588799049,0.8375123349225477
+177,custom:../bool-run/resilient-universe-468/model_190.pth,Solubility_AqSolDB,0.8118909521721918,0.836420542103738
+178,custom:../bool-run/resilient-universe-468/model_190.pth,Solubility_AqSolDB,0.7919383934933214,0.8520916120358835
+179,custom:../bool-run/resilient-universe-468/model_190.pth,Solubility_AqSolDB,0.8236768497058176,0.8115724722315885

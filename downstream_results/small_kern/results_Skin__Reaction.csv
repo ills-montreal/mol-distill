@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/graceful-resonance-476/model_390.pth,Skin__Reaction,0.834717607973422,0.9166666666666666
+31,custom:../bool-run/graceful-resonance-476/model_390.pth,Skin__Reaction,0.7715078630897317,0.7992424242424242
+32,custom:../bool-run/graceful-resonance-476/model_390.pth,Skin__Reaction,0.7653061224489796,0.8787878787878787
+33,custom:../bool-run/graceful-resonance-476/model_390.pth,Skin__Reaction,0.8516666666666667,0.9347826086956521
+34,custom:../bool-run/graceful-resonance-476/model_390.pth,Skin__Reaction,0.7809364548494984,0.8611111111111112

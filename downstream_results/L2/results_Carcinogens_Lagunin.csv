@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+20,custom:../bool-run/still-waterfall-449/model_40.pth,Carcinogens_Lagunin,0.75,0.8090909090909091
+21,custom:../bool-run/still-waterfall-449/model_40.pth,Carcinogens_Lagunin,0.7534883720930232,0.8977272727272727
+22,custom:../bool-run/still-waterfall-449/model_40.pth,Carcinogens_Lagunin,0.8010335917312662,0.9078947368421053
+23,custom:../bool-run/still-waterfall-449/model_40.pth,Carcinogens_Lagunin,0.8424015009380863,0.8245614035087718
+24,custom:../bool-run/still-waterfall-449/model_40.pth,Carcinogens_Lagunin,0.7673992673992673,0.7727272727272727

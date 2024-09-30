@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+69,MolR_gat,Lipophilicity_AstraZeneca,0.4549539276111282,0.6089332586728221
+81,MolR_gat,Lipophilicity_AstraZeneca,0.5317547429231693,0.5430035629279064
+93,MolR_gat,Lipophilicity_AstraZeneca,0.5521100667627665,0.5482458496982553
+105,MolR_gat,Lipophilicity_AstraZeneca,0.5185530672985619,0.5315703405841734
+117,MolR_gat,Lipophilicity_AstraZeneca,0.5349517231113341,0.5599954177654243

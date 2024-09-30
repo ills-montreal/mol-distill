@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/still-waterfall-449/model_40.pth,HIV,0.7931205144359034,0.7657644195875849
+1,custom:../bool-run/still-waterfall-449/model_40.pth,HIV,0.7907547942912876,0.857885238361862
+2,custom:../bool-run/still-waterfall-449/model_40.pth,HIV,0.8003344036423103,0.8023448949682463
+3,custom:../bool-run/still-waterfall-449/model_40.pth,HIV,0.8004141583161836,0.8059694093682684
+4,custom:../bool-run/still-waterfall-449/model_40.pth,HIV,0.8016575855806147,0.7839650962654605

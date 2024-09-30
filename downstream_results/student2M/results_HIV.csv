@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/glorious-plant-430/model_275.pth,HIV,0.8107070116579542,0.7636653431812036
+1,custom:../bool-run/glorious-plant-430/model_275.pth,HIV,0.7769977896917688,0.8761373180291153
+2,custom:../bool-run/glorious-plant-430/model_275.pth,HIV,0.7971146480204717,0.8182413287738154
+3,custom:../bool-run/glorious-plant-430/model_275.pth,HIV,0.8043659723424308,0.801715202480419
+4,custom:../bool-run/glorious-plant-430/model_275.pth,HIV,0.8118243786927833,0.7877409972114372

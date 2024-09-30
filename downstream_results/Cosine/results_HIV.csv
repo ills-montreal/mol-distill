@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/swift-dream-464/model_120.pth,HIV,0.7811609510356609,0.7960409284321679
+1,custom:../bool-run/swift-dream-464/model_120.pth,HIV,0.773723878831249,0.8613546832506799
+2,custom:../bool-run/swift-dream-464/model_120.pth,HIV,0.781541516578923,0.8372813873961896
+3,custom:../bool-run/swift-dream-464/model_120.pth,HIV,0.7838465434449509,0.7905321363869885
+4,custom:../bool-run/swift-dream-464/model_120.pth,HIV,0.8094558245396234,0.7717648000640437

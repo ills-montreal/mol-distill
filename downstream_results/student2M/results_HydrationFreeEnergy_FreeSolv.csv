@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/glorious-plant-430/model_275.pth,HydrationFreeEnergy_FreeSolv,0.9107391715618756,0.860365271452313
+16,custom:../bool-run/glorious-plant-430/model_275.pth,HydrationFreeEnergy_FreeSolv,0.8842235095658613,0.9430716276203736
+17,custom:../bool-run/glorious-plant-430/model_275.pth,HydrationFreeEnergy_FreeSolv,0.8153516773598694,0.9199642504882493
+18,custom:../bool-run/glorious-plant-430/model_275.pth,HydrationFreeEnergy_FreeSolv,0.8925377614881336,0.922114986707298
+19,custom:../bool-run/glorious-plant-430/model_275.pth,HydrationFreeEnergy_FreeSolv,0.8848982630336125,0.9379426320169109

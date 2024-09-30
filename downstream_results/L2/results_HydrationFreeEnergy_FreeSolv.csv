@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/still-waterfall-449/model_40.pth,HydrationFreeEnergy_FreeSolv,0.8911797748112545,0.8086403192664147
+16,custom:../bool-run/still-waterfall-449/model_40.pth,HydrationFreeEnergy_FreeSolv,0.8658228343445689,0.9011427550385074
+17,custom:../bool-run/still-waterfall-449/model_40.pth,HydrationFreeEnergy_FreeSolv,0.7394449475721752,0.8921001195497079
+18,custom:../bool-run/still-waterfall-449/model_40.pth,HydrationFreeEnergy_FreeSolv,0.8880985826812117,0.8871005549142583
+19,custom:../bool-run/still-waterfall-449/model_40.pth,HydrationFreeEnergy_FreeSolv,0.8726771639666804,0.902695458964438

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+10,custom:../bool-run/resilient-universe-468/model_190.pth,hERG_Karim,0.8998835053989263,0.8941926362579826
+11,custom:../bool-run/resilient-universe-468/model_190.pth,hERG_Karim,0.9002135093167702,0.9146834582332687
+12,custom:../bool-run/resilient-universe-468/model_190.pth,hERG_Karim,0.8871646891222518,0.9133830627468188
+13,custom:../bool-run/resilient-universe-468/model_190.pth,hERG_Karim,0.9007613814756672,0.9069665527343749
+14,custom:../bool-run/resilient-universe-468/model_190.pth,hERG_Karim,0.9008577702825669,0.9133407786202707

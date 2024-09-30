@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+165,custom:../bool-run/swift-dream-464/model_120.pth,Caco2_Wang,0.7161851881855941,0.6766270559459543
+166,custom:../bool-run/swift-dream-464/model_120.pth,Caco2_Wang,0.6082429977607028,0.6912582482496409
+167,custom:../bool-run/swift-dream-464/model_120.pth,Caco2_Wang,0.7174823872903369,0.685398116761087
+168,custom:../bool-run/swift-dream-464/model_120.pth,Caco2_Wang,0.6936286990353427,0.7724975349148503
+169,custom:../bool-run/swift-dream-464/model_120.pth,Caco2_Wang,0.7584494075730277,0.690587581289624

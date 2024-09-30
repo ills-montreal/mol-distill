@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+210,custom:../bool-run/neat-spaceship-459/model_200.pth,LD50_Zhu,0.48805794271513525,0.47976075671232166
+211,custom:../bool-run/neat-spaceship-459/model_200.pth,LD50_Zhu,0.4441295055092137,0.5613662205868041
+212,custom:../bool-run/neat-spaceship-459/model_200.pth,LD50_Zhu,0.5016356363623047,0.41863422830819286
+213,custom:../bool-run/neat-spaceship-459/model_200.pth,LD50_Zhu,0.49503629806625027,0.4715356154014969
+214,custom:../bool-run/neat-spaceship-459/model_200.pth,LD50_Zhu,0.4704870021314279,0.46599953768534197

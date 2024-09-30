@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/swift-dream-464/model_120.pth,hERG,0.8507667031763417,0.8890063424947147
+6,custom:../bool-run/swift-dream-464/model_120.pth,hERG,0.7961178045515395,0.8747228381374722
+7,custom:../bool-run/swift-dream-464/model_120.pth,hERG,0.7845500848896435,0.8773690078037903
+8,custom:../bool-run/swift-dream-464/model_120.pth,hERG,0.8464705882352941,0.8869179600886918
+9,custom:../bool-run/swift-dream-464/model_120.pth,hERG,0.8720930232558141,0.8645096056622851

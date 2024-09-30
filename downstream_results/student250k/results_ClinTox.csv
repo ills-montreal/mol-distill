@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+90,custom:../bool-run/dry-elevator-456/model_400.pth,ClinTox,0.6560251798561151,0.6977941176470589
+91,custom:../bool-run/dry-elevator-456/model_400.pth,ClinTox,0.7705449826989619,0.6023550724637681
+92,custom:../bool-run/dry-elevator-456/model_400.pth,ClinTox,0.5578273440726973,0.6529867761057911
+93,custom:../bool-run/dry-elevator-456/model_400.pth,ClinTox,0.6180830039525692,0.8057142857142857
+94,custom:../bool-run/dry-elevator-456/model_400.pth,ClinTox,0.5615339463901389,0.7165032679738562

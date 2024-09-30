@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+165,custom:../bool-run/resilient-universe-468/model_190.pth,Caco2_Wang,0.6767318485354203,0.6988442620057815
+166,custom:../bool-run/resilient-universe-468/model_190.pth,Caco2_Wang,0.6268992696776314,0.6341658160063895
+167,custom:../bool-run/resilient-universe-468/model_190.pth,Caco2_Wang,0.7080562266143313,0.6795419582737205
+168,custom:../bool-run/resilient-universe-468/model_190.pth,Caco2_Wang,0.7105943966189265,0.7477936728116332
+169,custom:../bool-run/resilient-universe-468/model_190.pth,Caco2_Wang,0.7387624602958285,0.6116047676400779

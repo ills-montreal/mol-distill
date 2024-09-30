@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+30,custom:../bool-run/glorious-plant-430/model_275.pth,Half_Life_Obach,0.14252601835192935,0.46639002017748277
+31,custom:../bool-run/glorious-plant-430/model_275.pth,Half_Life_Obach,-0.17528541523127994,0.48307879195039216
+32,custom:../bool-run/glorious-plant-430/model_275.pth,Half_Life_Obach,0.1105723570447561,0.23550216117923106
+33,custom:../bool-run/glorious-plant-430/model_275.pth,Half_Life_Obach,0.3610751782540992,0.19551656823436625
+34,custom:../bool-run/glorious-plant-430/model_275.pth,Half_Life_Obach,0.2797063894913856,0.5837490059491197

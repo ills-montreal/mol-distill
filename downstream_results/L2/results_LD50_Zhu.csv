@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+45,custom:../bool-run/still-waterfall-449/model_40.pth,LD50_Zhu,0.4802166018707612,0.5351487432487034
+46,custom:../bool-run/still-waterfall-449/model_40.pth,LD50_Zhu,0.43402120053108006,0.5865966103040336
+47,custom:../bool-run/still-waterfall-449/model_40.pth,LD50_Zhu,0.4983639706503884,0.4659927712884956
+48,custom:../bool-run/still-waterfall-449/model_40.pth,LD50_Zhu,0.44122977313163436,0.5396150605820446
+49,custom:../bool-run/still-waterfall-449/model_40.pth,LD50_Zhu,0.49573573389373204,0.5013295289403905

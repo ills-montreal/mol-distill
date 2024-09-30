@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+140,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP1A2_Veith,0.9137097677508565,0.9234160432560551
+141,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP1A2_Veith,0.9163722776045374,0.9221172248803828
+142,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP1A2_Veith,0.9136875214422554,0.9189634502281614
+143,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP1A2_Veith,0.9114296767213046,0.9249241437794893
+144,custom:../bool-run/neat-spaceship-459/model_200.pth,CYP1A2_Veith,0.9236985061459113,0.9222432246661431

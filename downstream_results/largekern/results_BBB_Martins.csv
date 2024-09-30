@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+120,custom:../bool-run/clear-shape-496/model_390.pth,BBB_Martins,0.84000343524562,0.9373104145601618
+121,custom:../bool-run/clear-shape-496/model_390.pth,BBB_Martins,0.8541666666666666,0.9287477954144621
+122,custom:../bool-run/clear-shape-496/model_390.pth,BBB_Martins,0.8958922558922559,0.8790885995554144
+123,custom:../bool-run/clear-shape-496/model_390.pth,BBB_Martins,0.878738594119635,0.9420289855072463
+124,custom:../bool-run/clear-shape-496/model_390.pth,BBB_Martins,0.898450692333671,0.9264990328820115

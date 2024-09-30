@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+205,custom:../bool-run/clear-shape-496/model_390.pth,Clearance_Microsome_AZ,0.3470450707952707,0.383839891753901
+206,custom:../bool-run/clear-shape-496/model_390.pth,Clearance_Microsome_AZ,0.19181989455296233,0.5360739099093806
+207,custom:../bool-run/clear-shape-496/model_390.pth,Clearance_Microsome_AZ,0.4218972573322318,0.4270473310718276
+208,custom:../bool-run/clear-shape-496/model_390.pth,Clearance_Microsome_AZ,0.21263940893798805,0.3022866173206783
+209,custom:../bool-run/clear-shape-496/model_390.pth,Clearance_Microsome_AZ,0.3318100807270371,0.4584811521989405

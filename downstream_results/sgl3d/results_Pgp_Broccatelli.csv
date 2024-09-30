@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+110,custom:../bool-run/neat-spaceship-459/model_200.pth,Pgp_Broccatelli,0.9514115477372677,0.9682017543859649
+111,custom:../bool-run/neat-spaceship-459/model_200.pth,Pgp_Broccatelli,0.9539285714285715,0.9273529411764706
+112,custom:../bool-run/neat-spaceship-459/model_200.pth,Pgp_Broccatelli,0.9326789195210248,0.9238095238095237
+113,custom:../bool-run/neat-spaceship-459/model_200.pth,Pgp_Broccatelli,0.9153846153846154,0.9485359361135759
+114,custom:../bool-run/neat-spaceship-459/model_200.pth,Pgp_Broccatelli,0.8982313307130826,0.940625

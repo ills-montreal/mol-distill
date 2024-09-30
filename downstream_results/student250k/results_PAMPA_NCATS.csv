@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+0,custom:../bool-run/dry-elevator-456/model_400.pth,PAMPA_NCATS,0.7017057569296374,0.780276134122288
+1,custom:../bool-run/dry-elevator-456/model_400.pth,PAMPA_NCATS,0.7515512155426711,0.8072916666666666
+2,custom:../bool-run/dry-elevator-456/model_400.pth,PAMPA_NCATS,0.7287067888379841,0.8013873676524279
+3,custom:../bool-run/dry-elevator-456/model_400.pth,PAMPA_NCATS,0.7683311924641404,0.7926614727318422
+4,custom:../bool-run/dry-elevator-456/model_400.pth,PAMPA_NCATS,0.7602074032738096,0.8429969879518072

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+180,custom:../bool-run/neat-spaceship-459/model_200.pth,HydrationFreeEnergy_FreeSolv,0.8453999232859744,0.9099839338541229
+181,custom:../bool-run/neat-spaceship-459/model_200.pth,HydrationFreeEnergy_FreeSolv,0.8434156995850164,0.9125703632823762
+182,custom:../bool-run/neat-spaceship-459/model_200.pth,HydrationFreeEnergy_FreeSolv,0.7785386172311854,0.8805038000372882
+183,custom:../bool-run/neat-spaceship-459/model_200.pth,HydrationFreeEnergy_FreeSolv,0.8221570448745807,0.8766407716395583
+184,custom:../bool-run/neat-spaceship-459/model_200.pth,HydrationFreeEnergy_FreeSolv,0.8553461100048749,0.8727398215617597

@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+40,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Microsome_AZ,0.3618455588091627,0.32351197176536706
+41,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Microsome_AZ,0.19500102184650991,0.5087426692578283
+42,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Microsome_AZ,0.2946920540395185,0.40171138836367404
+43,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Microsome_AZ,0.20367024814381507,0.37412139385480714
+44,custom:../bool-run/dry-elevator-456/model_400.pth,Clearance_Microsome_AZ,0.35864814291625136,0.43530377606759807

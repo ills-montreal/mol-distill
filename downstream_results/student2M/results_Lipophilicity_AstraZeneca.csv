@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+5,custom:../bool-run/glorious-plant-430/model_275.pth,Lipophilicity_AstraZeneca,0.704147652877386,0.7857644748950307
+6,custom:../bool-run/glorious-plant-430/model_275.pth,Lipophilicity_AstraZeneca,0.7384916580019492,0.7716177573498533
+7,custom:../bool-run/glorious-plant-430/model_275.pth,Lipophilicity_AstraZeneca,0.742709391161959,0.7488802738484028
+8,custom:../bool-run/glorious-plant-430/model_275.pth,Lipophilicity_AstraZeneca,0.7556103758884981,0.7501452725093193
+9,custom:../bool-run/glorious-plant-430/model_275.pth,Lipophilicity_AstraZeneca,0.7557340026835331,0.7585250867356389

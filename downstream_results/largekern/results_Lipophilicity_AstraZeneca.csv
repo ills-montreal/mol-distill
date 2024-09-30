@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+170,custom:../bool-run/clear-shape-496/model_390.pth,Lipophilicity_AstraZeneca,0.7080591858539499,0.7859434108072252
+171,custom:../bool-run/clear-shape-496/model_390.pth,Lipophilicity_AstraZeneca,0.7462648316102425,0.768074658696366
+172,custom:../bool-run/clear-shape-496/model_390.pth,Lipophilicity_AstraZeneca,0.7473967371893245,0.7441687961878458
+173,custom:../bool-run/clear-shape-496/model_390.pth,Lipophilicity_AstraZeneca,0.7612536351549144,0.7406035881686402
+174,custom:../bool-run/clear-shape-496/model_390.pth,Lipophilicity_AstraZeneca,0.7650508074251972,0.7778217060613805

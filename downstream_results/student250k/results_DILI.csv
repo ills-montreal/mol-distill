@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+15,custom:../bool-run/dry-elevator-456/model_400.pth,DILI,0.8786295005807201,0.9509803921568627
+16,custom:../bool-run/dry-elevator-456/model_400.pth,DILI,0.8392857142857143,0.9197860962566845
+17,custom:../bool-run/dry-elevator-456/model_400.pth,DILI,0.8804909560723514,0.8634259259259259
+18,custom:../bool-run/dry-elevator-456/model_400.pth,DILI,0.8906048906048907,0.0
+19,custom:../bool-run/dry-elevator-456/model_400.pth,DILI,0.8001302083333334,0.9213250517598344

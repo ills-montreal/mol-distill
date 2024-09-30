@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+100,custom:../bool-run/clear-shape-496/model_390.pth,PAMPA_NCATS,0.7082918739635158,0.7779092702169625
+101,custom:../bool-run/clear-shape-496/model_390.pth,PAMPA_NCATS,0.7542976299460887,0.81640625
+102,custom:../bool-run/clear-shape-496/model_390.pth,PAMPA_NCATS,0.7524468971261973,0.7931726907630523
+103,custom:../bool-run/clear-shape-496/model_390.pth,PAMPA_NCATS,0.7739242132305717,0.812515707464187
+104,custom:../bool-run/clear-shape-496/model_390.pth,PAMPA_NCATS,0.7531622023809524,0.8580572289156627

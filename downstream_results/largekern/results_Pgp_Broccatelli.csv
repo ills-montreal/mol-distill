@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+110,custom:../bool-run/clear-shape-496/model_390.pth,Pgp_Broccatelli,0.9407717406724359,0.9484649122807017
+111,custom:../bool-run/clear-shape-496/model_390.pth,Pgp_Broccatelli,0.9445,0.9088235294117647
+112,custom:../bool-run/clear-shape-496/model_390.pth,Pgp_Broccatelli,0.9371345029239766,0.9223214285714286
+113,custom:../bool-run/clear-shape-496/model_390.pth,Pgp_Broccatelli,0.9274038461538461,0.9467613132209406
+114,custom:../bool-run/clear-shape-496/model_390.pth,Pgp_Broccatelli,0.8881948343627175,0.9565340909090909

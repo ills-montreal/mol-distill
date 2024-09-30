@@ -1,0 +1,6 @@
+,embedder,dataset,metric_test,metric
+115,custom:../bool-run/resilient-universe-468/model_190.pth,Bioavailability_Ma,0.6273267326732673,0.7361702127659574
+116,custom:../bool-run/resilient-universe-468/model_190.pth,Bioavailability_Ma,0.6476934523809524,0.6016666666666667
+117,custom:../bool-run/resilient-universe-468/model_190.pth,Bioavailability_Ma,0.610632183908046,0.6461538461538461
+118,custom:../bool-run/resilient-universe-468/model_190.pth,Bioavailability_Ma,0.5869565217391304,0.7127158555729984
+119,custom:../bool-run/resilient-universe-468/model_190.pth,Bioavailability_Ma,0.7304511278195488,0.6231003039513678
