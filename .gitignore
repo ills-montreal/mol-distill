@@ -7,6 +7,9 @@ data/**.tab
 global_table.csv
 molDistill/notebooks/fig_global_ranking_classif_cluster**
 molDistill/notebooks/Impact of distillation on performances.ipynb
+eval.sh
+train.sh
+molDistill/run_eval_while_training.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
