@@ -26,6 +26,27 @@ The "knifes-config" argument should be a path to a yaml file containing the argu
 
 Similarly, L2 and Cosine distillations can be performed using the [train_l2.py](molDistill/train_l2.py) and [train_cos.py](molDistill/train_cos.py) scripts, respectively.
 
+
+# :test_tube: Downstream evaluation
+
+To evaluate the representations learned by the models on downstream tasks, we train an MLP on top of the learnt representations. 
+We use the [downstream_eval.py](molDistill/downstream_eval.py) script:
+```bash
+python molDistill/downstream_eval.py \
+  --datasets <dataset_names_list> \
+  --data-path <path_to_datasets> \
+  --embedders <list_of_models> \
+  --hidden-dim <MLP_hidden_dim> \
+  --n-layers <MLP_n_layers> \
+  --n-epochs <num_epochs> \
+  --n-runs <number_of_runs> \
+  --test # If you want to evaluate the model on the test set
+  --save-results # If you want to save the results
+  ...
+```
+
+For a complete list of arguments, please refer to the [downstream_eval.py](molDistill/downstream_eval.py) script.
+
 # :framed_picture: Paper's figures
 
 The results of each model on the different downstream tasks are available in the [downstream_eval](downstream_eval) folder.
@@ -47,4 +68,3 @@ python molDistill/process_tdc_data.py --dataset <dataset_name> --data-path <path
 python molDistill/process_tdc_data_multifiles.py --dataset <dataset_name> --data-path <path_to_dataset> --i0 <initial_index_to_process> --step <datapoints_per_files>
 ```
 Using the second scripts, the dataset will be split into multiple files, each containing 'step' datapoints.
-
