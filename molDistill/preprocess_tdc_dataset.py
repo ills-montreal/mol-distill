@@ -51,7 +51,6 @@ def main():
                     smiles = df["Drug"].tolist()
                 else:
                     smiles = df["smiles"].tolist()
-                mols = None
                 mols, smiles = precompute_3d(smiles, filepath)
 
             valid_smiles = []
