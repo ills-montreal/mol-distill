@@ -6,9 +6,10 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--data", type=str, default="ClinTox")
+parser.add_argument("--data-path", type=str, default="../data")
 args = parser.parse_args()
 
-DIR = "/export/gauss/vision//emir/molecule/data_new/" + args.data
+DIR = os.path.join(args.data_path, args.data)
 
 def compute_shapes(path):
     if path.endswith(".npy") and not path.endswith("_shape.npy"):
