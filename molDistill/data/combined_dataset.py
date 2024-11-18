@@ -183,7 +183,7 @@ def get_embedding_loader(args):
         drop_last=True,
         collate_fn=collate_fn,
         worker_init_fn=worker_init_factory(idx_train),
-        prefetch_factor=10,
+        prefetch_factor=10 if args.n_workers > 1 else None,
         pin_memory=True,
     )
     valid_loader = DataLoader(

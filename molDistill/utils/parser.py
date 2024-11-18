@@ -104,6 +104,6 @@ def get_pretraining_args():
     parser.add_argument("--out-dir", type=str, default="results")
     parser.add_argument("--checkpoint", type=str, default=None)
 
-    parser.add_argument("--n-workers", type=int, default=6)
+    parser.add_argument("--n-workers", type=int, default=0)
 
     return parser

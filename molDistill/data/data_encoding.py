@@ -175,7 +175,7 @@ class DistillGraphDataset(InMemoryDataset):
             self.num_files += 1
 
     def load_processed(self, data_cls: Type[BaseData] = Data) -> None:
-        self.data = []
+        self.data_mol = []
         for p in tqdm(self.processed_paths):
             if not os.path.exists(p):
                 break
@@ -200,13 +200,13 @@ class DistillGraphDataset(InMemoryDataset):
                     slice_dict=slice,
                     decrement=False,
                 )
-                self.data.append(graph)
+                self.data_mol.append(graph)
 
     def get(self, idx):
-        return self.data[idx]
+        return self.data_mol[idx]
 
     def len(self) -> int:
-        return len(self.data)
+        return len(self.data_mol)
 
     def __repr__(self):
         return "{}()".format(self.__class__.__name__)
